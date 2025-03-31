@@ -6,3 +6,9 @@ FeatureCreateRequest:
 
 Feature:
   $ref: './feature.yaml#/Feature'
+
+FeaturesListResponse:
+  $ref: './list_response.yaml#/FeaturesListResponse'
+
+FeatureGetResponse:
+  $ref: './get_response.yaml#/FeatureGetResponse'

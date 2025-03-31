@@ -21,10 +21,17 @@ paths:
     $ref: './paths/users.yaml#/users_by_id'
 
   # Features
+  /features:
+    $ref: './paths/features/index.yaml#/list_features'
+  /goals/{goal_id}/features:
+    $ref: './paths/features/index.yaml#/goal_features'
   /releases/{release_id}/features:
     $ref: './paths/features/index.yaml#/release_features'
   /features/{id}:
-    $ref: './paths/features/index.yaml#/get_feature'
+    get:
+      $ref: './paths/features/index.yaml#/get_feature'
+    delete:
+      $ref: './paths/features/index.yaml#/delete_feature'
   /features/{id}/convert_to_epic:
     $ref: './paths/features/index.yaml#/convert_to_epic'
 
@@ -80,6 +87,10 @@ components:
       $ref: './schemas/features/index.yaml#/FeatureCreateRequest'
     Feature:
       $ref: './schemas/features/index.yaml#/Feature'
+    FeaturesListResponse:
+      $ref: './schemas/features/index.yaml#/FeaturesListResponse'
+    FeatureGetResponse:
+      $ref: './schemas/features/index.yaml#/FeatureGetResponse'
 
     # Comment related schemas
     CommentCreateRequest:

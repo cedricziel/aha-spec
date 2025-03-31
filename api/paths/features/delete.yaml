@@ -1,7 +1,7 @@
-get_feature:
-  get:
-    summary: Get a specific feature
-    description: Retrieves the details of a specific feature.
+delete_feature:
+  delete:
+    summary: Delete a feature
+    description: Deletes the specified feature.
     tags:
       - Features
     parameters:
@@ -12,13 +12,8 @@ get_feature:
           type: string
         description: Numeric ID or key of the feature
     responses:
-      '200':
-        description: OK
-        content:
-          application/json:
-            schema:
-              $ref: >-
-                ../../schemas/features/get_response.yaml#/FeatureGetResponse
+      '204':
+        description: No Content
       '401':
         description: Unauthorized
       '403':

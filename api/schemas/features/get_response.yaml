@@ -1,0 +1,5 @@
+FeatureGetResponse:
+  type: object
+  properties:
+    feature:
+      $ref: './feature.yaml#/Feature'
