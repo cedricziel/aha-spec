@@ -45,6 +45,14 @@ paths:
     $ref: './paths/features/feature_goals_path.yaml#/feature_goals_path'
   /features/{id}/progress:
     $ref: './paths/features/feature_progress_path.yaml#/feature_progress_path'
+  /features/{id}/progress_source:
+    $ref: './paths/features/feature_progress_source_path.yaml#/feature_progress_source_path'
+  /features/{id}/release:
+    $ref: './paths/features/feature_release_path.yaml#/feature_release_path'
+  /features/{id}/score:
+    $ref: './paths/features/feature_score_path.yaml#/feature_score_path'
+  /features/{id}/tags:
+    $ref: './paths/features/feature_tags_array_path.yaml#/feature_tags_array_path'
   /features/{id}/convert_to_epic:
     $ref: './paths/features/feature_convert_to_epic_path.yaml#/feature_convert_to_epic_path'
 

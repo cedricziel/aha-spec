@@ -1,4 +1,4 @@
-feature_progress_path:
+feature_progress_source_path:
   parameters:
     - name: id
       in: path
@@ -7,10 +7,11 @@ feature_progress_path:
         type: string
       description: Numeric ID or key of the feature
   put:
-    summary: Update a feature's progress
+    summary: Update a feature's progress source
     description: |
-      Updates the progress of an existing feature. May only be set when the
-      progress_source is manual.
+      Updates the progress source of an existing feature. Options are:
+      progress_manual, progress_from_requirements,
+      progress_from_remaining_estimate, progress_from_todos.
     tags:
       - Features
     requestBody:
@@ -23,20 +24,23 @@ feature_progress_path:
               feature:
                 type: object
                 properties:
-                  progress:
-                    type: integer
-                    description: Progress completed on the feature (0-100)
-                    minimum: 0
-                    maximum: 100
+                  progress_source:
+                    type: string
+                    description: Source for calculating progress on the feature
+                    enum:
+                      - progress_manual
+                      - progress_from_requirements
+                      - progress_from_remaining_estimate
+                      - progress_from_todos
           examples:
-            update_progress:
-              summary: Update a feature's progress
+            update_progress_source:
+              summary: Update a feature's progress source
               value:
                 feature:
-                  progress: 25
+                  progress_source: "progress_from_requirements"
     responses:
       '200':
-        description: Feature progress updated
+        description: Feature progress source updated
         content:
           application/json:
             schema:
@@ -56,8 +60,8 @@ feature_progress_path:
                 start_date: "2019-01-01"
                 due_date: "2019-01-01"
                 product_id: "131414752"
-                progress: 25
-                progress_source: "progress_manual"
+                progress: 33
+                progress_source: "progress_from_requirements"
                 status_changed_on: null
                 workflow_kind:
                   id: "98484309"
@@ -86,7 +90,8 @@ feature_progress_path:
       - lang: curl
         source: |
           curl "https://company.aha.io/api/v1/features/PRJ1-1" \
-            -d '{"feature":{"progress":25}}' -X PUT \
+            -d '{"feature":{"progress_source":"progress_from_requirements"}}' \
+            -X PUT \
             -H "Authorization: Bearer 15b60d42d4bc417284a246ced6877b0bf13fb4a" \
             "ca415f7b" \
             "55f7006bc3694a8ab" \

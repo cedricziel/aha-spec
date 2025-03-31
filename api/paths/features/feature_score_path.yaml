@@ -1,4 +1,4 @@
-feature_progress_path:
+feature_score_path:
   parameters:
     - name: id
       in: path
@@ -7,10 +7,9 @@ feature_progress_path:
         type: string
       description: Numeric ID or key of the feature
   put:
-    summary: Update a feature's progress
+    summary: Update a feature's score
     description: |
-      Updates the progress of an existing feature. May only be set when the
-      progress_source is manual.
+      Updates the score of an existing feature.
     tags:
       - Features
     requestBody:
@@ -23,20 +22,31 @@ feature_progress_path:
               feature:
                 type: object
                 properties:
-                  progress:
-                    type: integer
-                    description: Progress completed on the feature (0-100)
-                    minimum: 0
-                    maximum: 100
+                  score_facts:
+                    type: array
+                    description: Array of score facts to update
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: Name of the score fact
+                        value:
+                          type: integer
+                          description: Value of the score fact
           examples:
-            update_progress:
-              summary: Update a feature's progress
+            update_score:
+              summary: Update a feature's score
               value:
                 feature:
-                  progress: 25
+                  score_facts:
+                    - name: "Benefit"
+                      value: 4
+                    - name: "Effort"
+                      value: 5
     responses:
       '200':
-        description: Feature progress updated
+        description: Feature score updated
         content:
           application/json:
             schema:
@@ -50,32 +60,22 @@ feature_progress_path:
                 release_reference_num: "PRJ1-R-1"
                 epic_reference_num: "PRJ1-E-1"
                 position: 1
-                score: 3
+                score: 9
                 created_at: "2019-01-01T00:00:00.000Z"
                 updated_at: "2019-01-01T00:00:00.000Z"
                 start_date: "2019-01-01"
                 due_date: "2019-01-01"
                 product_id: "131414752"
-                progress: 25
+                progress: null
                 progress_source: "progress_manual"
                 status_changed_on: null
-                workflow_kind:
-                  id: "98484309"
-                  name: "New"
-                workflow_status:
-                  id: "934242751"
-                  name: "New"
-                  position: 1
-                  complete: false
-                  color: "#dce7c6"
-                project:
-                  id: "131414752"
-                  reference_prefix: "PRJ1"
-                  name: "Project 1"
-                  product_line: false
-                  created_at: "2019-01-01T00:00:00.000Z"
-                  workspace_type: "product_workspace"
-                  url: "http://company.aha.io/projects/PRJ1"
+                score_facts:
+                  - id: "728895917"
+                    value: 5
+                    name: "Effort"
+                  - id: "846938137"
+                    value: 4
+                    name: "Benefit"
       '401':
         description: Unauthorized
       '403':
@@ -86,7 +86,8 @@ feature_progress_path:
       - lang: curl
         source: |
           curl "https://company.aha.io/api/v1/features/PRJ1-1" \
-            -d '{"feature":{"progress":25}}' -X PUT \
+            -d '{"feature":{"score_facts":[{"name":"Benefit","value":4},
+            {"name":"Effort","value":5}]}}' -X PUT \
             -H "Authorization: Bearer 15b60d42d4bc417284a246ced6877b0bf13fb4a" \
             "ca415f7b" \
             "55f7006bc3694a8ab" \
