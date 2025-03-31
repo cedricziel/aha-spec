@@ -1,0 +1,14 @@
+feature_by_id_path:
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the feature
+  get:
+    $ref: './get.yaml#/get_feature'
+  put:
+    $ref: './update.yaml#/update_feature'
+  delete:
+    $ref: './delete.yaml#/delete_feature'

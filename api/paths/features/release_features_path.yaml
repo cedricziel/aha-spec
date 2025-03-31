@@ -1,0 +1,12 @@
+release_features_path:
+  parameters:
+    - name: release_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the release
+  get:
+    $ref: './release_features_get.yaml#/release_features_get'
+  post:
+    $ref: './create.yaml#/release_features'

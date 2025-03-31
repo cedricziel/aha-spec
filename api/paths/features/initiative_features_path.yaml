@@ -1,0 +1,9 @@
+initiative_features_path:
+  parameters:
+    - name: initiative_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the initiative
+  $ref: './initiative_features.yaml#/initiative_features'

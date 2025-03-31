@@ -1,6 +1,7 @@
 # Feature paths index file
 # References to all feature-related paths
 
+# Individual operations
 list_features:
   $ref: './list.yaml#/list_features'
 
@@ -35,7 +36,8 @@ update_feature_custom_fields_tag:
   $ref: './update_custom_fields_tag.yaml#/update_feature_custom_fields_tag'
 
 update_feature_custom_worksheet_fields:
-  $ref: './update_custom_worksheet_fields.yaml#/update_feature_custom_worksheet_fields'
+  $ref: >-
+    ./update_custom_worksheet_fields.yaml#/update_feature_custom_worksheet_fields
 
 update_feature_epic:
   $ref: './update_feature_epic.yaml#/update_feature_epic'
@@ -51,3 +53,44 @@ delete_feature:
 
 convert_to_epic:
   $ref: './convert.yaml#/convert_to_epic'
+
+# Combined path operations
+feature_by_id_path:
+  $ref: './feature_by_id_path.yaml#/feature_by_id_path'
+
+feature_custom_fields_path:
+  $ref: './feature_custom_fields_path.yaml#/feature_custom_fields_path'
+
+feature_custom_fields_tag_path:
+  $ref: './feature_custom_fields_tag_path.yaml#/feature_custom_fields_tag_path'
+
+feature_convert_to_epic_path:
+  $ref: './feature_convert_to_epic_path.yaml#/feature_convert_to_epic_path'
+
+feature_custom_worksheet_fields_path:
+  $ref: >-
+    ./feature_custom_worksheet_fields_path.yaml#/feature_custom_worksheet_fields_path
+
+feature_epic_path:
+  $ref: './feature_epic_path.yaml#/feature_epic_path'
+
+feature_goals_path:
+  $ref: './feature_goals_path.yaml#/feature_goals_path'
+
+feature_progress_path:
+  $ref: './feature_progress_path.yaml#/feature_progress_path'
+
+epic_features_path:
+  $ref: './epic_features_path.yaml#/epic_features_path'
+
+goal_features_path:
+  $ref: './goal_features_path.yaml#/goal_features_path'
+
+initiative_features_path:
+  $ref: './initiative_features_path.yaml#/initiative_features_path'
+
+product_features_path:
+  $ref: './product_features_path.yaml#/product_features_path'
+
+release_features_path:
+  $ref: './release_features_path.yaml#/release_features_path'

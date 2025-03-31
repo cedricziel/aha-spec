@@ -1,0 +1,9 @@
+feature_convert_to_epic_path:
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the feature
+  $ref: './convert.yaml#/convert_to_epic'

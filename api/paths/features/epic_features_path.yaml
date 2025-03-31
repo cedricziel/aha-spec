@@ -1,0 +1,10 @@
+
+epic_features_path:
+  parameters:
+    - name: epic_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the epic
+  $ref: './epic_features.yaml#/epic_features'

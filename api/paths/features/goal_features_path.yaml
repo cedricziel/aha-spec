@@ -1,0 +1,9 @@
+goal_features_path:
+  parameters:
+    - name: goal_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the goal
+  $ref: './goal_features.yaml#/goal_features'

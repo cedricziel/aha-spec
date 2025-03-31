@@ -1,0 +1,9 @@
+product_features_path:
+  parameters:
+    - name: product_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the product
+  $ref: './product_features.yaml#/product_features'
