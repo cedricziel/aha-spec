@@ -69,6 +69,245 @@ paths:
               schema:
                 $ref: '#/components/schemas/Feature'
 
+  /features/{feature_id}/comments:
+    post:
+      summary: Create a comment on a feature
+      description: Adds a new comment to the specified feature.
+      parameters:
+        - name: feature_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreateRequest'
+      responses:
+        '201':
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+
+  /epics/{epic_id}/comments:
+    get:
+      summary: List comments on an epic
+      description: Retrieves a list of comments associated with the specified epic.
+      parameters:
+        - name: epic_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+        '400':
+          description: Invalid input
+        '404':
+          description: Epic not found
+
+  /requirements/{requirement_id}/comments:
+    get:
+      summary: List comments on a requirement
+      description: Retrieves a list of comments associated with the specified requirement.
+      parameters:
+        - name: requirement_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+        '400':
+          description: Invalid input
+        '404':
+          description: Requirement not found
+
+  /ideas/{idea_id}/comments:
+    get:
+      summary: List comments on an idea
+      description: Retrieves a list of comments associated with the specified idea.
+      parameters:
+        - name: idea_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /initiatives/{initiative_id}/comments:
+    get:
+      summary: List comments on an initiative
+      description: Retrieves a list of comments associated with the specified initiative.
+      parameters:
+        - name: initiative_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /goals/{goal_id}/comments:
+    get:
+      summary: List comments on a goal
+      description: Retrieves a list of comments associated with the specified goal.
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /releases/{release_id}/comments:
+    get:
+      summary: List comments on a release
+      description: Retrieves a list of comments associated with the specified release.
+      parameters:
+        - name: release_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /release_phases/{release_phase_id}/comments:
+    get:
+      summary: List comments on a release phase
+      description: Retrieves a list of comments associated with the specified release phase.
+      parameters:
+        - name: release_phase_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /todos/{todo_id}/comments:
+    get:
+      summary: List comments on a to-do
+      description: Retrieves a list of comments associated with the specified to-do.
+      parameters:
+        - name: todo_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
+  /products/{product_id}/comments:
+    get:
+      summary: List comments in a product
+      description: Retrieves a list of comments associated with the specified product.
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+
 components:
   schemas:
     User:
@@ -105,24 +344,6 @@ components:
             release_id:
               type: string
 
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://{subdomain}.aha.io/oauth/authorize
-          tokenUrl: https://{subdomain}.aha.io/oauth/token
-          scopes: {}
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-
-security:
-  - OAuth2: []
-  - BearerAuth: []
-
-tags:
-  - name: Users
-  - name: Features
-  - name: Releases
+    CommentCreateRequest:
+      type: object
+      properties:
