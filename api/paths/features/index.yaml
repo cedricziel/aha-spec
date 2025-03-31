@@ -28,6 +28,18 @@ get_feature:
 update_feature:
   $ref: './update.yaml#/update_feature'
 
+update_feature_custom_fields:
+  $ref: './update_custom_fields.yaml#/update_feature_custom_fields'
+
+update_feature_custom_fields_tag:
+  $ref: './update_custom_fields_tag.yaml#/update_feature_custom_fields_tag'
+
+update_feature_custom_worksheet_fields:
+  $ref: './update_custom_worksheet_fields.yaml#/update_feature_custom_worksheet_fields'
+
+update_feature_epic:
+  $ref: './update_feature_epic.yaml#/update_feature_epic'
+
 delete_feature:
   $ref: './delete.yaml#/delete_feature'
 

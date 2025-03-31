@@ -41,6 +41,18 @@ paths:
       $ref: './paths/features/index.yaml#/update_feature'
     delete:
       $ref: './paths/features/index.yaml#/delete_feature'
+  /features/{id}/custom_fields:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_custom_fields'
+  /features/{id}/custom_fields/tag:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_custom_fields_tag'
+  /features/{id}/custom_fields/worksheet:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_custom_worksheet_fields'
+  /features/{id}/epic:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_epic'
   /features/{id}/convert_to_epic:
     $ref: './paths/features/index.yaml#/convert_to_epic'
 

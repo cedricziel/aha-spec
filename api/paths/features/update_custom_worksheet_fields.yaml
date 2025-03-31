@@ -1,0 +1,83 @@
+update_feature_custom_worksheet_fields:
+  put:
+    summary: Update a feature's custom worksheet fields
+    description: |
+      Updates the custom worksheet fields of an existing feature.
+    tags:
+      - Features
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              feature:
+                type: object
+                properties:
+                  custom_fields:
+                    type: object
+                    description: Object containing custom field key-value pairs
+                    properties:
+                      equation_custom_field:
+                        type: object
+                        description: >-
+                          Object containing worksheet field values where keys are cell IDs
+                          and values are the cell values
+                        additionalProperties: true
+                    additionalProperties: true
+          examples:
+            update_worksheet:
+              summary: Update a feature's worksheet custom field
+              value:
+                feature:
+                  custom_fields:
+                    equation_custom_field: {
+                      "6651670327076753738": 777.0,
+                      "6651670366942086967": 432.0
+                    }
+    responses:
+      '200':
+        description: Feature custom worksheet fields updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/features/index.yaml#/Feature'
+            example:
+              feature:
+                id: "1007868956"
+                name: "Feature 1"
+                reference_num: "PRJ1-1"
+                custom_fields:
+                  - id: "6776757454425816373"
+                    key: "equation_custom_field"
+                    name: "Equation custom field"
+                    updatedAt: "2019-01-01T00:00:00Z"
+                    value:
+                      values:
+                        "6651670327076753738":
+                          value: 777
+                          name: "Revenue"
+                          display_value: "$777.00"
+                        "6651670366942086967":
+                          value: 432
+                          name: "Expenses"
+                          display_value: "$432.00"
+                        "6651670393424268679":
+                          value: 345
+                          name: "Profit"
+                          display_value: "$345.00"
+                    type: "equation_sheet"
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
