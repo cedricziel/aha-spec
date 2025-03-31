@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Aha! REST API
+  description: API for interacting with Aha! product management platform.
+  version: 1.0.0
+
+servers:
+  - url: https://{subdomain}.aha.io/api/v1
+    description: Aha! API server
+    variables:
+      subdomain:
+        default: mycompany
+        description: Your Aha! account subdomain
+
+paths:
+  /users:
+    get:
+      summary: List users
+      description: Fetches a list of users associated with the Aha! account.
+      responses:
+        '200':
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      summary: Get a specific user
+      description: Retrieves details of a specific user by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A single user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /releases/{release_id}/features:
+    post:
+      summary: Create a feature
+      description: Adds a new feature to a specified release.
+      parameters:
+        - name: release_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeatureCreateRequest'
+      responses:
+        '201':
+          description: Feature created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+
+    FeatureCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+
+    Feature:
+      allOf:
+        - $ref: '#/components/schemas/FeatureCreateRequest'
+        - type: object
+          properties:
+            id:
+              type: string
+            release_id:
+              type: string
+
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{subdomain}.aha.io/oauth/authorize
+          tokenUrl: https://{subdomain}.aha.io/oauth/token
+          scopes: {}
+
+security:
+  - OAuth2: []
+
+tags:
+  - name: Users
+  - name: Features
+  - name: Releases
