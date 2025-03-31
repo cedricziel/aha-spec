@@ -7,11 +7,26 @@ list_features:
 goal_features:
   $ref: './goal_features.yaml#/goal_features'
 
+initiative_features:
+  $ref: './initiative_features.yaml#/initiative_features'
+
+product_features:
+  $ref: './product_features.yaml#/product_features'
+
+epic_features:
+  $ref: './epic_features.yaml#/epic_features'
+
 release_features:
   $ref: './create.yaml#/release_features'
 
+release_features_get:
+  $ref: './release_features_get.yaml#/release_features_get'
+
 get_feature:
   $ref: './get.yaml#/get_feature'
+
+update_feature:
+  $ref: './update.yaml#/update_feature'
 
 delete_feature:
   $ref: './delete.yaml#/delete_feature'

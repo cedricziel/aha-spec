@@ -25,11 +25,20 @@ paths:
     $ref: './paths/features/index.yaml#/list_features'
   /goals/{goal_id}/features:
     $ref: './paths/features/index.yaml#/goal_features'
+  /initiatives/{initiative_id}/features:
+    $ref: './paths/features/index.yaml#/initiative_features'
+  /products/{product_id}/features:
+    $ref: './paths/features/index.yaml#/product_features'
   /releases/{release_id}/features:
-    $ref: './paths/features/index.yaml#/release_features'
+    post:
+      $ref: './paths/features/index.yaml#/release_features'
+    get:
+      $ref: './paths/features/index.yaml#/release_features_get'
   /features/{id}:
     get:
       $ref: './paths/features/index.yaml#/get_feature'
+    put:
+      $ref: './paths/features/index.yaml#/update_feature'
     delete:
       $ref: './paths/features/index.yaml#/delete_feature'
   /features/{id}/convert_to_epic:
@@ -64,6 +73,8 @@ paths:
     $ref: './paths/epics.yaml#/release_epics'
   /epics/{epic_id}:
     $ref: './paths/epics.yaml#/epic_by_id'
+  /epics/{epic_id}/features:
+    $ref: './paths/features/index.yaml#/epic_features'
   /goals/{goal_id}/epics:
     $ref: './paths/epics.yaml#/goal_epics'
   /initiatives/{initiative_id}/epics:
