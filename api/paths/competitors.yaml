@@ -8,6 +8,8 @@ product_competitors:
         required: true
         schema:
           type: string
+    tags:
+      - Competitors
     responses:
       '200':
         description: List of competitors
@@ -35,6 +37,8 @@ product_competitors:
         application/json:
           schema:
             $ref: '../schemas/competitors.yaml#/CompetitorCreateRequest'
+    tags:
+      - Competitors
     responses:
       '201':
         description: Competitor created
@@ -63,6 +67,8 @@ competitor_by_id:
   put:
     summary: Update a competitor
     description: Updates the details of the specified competitor.
+    tags:
+      - Competitors
     parameters:
       - name: competitor_id
         in: path
@@ -85,6 +91,8 @@ competitor_by_id:
   delete:
     summary: Delete a competitor
     description: Removes the specified competitor.
+    tags:
+      - Competitors
     parameters:
       - name: competitor_id
         in: path
