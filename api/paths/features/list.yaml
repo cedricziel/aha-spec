@@ -45,8 +45,7 @@ list_features:
         content:
           application/json:
             schema:
-              $ref: >-
-                ../../schemas/features/list_response.yaml#/FeaturesListResponse
+              $ref: ../../schemas/features/list_response.yaml#/FeaturesListResponse
       '401':
         description: Unauthorized
       '403':

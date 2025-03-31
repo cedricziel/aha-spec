@@ -16,7 +16,7 @@ release_features:
       content:
         application/json:
           schema:
-            $ref: '../../schemas/features/index.yaml#/FeatureCreateRequest'
+            $ref: '../../schemas/features/create_request.yaml#/FeatureCreateRequest'
           examples:
             minimal:
               summary: Minimal feature creation
@@ -108,7 +108,7 @@ release_features:
         content:
           application/json:
             schema:
-              $ref: '../../schemas/features/index.yaml#/Feature'
+              $ref: '../../schemas/features/feature.yaml#/Feature'
             examples:
               success:
                 summary: Standard successful response

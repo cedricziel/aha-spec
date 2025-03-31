@@ -22,31 +22,31 @@ paths:
 
   # Features
   /features:
-    $ref: './paths/features/index.yaml#/list_features'
+    $ref: './paths/features/list.yaml#/list_features'
   /goals/{goal_id}/features:
-    $ref: './paths/features/index.yaml#/goal_features_path'
+    $ref: './paths/features/goal_features_path.yaml#/goal_features_path'
   /initiatives/{initiative_id}/features:
-    $ref: './paths/features/index.yaml#/initiative_features_path'
+    $ref: './paths/features/initiative_features_path.yaml#/initiative_features_path'
   /products/{product_id}/features:
-    $ref: './paths/features/index.yaml#/product_features_path'
+    $ref: './paths/features/product_features_path.yaml#/product_features_path'
   /releases/{release_id}/features:
-    $ref: './paths/features/index.yaml#/release_features_path'
+    $ref: './paths/features/release_features_path.yaml#/release_features_path'
   /features/{id}:
-    $ref: './paths/features/index.yaml#/feature_by_id_path'
+    $ref: './paths/features/feature_by_id_path.yaml#/feature_by_id_path'
   /features/{id}/custom_fields:
-    $ref: './paths/features/index.yaml#/feature_custom_fields_path'
+    $ref: './paths/features/feature_custom_fields_path.yaml#/feature_custom_fields_path'
   /features/{id}/custom_fields/tag:
-    $ref: './paths/features/index.yaml#/feature_custom_fields_tag_path'
+    $ref: './paths/features/feature_custom_fields_tag_path.yaml#/feature_custom_fields_tag_path'
   /features/{id}/custom_fields/worksheet:
-    $ref: './paths/features/index.yaml#/feature_custom_worksheet_fields_path'
+    $ref: './paths/features/feature_custom_worksheet_fields_path.yaml#/feature_custom_worksheet_fields_path'
   /features/{id}/epic:
-    $ref: './paths/features/index.yaml#/feature_epic_path'
+    $ref: './paths/features/feature_epic_path.yaml#/feature_epic_path'
   /features/{id}/goals:
-    $ref: './paths/features/index.yaml#/feature_goals_path'
+    $ref: './paths/features/feature_goals_path.yaml#/feature_goals_path'
   /features/{id}/progress:
-    $ref: './paths/features/index.yaml#/feature_progress_path'
+    $ref: './paths/features/feature_progress_path.yaml#/feature_progress_path'
   /features/{id}/convert_to_epic:
-    $ref: './paths/features/index.yaml#/feature_convert_to_epic_path'
+    $ref: './paths/features/feature_convert_to_epic_path.yaml#/feature_convert_to_epic_path'
 
   # Comments
   /features/{feature_id}/comments:
@@ -78,7 +78,7 @@ paths:
   /epics/{epic_id}:
     $ref: './paths/epics.yaml#/epic_by_id'
   /epics/{epic_id}/features:
-    $ref: './paths/features/index.yaml#/epic_features_path'
+    $ref: './paths/features/epic_features_path.yaml#/epic_features_path'
   /goals/{goal_id}/epics:
     $ref: './paths/epics.yaml#/goal_epics'
   /initiatives/{initiative_id}/epics:
@@ -99,13 +99,13 @@ components:
 
     # Feature related schemas
     FeatureCreateRequest:
-      $ref: './schemas/features/index.yaml#/FeatureCreateRequest'
+      $ref: './schemas/features/create_request.yaml#/FeatureCreateRequest'
     Feature:
-      $ref: './schemas/features/index.yaml#/Feature'
+      $ref: './schemas/features/feature.yaml#/Feature'
     FeaturesListResponse:
-      $ref: './schemas/features/index.yaml#/FeaturesListResponse'
+      $ref: './schemas/features/list_response.yaml#/FeaturesListResponse'
     FeatureGetResponse:
-      $ref: './schemas/features/index.yaml#/FeatureGetResponse'
+      $ref: './schemas/features/get_response.yaml#/FeatureGetResponse'
 
     # Comment related schemas
     CommentCreateRequest:

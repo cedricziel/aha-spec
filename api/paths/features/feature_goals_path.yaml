@@ -39,7 +39,7 @@ feature_goals_path:
         content:
           application/json:
             schema:
-              $ref: '../../schemas/features/index.yaml#/Feature'
+              $ref: '../../schemas/features/feature.yaml#/Feature'
       '401':
         description: Unauthorized
       '403':

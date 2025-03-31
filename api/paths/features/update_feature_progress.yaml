@@ -39,7 +39,7 @@ update_feature_progress:
         content:
           application/json:
             schema:
-              $ref: '../../schemas/features/index.yaml#/Feature'
+              $ref: '../../schemas/features/feature.yaml#/Feature'
             example:
               feature:
                 id: "1007868956"

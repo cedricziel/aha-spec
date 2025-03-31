@@ -17,8 +17,7 @@ get_feature:
         content:
           application/json:
             schema:
-              $ref: >-
-                ../../schemas/features/get_response.yaml#/FeatureGetResponse
+              $ref: ../../schemas/features/get_response.yaml#/FeatureGetResponse
       '401':
         description: Unauthorized
       '403':
