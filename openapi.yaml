@@ -347,3 +347,51 @@ components:
     CommentCreateRequest:
       type: object
       properties:
+        body:
+          type: string
+      required:
+        - body
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        body:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        user:
+          $ref: '#/components/schemas/User'
+
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{subdomain}.aha.io/oauth/authorize
+          tokenUrl: https://{subdomain}.aha.io/oauth/token
+          scopes: {}
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - OAuth2: []
+  - BearerAuth: []
+
+tags:
+  - name: Users
+  - name: Features
+  - name: Releases
+  - name: Comments
+  - name: Epics
+  - name: Requirements
+  - name: Ideas
+  - name: Initiatives
+  - name: Goals
+  - name: Release Phases
+  - name: Todos
+  - name: Products
