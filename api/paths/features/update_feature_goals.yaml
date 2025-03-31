@@ -1,0 +1,68 @@
+update_feature_goals:
+  put:
+    summary: Update a feature's goals
+    description: |
+      Updates the goals of an existing feature.
+    tags:
+      - Features
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              feature:
+                type: object
+                properties:
+                  goals:
+                    type: array
+                    description: Array of goal IDs to associate with the feature
+                    items:
+                      type: integer
+          examples:
+            update_goals:
+              summary: Update a feature's goals
+              value:
+                feature:
+                  goals: [602095703]
+    responses:
+      '200':
+        description: Feature goals updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/features/index.yaml#/Feature'
+            example:
+              feature:
+                id: "1007868956"
+                name: "Feature 1"
+                reference_num: "PRJ1-1"
+                initiative_reference_num: "PRJ1-S-1"
+                release_reference_num: "PRJ1-R-1"
+                epic_reference_num: "PRJ1-E-1"
+                goals:
+                  - id: "602095703"
+                    name: "Goal 1"
+                    url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-1"
+                    resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-1"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    description:
+                      id: "166463080"
+                      body: "Description of goal 1"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found

@@ -40,6 +40,12 @@ update_feature_custom_worksheet_fields:
 update_feature_epic:
   $ref: './update_feature_epic.yaml#/update_feature_epic'
 
+update_feature_goals:
+  $ref: './update_feature_goals.yaml#/update_feature_goals'
+
+update_feature_progress:
+  $ref: './update_feature_progress.yaml#/update_feature_progress'
+
 delete_feature:
   $ref: './delete.yaml#/delete_feature'
 

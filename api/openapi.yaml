@@ -53,6 +53,12 @@ paths:
   /features/{id}/epic:
     put:
       $ref: './paths/features/index.yaml#/update_feature_epic'
+  /features/{id}/goals:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_goals'
+  /features/{id}/progress:
+    put:
+      $ref: './paths/features/index.yaml#/update_feature_progress'
   /features/{id}/convert_to_epic:
     $ref: './paths/features/index.yaml#/convert_to_epic'
 
