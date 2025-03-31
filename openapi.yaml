@@ -239,6 +239,251 @@ paths:
                     items:
                       $ref: '#/components/schemas/Comment'
 
+  /products/{product_id}/epics:
+    post:
+      summary: Create an epic in a product
+      description: Creates a new epic in the specified product.
+      tags:
+        - Epics
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the product the epic should be created in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpicCreateRequest'
+      responses:
+        '201':
+          description: Epic created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Epic'
+        '400':
+          description: Invalid input
+        '404':
+          description: Product not found
+
+    get:
+      summary: List epics in a product
+      description: Retrieves a list of epics associated with the specified product.
+      tags:
+        - Epics
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the product
+      responses:
+        '200':
+          description: A list of epics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  epics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Epic'
+        '404':
+          description: Product not found
+
+  /releases/{release_id}/epics:
+    post:
+      summary: Create an epic in a release
+      description: Creates a new epic in the specified release.
+      tags:
+        - Epics
+      parameters:
+        - name: release_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the release the epic should be created in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpicCreateRequest'
+      responses:
+        '201':
+          description: Epic created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Epic'
+        '400':
+          description: Invalid input
+        '404':
+          description: Release not found
+
+    get:
+      summary: List epics in a release
+      description: Retrieves a list of epics associated with the specified release.
+      tags:
+        - Epics
+      parameters:
+        - name: release_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the release
+      responses:
+        '200':
+          description: A list of epics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  epics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Epic'
+        '404':
+          description: Release not found
+
+  /epics/{epic_id}:
+    get:
+      summary: Get a specific epic
+      description: Retrieves details of a specific epic by its ID.
+      tags:
+        - Epics
+      parameters:
+        - name: epic_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the epic
+      responses:
+        '200':
+          description: Epic details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Epic'
+        '404':
+          description: Epic not found
+
+    put:
+      summary: Update an epic
+      description: Updates the details of the specified epic.
+      tags:
+        - Epics
+      parameters:
+        - name: epic_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the epic
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpicUpdateRequest'
+      responses:
+        '200':
+          description: Epic updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Epic'
+        '400':
+          description: Invalid input
+        '404':
+          description: Epic not found
+
+    delete:
+      summary: Delete an epic
+      description: Deletes the specified epic.
+      tags:
+        - Epics
+      parameters:
+        - name: epic_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the epic
+      responses:
+        '204':
+          description: Epic deleted
+        '404':
+          description: Epic not found
+
+  /goals/{goal_id}/epics:
+    get:
+      summary: List epics associated with a goal
+      description: Retrieves a list of epics associated with the specified goal.
+      tags:
+        - Epics
+        - Goals
+      parameters:
+        - name: goal_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the goal
+      responses:
+        '200':
+          description: A list of epics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  epics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Epic'
+        '404':
+          description: Goal not found
+
+  /initiatives/{initiative_id}/epics:
+    get:
+      summary: List epics associated with an initiative
+      description: Retrieves a list of epics associated with the specified initiative.
+      tags:
+        - Epics
+        - Initiatives
+      parameters:
+        - name: initiative_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Numeric ID or key of the initiative
+      responses:
+        '200':
+          description: A list of epics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  epics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Epic'
+        '404':
+          description: Initiative not found
+
   /release_phases/{release_phase_id}/comments:
     get:
       summary: List comments on a release phase
@@ -512,6 +757,211 @@ components:
         weaknesses:
           type: string
         website:
+          type: string
+          format: uri
+
+    EpicUpdateRequest:
+      type: object
+      properties:
+        epic:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the epic
+            description:
+              type: string
+              description: Description of the epic - may include HTML formatting
+            workflow_status:
+              type: string
+              description: Status of the epic - must be a valid status for the selected product
+            assigned_to_user:
+              type: string
+              description: Email address of user that is assigned the epic
+            tags:
+              type: string
+              description: Tags to add to the epic. Multiple tags must be separated by commas
+            detailed_estimate_text:
+              type: string
+              description: The detailed estimated effort in time or story points for this epic
+            remaining_estimate_text:
+              type: string
+              description: The remaining estimated effort in time or story points for this epic
+            initial_estimate:
+              type: number
+              description: Set the initial estimated effort in minutes or story points
+            detailed_estimate:
+              type: number
+              description: Set the detailed estimated effort in minutes or story points
+            remaining_estimate:
+              type: number
+              description: Set the remaining estimated effort in minutes or story points
+            start_date:
+              type: string
+              format: date
+              description: Date that work will start on the epic in format YYYY-MM-DD
+            due_date:
+              type: string
+              format: date
+              description: Date that work is due to be completed on the epic in format YYYY-MM-DD
+            initiative:
+              type: string
+              description: Name or id of initiative which the epic belongs to
+            progress:
+              type: number
+              description: Progress completed on the epic. May only be set when the progress_source is manual
+            duration_source:
+              type: string
+              enum: [duration_manual, duration_from_features]
+              description: Source for automatically calculating start and due dates
+            team:
+              type: string
+              description: Numeric ID or key of the Develop team to assign the epic to
+            team_workflow_status:
+              type: string
+              description: Team status of the epic - must be a valid status for the selected team
+            iteration:
+              type: string
+              description: ID of sprint to assign the epic to, must belong to the selected team
+            program_increment:
+              type: string
+              description: Numeric ID or key of the PI to assign the epic to
+
+    EpicCreateRequest:
+      type: object
+      properties:
+        epic:
+          type: object
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the epic
+            description:
+              type: string
+              description: Description of the epic - may include HTML formatting
+            workflow_status:
+              type: string
+              description: Status of the epic - must be a valid status for the selected product
+            created_by:
+              type: string
+              description: Email address of the user who created the epic
+            assigned_to_user:
+              type: string
+              description: Email address of user that is assigned the epic
+            tags:
+              type: string
+              description: Tags to add to the epic. Multiple tags must be separated by commas
+            detailed_estimate_text:
+              type: string
+              description: The detailed estimated effort in time or story points for this epic
+            remaining_estimate_text:
+              type: string
+              description: The remaining estimated effort in time or story points for this epic
+            initial_estimate:
+              type: number
+              description: Set the initial estimated effort in minutes or story points
+            detailed_estimate:
+              type: number
+              description: Set the detailed estimated effort in minutes or story points
+            remaining_estimate:
+              type: number
+              description: Set the remaining estimated effort in minutes or story points
+            start_date:
+              type: string
+              format: date
+              description: Date that work will start on the epic in format YYYY-MM-DD
+            due_date:
+              type: string
+              format: date
+              description: Date that work is due to be completed on the epic in format YYYY-MM-DD
+            initiative:
+              type: string
+              description: Name or id of initiative which the epic belongs to
+            progress:
+              type: number
+              description: Progress completed on the epic. May only be set when the progress_source is manual
+            duration_source:
+              type: string
+              enum: [duration_manual, duration_from_features]
+              description: Source for automatically calculating start and due dates
+            team:
+              type: string
+              description: Numeric ID or key of the Develop team to assign the epic to
+            team_workflow_status:
+              type: string
+              description: Team status of the epic - must be a valid status for the selected team
+            iteration:
+              type: string
+              description: ID of sprint to assign the epic to, must belong to the selected team
+            program_increment:
+              type: string
+              description: Numeric ID or key of the PI to assign the epic to
+
+    Epic:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference_num:
+          type: string
+        initiative_reference_num:
+          type: string
+        position:
+          type: integer
+        score:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        start_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        product_id:
+          type: string
+        progress:
+          type: integer
+        created_by:
+          $ref: '#/components/schemas/User'
+        workflow_status:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            position:
+              type: integer
+            complete:
+              type: boolean
+            color:
+              type: string
+        description:
+          type: object
+          properties:
+            id:
+              type: string
+            body:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+        url:
+          type: string
+          format: uri
+        resource:
           type: string
           format: uri
 
