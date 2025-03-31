@@ -23,6 +23,8 @@ paths:
   # Features
   /releases/{release_id}/features:
     $ref: './paths/features.yaml#/release_features'
+  /features/{id}/convert_to_epic:
+    $ref: './paths/features.yaml#/convert_to_epic'
 
   # Comments
   /features/{feature_id}/comments:

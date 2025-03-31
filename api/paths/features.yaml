@@ -1,23 +1,834 @@
 release_features:
   post:
     summary: Create a feature
-    description: Adds a new feature to a specified release.
+    description: Adds a new feature to a specified release. Features belong to releases. This means that if you want to create one then you must scope it to a release.
+    tags:
+      - Features
     parameters:
       - name: release_id
         in: path
         required: true
         schema:
           type: string
+        description: Numeric ID or key of the release
     requestBody:
       required: true
       content:
         application/json:
           schema:
             $ref: '../schemas/features.yaml#/FeatureCreateRequest'
+          examples:
+            minimal:
+              summary: Minimal feature creation
+              value:
+                feature:
+                  name: "New name"
+            complete:
+              summary: Complete feature creation
+              value:
+                feature:
+                  name: "New name"
+                  workflow_kind: "new"
+                  workflow_status:
+                    name: "Designed"
+                  description: "<p>This is the description</p>"
+                  assigned_to_user:
+                    email: "no-reply@aha.io"
+                  tags: "tag1,tag2,tag3"
+                  initial_estimate_text: "2d 4h"
+                  detailed_estimate_text: "3d 2h"
+                  remaining_estimate_text: "1d 2h"
+                  initial_estimate: 960
+                  detailed_estimate: 1560
+                  remaining_estimate: 600
+                  start_date: "2023-01-01"
+                  due_date: "2023-01-31"
+                  release_phase: "Phase 1"
+                  initiative: "Initiative 1"
+                  epic: "Epic 1"
+                  progress_source: "progress_manual"
+                  progress: 25
+                  team: "team-123"
+                  team_workflow_status: "In Progress"
+                  iteration: "sprint-456"
+                  program_increment: "pi-789"
+            with_score:
+              summary: Feature creation with score
+              value:
+                feature:
+                  name: "New feature"
+                  workflow_kind: "new"
+                  workflow_status:
+                    name: "Designed"
+                  score_facts:
+                    - name: "Benefit"
+                      value: 10
+                    - name: "Effort"
+                      value: 3
+            with_assignee:
+              summary: Feature creation with assignee
+              value:
+                feature:
+                  name: "New feature"
+                  workflow_kind: "new"
+                  workflow_status:
+                    name: "Designed"
+                  assigned_to_user: "no-reply@aha.io"
+            with_goals:
+              summary: Feature creation with goals
+              value:
+                feature:
+                  name: "New feature"
+                  workflow_kind: "new"
+                  workflow_status:
+                    name: "Designed"
+                  goals: "602095703,988418543"
+            with_tags:
+              summary: Feature creation with tags
+              value:
+                feature:
+                  name: "New feature"
+                  workflow_kind: "new"
+                  workflow_status:
+                    name: "Designed"
+                  tags: "tag1, tag2"
     responses:
-      '201':
+      '200':
         description: Feature created
         content:
           application/json:
             schema:
               $ref: '../schemas/features.yaml#/Feature'
+            examples:
+              success:
+                summary: Standard successful response
+                value:
+                  feature:
+                    id: "6776757454426194661"
+                    name: "New name"
+                    reference_num: "PRJ1-251"
+                    initiative_reference_num: null
+                    release_reference_num: "PRJ1-R-1"
+                    epic_reference_num: null
+                    position: 1
+                    score: 2
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    start_date: null
+                    due_date: null
+                    product_id: "131414752"
+                    progress: 0
+                    progress_source: "progress_manual"
+                    status_changed_on: "2019-01-01"
+                    created_by_user:
+                      id: "1020675218"
+                      name: "Mary Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    workflow_kind:
+                      id: "98484309"
+                      name: "New"
+                    workflow_status:
+                      id: "962984386"
+                      name: "Designed"
+                      position: 2
+                      complete: false
+                      color: "#ecdd8f"
+                    project:
+                      id: "131414752"
+                      reference_prefix: "PRJ1"
+                      name: "Project 1"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ1"
+                    description:
+                      id: "6776757454428226645"
+                      body: "<p>This is the description</p>"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+                    attachments: []
+                    integration_fields:
+                      - id: "68217473"
+                        name: "id"
+                        value: "777"
+                        integration_id: 204584239
+                        service_name: "jira"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                    url: "http://company.aha.io/features/PRJ1-251"
+                    resource: "http://company.aha.io/api/v1/features/PRJ1-251"
+                    release:
+                      id: "278327321"
+                      reference_num: "PRJ1-R-1"
+                      name: "Release 1"
+                      start_date: "2019-01-01"
+                      release_date: "2019-01-01"
+                      parking_lot: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      product_id: "131414752"
+                      integration_fields:
+                        - id: "68217473"
+                          name: "id"
+                          value: "777"
+                          integration_id: 204584239
+                          service_name: "jira"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/releases/PRJ1-R-1"
+                      resource: "http://company.aha.io/api/v1/releases/PRJ1-R-1"
+                      owner:
+                        id: "16338845"
+                        name: "John Smith"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        workspace_type: "product_workspace"
+                        url: "http://company.aha.io/projects/PRJ1"
+                    assigned_to_user:
+                      id: "689956296"
+                      name: "Henry Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      default_assignee: false
+                    requirements: []
+                    goals: []
+                    key_results: []
+                    comments_count: 0
+                    score_facts: []
+                    tags: []
+                    full_tags: []
+                    custom_fields: []
+                    feature_links: []
+                    workflow_status_times:
+                      - status_id: "962984386"
+                        status_name: "Designed"
+                        started_at: "2019-01-01T00:00:00.000Z"
+                        ended_at: null
+                    feature_only_original_estimate: null
+                    feature_only_remaining_estimate: null
+                    feature_only_work_done: null
+              with_tags:
+                summary: Response for feature with tags
+                value:
+                  feature:
+                    id: "6776757454434468014"
+                    name: "New feature"
+                    reference_num: "PRJ1-251"
+                    initiative_reference_num: null
+                    release_reference_num: "PRJ1-R-1"
+                    epic_reference_num: null
+                    position: 1
+                    score: 2
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    start_date: null
+                    due_date: null
+                    product_id: "131414752"
+                    progress: 0
+                    progress_source: "progress_manual"
+                    status_changed_on: "2019-01-01"
+                    created_by_user:
+                      id: "1020675218"
+                      name: "Mary Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    workflow_kind:
+                      id: "98484309"
+                      name: "New"
+                    workflow_status:
+                      id: "962984386"
+                      name: "Designed"
+                      position: 2
+                      complete: false
+                      color: "#ecdd8f"
+                    project:
+                      id: "131414752"
+                      reference_prefix: "PRJ1"
+                      name: "Project 1"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ1"
+                    description:
+                      id: "6776757454439903095"
+                      body: ""
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+                    attachments: []
+                    integration_fields: []
+                    url: "http://company.aha.io/features/PRJ1-251"
+                    resource: "http://company.aha.io/api/v1/features/PRJ1-251"
+                    release:
+                      id: "278327321"
+                      reference_num: "PRJ1-R-1"
+                      name: "Release 1"
+                      start_date: "2019-01-01"
+                      release_date: "2019-01-01"
+                      parking_lot: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      product_id: "131414752"
+                      integration_fields:
+                        - id: "68217473"
+                          name: "id"
+                          value: "777"
+                          integration_id: 204584239
+                          service_name: "jira"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/releases/PRJ1-R-1"
+                      resource: "http://company.aha.io/api/v1/releases/PRJ1-R-1"
+                      owner:
+                        id: "16338845"
+                        name: "John Smith"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        workspace_type: "product_workspace"
+                        url: "http://company.aha.io/projects/PRJ1"
+                    assigned_to_user:
+                      id: "689956296"
+                      name: "Henry Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      default_assignee: true
+                    requirements: []
+                    goals: []
+                    key_results: []
+                    comments_count: 0
+                    score_facts: []
+                    tags:
+                      - "tag1"
+                      - "tag2"
+                    full_tags:
+                      - id: "6776757454428864050"
+                        name: "tag2"
+                        color: "#52d3e0"
+                      - id: "6776757454431745052"
+                        name: "tag1"
+                        color: "#52e077"
+                    custom_fields: []
+                    feature_links: []
+                    workflow_status_times:
+                      - status_id: "962984386"
+                        status_name: "Designed"
+                        started_at: "2019-01-01T00:00:00.000Z"
+                        ended_at: null
+                    feature_only_original_estimate: null
+                    feature_only_remaining_estimate: null
+                    feature_only_work_done: null
+              with_goals:
+                summary: Response for feature with goals
+                value:
+                  feature:
+                    id: "6776757454426902278"
+                    name: "New feature"
+                    reference_num: "PRJ1-251"
+                    initiative_reference_num: null
+                    release_reference_num: "PRJ1-R-1"
+                    epic_reference_num: null
+                    position: 1
+                    score: 2
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    start_date: null
+                    due_date: null
+                    product_id: "131414752"
+                    progress: 0
+                    progress_source: "progress_manual"
+                    status_changed_on: "2019-01-01"
+                    created_by_user:
+                      id: "1020675218"
+                      name: "Mary Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    workflow_kind:
+                      id: "98484309"
+                      name: "New"
+                    workflow_status:
+                      id: "962984386"
+                      name: "Designed"
+                      position: 2
+                      complete: false
+                      color: "#ecdd8f"
+                    project:
+                      id: "131414752"
+                      reference_prefix: "PRJ1"
+                      name: "Project 1"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ1"
+                    description:
+                      id: "6776757454436213613"
+                      body: ""
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+                    attachments: []
+                    integration_fields: []
+                    url: "http://company.aha.io/features/PRJ1-251"
+                    resource: "http://company.aha.io/api/v1/features/PRJ1-251"
+                    release:
+                      id: "278327321"
+                      reference_num: "PRJ1-R-1"
+                      name: "Release 1"
+                      start_date: "2019-01-01"
+                      release_date: "2019-01-01"
+                      parking_lot: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      product_id: "131414752"
+                      integration_fields:
+                        - id: "68217473"
+                          name: "id"
+                          value: "777"
+                          integration_id: 204584239
+                          service_name: "jira"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/releases/PRJ1-R-1"
+                      resource: "http://company.aha.io/api/v1/releases/PRJ1-R-1"
+                      owner:
+                        id: "16338845"
+                        name: "John Smith"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        workspace_type: "product_workspace"
+                        url: "http://company.aha.io/projects/PRJ1"
+                    assigned_to_user:
+                      id: "689956296"
+                      name: "Henry Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      default_assignee: true
+                    requirements: []
+                    goals:
+                      - id: "602095703"
+                        name: "Goal 1"
+                        url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-1"
+                        resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-1"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        description:
+                          id: "166463080"
+                          body: "Description of goal 1"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                          updated_at: "2019-01-01T00:00:00.000Z"
+                          attachments: []
+                      - id: "988418543"
+                        name: "Goal 2"
+                        url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-2"
+                        resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-2"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        description:
+                          id: "1055602421"
+                          body: "Description of goal 2"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                          updated_at: "2019-01-01T00:00:00.000Z"
+                          attachments: []
+                    key_results: []
+                    comments_count: 0
+                    score_facts: []
+                    tags: []
+                    full_tags: []
+                    custom_fields: []
+                    feature_links: []
+                    workflow_status_times:
+                      - status_id: "962984386"
+                        status_name: "Designed"
+                        started_at: "2019-01-01T00:00:00.000Z"
+                        ended_at: null
+                    feature_only_original_estimate: null
+                    feature_only_remaining_estimate: null
+                    feature_only_work_done: null
+              with_assignee:
+                summary: Response for feature with assignee
+                value:
+                  feature:
+                    id: "6776757454433077587"
+                    name: "New feature"
+                    reference_num: "PRJ1-251"
+                    initiative_reference_num: null
+                    release_reference_num: "PRJ1-R-1"
+                    epic_reference_num: null
+                    position: 1
+                    score: 2
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    start_date: null
+                    due_date: null
+                    product_id: "131414752"
+                    progress: 0
+                    progress_source: "progress_manual"
+                    status_changed_on: "2019-01-01"
+                    created_by_user:
+                      id: "1020675218"
+                      name: "Mary Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    workflow_kind:
+                      id: "98484309"
+                      name: "New"
+                    workflow_status:
+                      id: "962984386"
+                      name: "Designed"
+                      position: 2
+                      complete: false
+                      color: "#ecdd8f"
+                    project:
+                      id: "131414752"
+                      reference_prefix: "PRJ1"
+                      name: "Project 1"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ1"
+                    description:
+                      id: "6776757454437052878"
+                      body: ""
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+                    attachments: []
+                    integration_fields: []
+                    url: "http://company.aha.io/features/PRJ1-251"
+                    resource: "http://company.aha.io/api/v1/features/PRJ1-251"
+                    release:
+                      id: "278327321"
+                      reference_num: "PRJ1-R-1"
+                      name: "Release 1"
+                      start_date: "2019-01-01"
+                      release_date: "2019-01-01"
+                      parking_lot: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      product_id: "131414752"
+                      integration_fields:
+                        - id: "68217473"
+                          name: "id"
+                          value: "777"
+                          integration_id: 204584239
+                          service_name: "jira"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/releases/PRJ1-R-1"
+                      resource: "http://company.aha.io/api/v1/releases/PRJ1-R-1"
+                      owner:
+                        id: "16338845"
+                        name: "John Smith"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        workspace_type: "product_workspace"
+                        url: "http://company.aha.io/projects/PRJ1"
+                    assigned_to_user:
+                      id: "689956296"
+                      name: "Henry Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      default_assignee: false
+                    requirements: []
+                    goals: []
+                    key_results: []
+                    comments_count: 0
+                    score_facts: []
+                    tags: []
+                    full_tags: []
+                    custom_fields: []
+                    feature_links: []
+                    workflow_status_times:
+                      - status_id: "962984386"
+                        status_name: "Designed"
+                        started_at: "2019-01-01T00:00:00.000Z"
+                        ended_at: null
+                    feature_only_original_estimate: null
+                    feature_only_remaining_estimate: null
+                    feature_only_work_done: null
+              with_score:
+                summary: Response for feature with score
+                value:
+                  feature:
+                    id: "6776757454438730193"
+                    name: "New feature"
+                    reference_num: "PRJ1-251"
+                    initiative_reference_num: null
+                    release_reference_num: "PRJ1-R-1"
+                    epic_reference_num: null
+                    position: 1
+                    score: 13
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    start_date: null
+                    due_date: null
+                    product_id: "131414752"
+                    progress: 0
+                    progress_source: "progress_manual"
+                    status_changed_on: "2019-01-01"
+                    created_by_user:
+                      id: "1020675218"
+                      name: "Mary Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    workflow_kind:
+                      id: "98484309"
+                      name: "New"
+                    workflow_status:
+                      id: "962984386"
+                      name: "Designed"
+                      position: 2
+                      complete: false
+                      color: "#ecdd8f"
+                    project:
+                      id: "131414752"
+                      reference_prefix: "PRJ1"
+                      name: "Project 1"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ1"
+                    description:
+                      id: "6776757454436000744"
+                      body: ""
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      attachments: []
+                    attachments: []
+                    integration_fields: []
+                    url: "http://company.aha.io/features/PRJ1-251"
+                    resource: "http://company.aha.io/api/v1/features/PRJ1-251"
+                    release:
+                      id: "278327321"
+                      reference_num: "PRJ1-R-1"
+                      name: "Release 1"
+                      start_date: "2019-01-01"
+                      release_date: "2019-01-01"
+                      parking_lot: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      product_id: "131414752"
+                      integration_fields:
+                        - id: "68217473"
+                          name: "id"
+                          value: "777"
+                          integration_id: 204584239
+                          service_name: "jira"
+                          created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/releases/PRJ1-R-1"
+                      resource: "http://company.aha.io/api/v1/releases/PRJ1-R-1"
+                      owner:
+                        id: "16338845"
+                        name: "John Smith"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        workspace_type: "product_workspace"
+                        url: "http://company.aha.io/projects/PRJ1"
+                    assigned_to_user:
+                      id: "689956296"
+                      name: "Henry Humpty"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      default_assignee: true
+                    requirements: []
+                    goals: []
+                    key_results: []
+                    comments_count: 0
+                    score_facts:
+                      - id: "6776757454426554593"
+                        value: 3
+                        name: "Effort"
+                      - id: "6776757454431948385"
+                        value: 10
+                        name: "Benefit"
+                    tags: []
+                    full_tags: []
+                    custom_fields: []
+                    feature_links: []
+                    workflow_status_times:
+                      - status_id: "962984386"
+                        status_name: "Designed"
+                        started_at: "2019-01-01T00:00:00.000Z"
+                        ended_at: null
+                    feature_only_original_estimate: null
+                    feature_only_remaining_estimate: null
+                    feature_only_work_done: null
+      '400':
+        description: Invalid input
+      '404':
+        description: Release not found
+
+convert_to_epic:
+  post:
+    summary: Convert a feature to an epic
+    description: Converts the specified feature to an epic.
+    tags:
+      - Features
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    responses:
+      '200':
+        description: Feature converted to epic
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/epics.yaml#/Epic'
+            examples:
+              success:
+                summary: Successful response
+                value:
+                  id: "6776757454425734692"
+                  name: "A feature in project 2"
+                  reference_num: "PRJ2-E-251"
+                  initiative_reference_num: null
+                  position: 1000
+                  score: 0
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  start_date: null
+                  due_date: null
+                  product_id: "517761884"
+                  progress: 0
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  status_changed_on: "2019-01-01"
+                  created_by_user:
+                    id: "1020675218"
+                    name: "Mary Humpty"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                  workflow_status:
+                    id: "962984386"
+                    name: "Designed"
+                    position: 2
+                    complete: false
+                    color: "#ecdd8f"
+                  project:
+                    id: "517761884"
+                    reference_prefix: "PRJ2"
+                    name: "Project 2"
+                    product_line: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/PRJ2"
+                  description:
+                    id: "6776757454429457454"
+                    body: ""
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  attachments: []
+                  integration_fields: []
+                  url: "http://company.aha.io/epics/PRJ2-E-251"
+                  resource: "http://company.aha.io/api/v1/epics/PRJ2-E-251"
+                  release:
+                    id: "1000426269"
+                    reference_num: "PRJ2-R-1"
+                    name: "Release 2"
+                    start_date: "2019-01-01"
+                    release_date: "2019-01-01"
+                    parking_lot: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    product_id: "517761884"
+                    integration_fields: []
+                    url: "http://company.aha.io/releases/PRJ2-R-1"
+                    resource: "http://company.aha.io/api/v1/releases/PRJ2-R-1"
+                    owner:
+                      id: "16338845"
+                      name: "John Smith"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    project:
+                      id: "517761884"
+                      reference_prefix: "PRJ2"
+                      name: "Project 2"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ2"
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    default_assignee: false
+                  features: []
+                  goals: []
+                  key_results: []
+                  comments_count: 0
+                  score_facts: []
+                  tags: []
+                  full_tags: []
+                  custom_fields: []
+                  workflow_status_times:
+                    - status_id: "962984386"
+                      status_name: "Designed"
+                      started_at: "2019-01-01T00:00:00.000Z"
+                      ended_at: null
+                  _links: []
+                  master_feature_only_original_estimate: null
+                  master_feature_only_remaining_estimate: null
+                  master_feature_only_work_done: null
+                  epic_only_original_estimate: null
+                  epic_only_remaining_estimate: null
+                  epic_only_work_done: null
+      '404':
+        description: Feature not found
+        content:
+          application/json:
+            examples:
+              error:
+                summary: Error response
+                value:
+                  error:
+                    message: "Feature with ID 'PRJ2-1' not found"
+                    status: 404
