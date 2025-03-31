@@ -2,6 +2,9 @@ feature_comments:
   post:
     summary: Create a comment on a feature
     description: Adds a new comment to the specified feature.
+    tags:
+      - Comments
+      - Features
     parameters:
       - name: feature_id
         in: path
@@ -26,6 +29,9 @@ epic_comments:
   get:
     summary: List comments on an epic
     description: Retrieves a list of comments associated with the specified epic.
+    tags:
+      - Comments
+      - Epics
     parameters:
       - name: epic_id
         in: path
@@ -53,6 +59,9 @@ requirement_comments:
   get:
     summary: List comments on a requirement
     description: Retrieves a list of comments associated with the specified requirement.
+    tags:
+      - Comments
+      - Requirements
     parameters:
       - name: requirement_id
         in: path
@@ -80,6 +89,9 @@ idea_comments:
   get:
     summary: List comments on an idea
     description: Retrieves a list of comments associated with the specified idea.
+    tags:
+      - Comments
+      - Ideas
     parameters:
       - name: idea_id
         in: path
@@ -103,6 +115,9 @@ initiative_comments:
   get:
     summary: List comments on an initiative
     description: Retrieves a list of comments associated with the specified initiative.
+    tags:
+      - Comments
+      - Initiatives
     parameters:
       - name: initiative_id
         in: path
@@ -126,6 +141,9 @@ goal_comments:
   get:
     summary: List comments on a goal
     description: Retrieves a list of comments associated with the specified goal.
+    tags:
+      - Comments
+      - Goals
     parameters:
       - name: goal_id
         in: path
@@ -149,6 +167,9 @@ release_comments:
   get:
     summary: List comments on a release
     description: Retrieves a list of comments associated with the specified release.
+    tags:
+      - Comments
+      - Releases
     parameters:
       - name: release_id
         in: path
@@ -172,6 +193,9 @@ release_phase_comments:
   get:
     summary: List comments on a release phase
     description: Retrieves a list of comments associated with the specified release phase.
+    tags:
+      - Comments
+      - Release Phases
     parameters:
       - name: release_phase_id
         in: path
@@ -195,6 +219,9 @@ todo_comments:
   get:
     summary: List comments on a to-do
     description: Retrieves a list of comments associated with the specified to-do.
+    tags:
+      - Comments
+      - To-Dos
     parameters:
       - name: todo_id
         in: path
@@ -218,6 +245,9 @@ product_comments:
   get:
     summary: List comments in a product
     description: Retrieves a list of comments associated with the specified product.
+    tags:
+      - Comments
+      - Products
     parameters:
       - name: product_id
         in: path
