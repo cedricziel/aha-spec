@@ -258,6 +258,36 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EpicCreateRequest'
+            examples:
+              minimal:
+                summary: Minimal epic creation
+                value:
+                  epic:
+                    name: "New name"
+              complete:
+                summary: Complete epic creation
+                value:
+                  epic:
+                    name: "New epic"
+                    description: "This is a description of the epic"
+                    workflow_status: "New"
+                    created_by: "user@example.com"
+                    assigned_to_user: "assignee@example.com"
+                    tags: "tag1,tag2,tag3"
+                    detailed_estimate_text: "2d 4h"
+                    remaining_estimate_text: "1d 2h"
+                    initial_estimate: 960
+                    detailed_estimate: 1200
+                    remaining_estimate: 600
+                    start_date: "2023-01-01"
+                    due_date: "2023-01-31"
+                    initiative: "Initiative 1"
+                    progress: 25
+                    duration_source: "duration_manual"
+                    team: "team-123"
+                    team_workflow_status: "In Progress"
+                    iteration: "sprint-456"
+                    program_increment: "pi-789"
       responses:
         '201':
           description: Epic created
@@ -265,6 +295,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epic:
+                      id: "6776757454427279043"
+                      name: "New name"
+                      reference_num: "PRJ1-E-251"
+                      initiative_reference_num: null
+                      position: 1
+                      score: 2
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      start_date: null
+                      due_date: null
+                      product_id: "131414752"
+                      progress: 0
+                      progress_source: "progress_manual"
+                      duration_source: "duration_manual"
+                      workflow_status:
+                        id: "934242751"
+                        name: "New"
+                        position: 1
+                        complete: false
+                        color: "#dce7c6"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/epics/PRJ1-E-251"
+                      resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      release:
+                        id: "278327321"
+                        reference_num: "PRJ1-R-1"
+                        name: "Release 1"
+                        start_date: "2019-01-01"
+                        release_date: "2019-01-01"
+                        parking_lot: false
+                      assigned_to_user:
+                        id: "689956296"
+                        name: "Henry Humpty"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        default_assignee: true
+                      features: []
+                      goals: []
+                      key_results: []
         '400':
           description: Invalid input
         '404':
@@ -294,8 +374,66 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epics:
+                      - id: "6776757454427279043"
+                        name: "Epic 1"
+                        reference_num: "PRJ1-E-251"
+                        initiative_reference_num: null
+                        position: 1
+                        score: 2
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        start_date: "2023-01-01"
+                        due_date: "2023-01-31"
+                        product_id: "131414752"
+                        progress: 25
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242751"
+                          name: "In Progress"
+                          position: 2
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-251"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      - id: "6776757454427279044"
+                        name: "Epic 2"
+                        reference_num: "PRJ1-E-252"
+                        initiative_reference_num: null
+                        position: 2
+                        score: 1
+                        created_at: "2019-01-02T00:00:00.000Z"
+                        updated_at: "2019-01-02T00:00:00.000Z"
+                        start_date: "2023-02-01"
+                        due_date: "2023-02-28"
+                        product_id: "131414752"
+                        progress: 0
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242750"
+                          name: "New"
+                          position: 1
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-252"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-252"
         '404':
           description: Product not found
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    error:
+                      message: "Product with ID 'PRJ2' not found"
+                      status: 404
 
   /releases/{release_id}/epics:
     post:
@@ -316,6 +454,36 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EpicCreateRequest'
+            examples:
+              minimal:
+                summary: Minimal epic creation in a release
+                value:
+                  epic:
+                    name: "New epic in release"
+              complete:
+                summary: Complete epic creation in a release
+                value:
+                  epic:
+                    name: "New epic in release"
+                    description: "This is a description of the epic"
+                    workflow_status: "New"
+                    created_by: "user@example.com"
+                    assigned_to_user: "assignee@example.com"
+                    tags: "tag1,tag2,tag3"
+                    detailed_estimate_text: "2d 4h"
+                    remaining_estimate_text: "1d 2h"
+                    initial_estimate: 960
+                    detailed_estimate: 1200
+                    remaining_estimate: 600
+                    start_date: "2023-01-01"
+                    due_date: "2023-01-31"
+                    initiative: "Initiative 1"
+                    progress: 25
+                    duration_source: "duration_manual"
+                    team: "team-123"
+                    team_workflow_status: "In Progress"
+                    iteration: "sprint-456"
+                    program_increment: "pi-789"
       responses:
         '201':
           description: Epic created
@@ -323,6 +491,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epic:
+                      id: "6776757454427279043"
+                      name: "New epic in release"
+                      reference_num: "PRJ1-E-251"
+                      initiative_reference_num: null
+                      position: 1
+                      score: 2
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      start_date: null
+                      due_date: null
+                      product_id: "131414752"
+                      progress: 0
+                      progress_source: "progress_manual"
+                      duration_source: "duration_manual"
+                      workflow_status:
+                        id: "934242751"
+                        name: "New"
+                        position: 1
+                        complete: false
+                        color: "#dce7c6"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/epics/PRJ1-E-251"
+                      resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      release:
+                        id: "278327321"
+                        reference_num: "PRJ1-R-1"
+                        name: "Release 1"
+                        start_date: "2019-01-01"
+                        release_date: "2019-01-01"
+                        parking_lot: false
+                      assigned_to_user:
+                        id: "689956296"
+                        name: "Henry Humpty"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        default_assignee: true
+                      features: []
+                      goals: []
+                      key_results: []
         '400':
           description: Invalid input
         '404':
@@ -352,8 +570,66 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epics:
+                      - id: "6776757454427279043"
+                        name: "Epic 1"
+                        reference_num: "PRJ1-E-251"
+                        initiative_reference_num: null
+                        position: 1
+                        score: 2
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        start_date: "2023-01-01"
+                        due_date: "2023-01-31"
+                        product_id: "131414752"
+                        progress: 25
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242751"
+                          name: "In Progress"
+                          position: 2
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-251"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      - id: "6776757454427279044"
+                        name: "Epic 2"
+                        reference_num: "PRJ1-E-252"
+                        initiative_reference_num: null
+                        position: 2
+                        score: 1
+                        created_at: "2019-01-02T00:00:00.000Z"
+                        updated_at: "2019-01-02T00:00:00.000Z"
+                        start_date: "2023-02-01"
+                        due_date: "2023-02-28"
+                        product_id: "131414752"
+                        progress: 0
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242750"
+                          name: "New"
+                          position: 1
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-252"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-252"
         '404':
           description: Release not found
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    error:
+                      message: "Release with ID 'PRJ1-R-999' not found"
+                      status: 404
 
   /epics/{epic_id}:
     get:
@@ -375,6 +651,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epic:
+                      id: "6776757454427279043"
+                      name: "Epic name"
+                      reference_num: "PRJ1-E-251"
+                      initiative_reference_num: null
+                      position: 1
+                      score: 2
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                      start_date: "2023-01-01"
+                      due_date: "2023-01-31"
+                      product_id: "131414752"
+                      progress: 25
+                      progress_source: "progress_manual"
+                      duration_source: "duration_manual"
+                      workflow_status:
+                        id: "934242751"
+                        name: "In Progress"
+                        position: 2
+                        complete: false
+                        color: "#dce7c6"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                      description:
+                        id: "123456789"
+                        body: "This is a description of the epic"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                      url: "http://company.aha.io/epics/PRJ1-E-251"
+                      resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      release:
+                        id: "278327321"
+                        reference_num: "PRJ1-R-1"
+                        name: "Release 1"
+                        start_date: "2019-01-01"
+                        release_date: "2019-01-31"
+                        parking_lot: false
+                      assigned_to_user:
+                        id: "689956296"
+                        name: "Henry Humpty"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        default_assignee: true
+                      features: [
+                        {
+                          id: "987654321",
+                          name: "Feature 1",
+                          reference_num: "PRJ1-F-123"
+                        }
+                      ]
+                      goals: [
+                        {
+                          id: "123123123",
+                          name: "Goal 1",
+                          reference_num: "PRJ1-G-456"
+                        }
+                      ]
+                      key_results: []
         '404':
           description: Epic not found
 
@@ -396,6 +739,35 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/EpicUpdateRequest'
+            examples:
+              minimal:
+                summary: Minimal epic update
+                value:
+                  epic:
+                    name: "Updated epic name"
+              complete:
+                summary: Complete epic update
+                value:
+                  epic:
+                    name: "Updated epic name"
+                    description: "Updated description of the epic"
+                    workflow_status: "In Progress"
+                    assigned_to_user: "assignee@example.com"
+                    tags: "tag1,tag2,tag3,tag4"
+                    detailed_estimate_text: "3d 4h"
+                    remaining_estimate_text: "2d 2h"
+                    initial_estimate: 960
+                    detailed_estimate: 1800
+                    remaining_estimate: 1200
+                    start_date: "2023-02-01"
+                    due_date: "2023-03-15"
+                    initiative: "Initiative 2"
+                    progress: 50
+                    duration_source: "duration_manual"
+                    team: "team-456"
+                    team_workflow_status: "In Progress"
+                    iteration: "sprint-789"
+                    program_increment: "pi-123"
       responses:
         '200':
           description: Epic updated
@@ -403,6 +775,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epic:
+                      id: "6776757454427279043"
+                      name: "Updated epic name"
+                      reference_num: "PRJ1-E-251"
+                      initiative_reference_num: null
+                      position: 1
+                      score: 2
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2023-02-01T00:00:00.000Z"
+                      start_date: "2023-02-01"
+                      due_date: "2023-03-15"
+                      product_id: "131414752"
+                      progress: 50
+                      progress_source: "progress_manual"
+                      duration_source: "duration_manual"
+                      workflow_status:
+                        id: "934242751"
+                        name: "In Progress"
+                        position: 2
+                        complete: false
+                        color: "#dce7c6"
+                      project:
+                        id: "131414752"
+                        reference_prefix: "PRJ1"
+                        name: "Project 1"
+                        product_line: false
+                        created_at: "2019-01-01T00:00:00.000Z"
+                      description:
+                        id: "123456789"
+                        body: "Updated description of the epic"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2023-02-01T00:00:00.000Z"
+                      url: "http://company.aha.io/epics/PRJ1-E-251"
+                      resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      release:
+                        id: "278327321"
+                        reference_num: "PRJ1-R-1"
+                        name: "Release 1"
+                        start_date: "2019-01-01"
+                        release_date: "2019-01-31"
+                        parking_lot: false
+                      assigned_to_user:
+                        id: "689956296"
+                        name: "Henry Humpty"
+                        email: "no-reply@aha.io"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        default_assignee: true
+                      features: [
+                        {
+                          id: "987654321",
+                          name: "Feature 1",
+                          reference_num: "PRJ1-F-123"
+                        }
+                      ]
+                      goals: [
+                        {
+                          id: "123123123",
+                          name: "Goal 1",
+                          reference_num: "PRJ1-G-456"
+                        }
+                      ]
+                      key_results: []
         '400':
           description: Invalid input
         '404':
@@ -422,9 +861,19 @@ paths:
           description: Numeric ID or key of the epic
       responses:
         '204':
-          description: Epic deleted
+          description: Epic deleted successfully (no content returned)
+          content: {}
         '404':
           description: Epic not found
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    error:
+                      message: "Epic with ID 'PRJ1-E-999' not found"
+                      status: 404
 
   /goals/{goal_id}/epics:
     get:
@@ -452,8 +901,66 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Epic'
+              examples:
+                success:
+                  summary: Successful response
+                  value:
+                    epics:
+                      - id: "6776757454427279043"
+                        name: "Epic 1"
+                        reference_num: "PRJ1-E-251"
+                        initiative_reference_num: null
+                        position: 1
+                        score: 2
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        start_date: "2023-01-01"
+                        due_date: "2023-01-31"
+                        product_id: "131414752"
+                        progress: 25
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242751"
+                          name: "In Progress"
+                          position: 2
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-251"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                      - id: "6776757454427279044"
+                        name: "Epic 2"
+                        reference_num: "PRJ1-E-252"
+                        initiative_reference_num: null
+                        position: 2
+                        score: 1
+                        created_at: "2019-01-02T00:00:00.000Z"
+                        updated_at: "2019-01-02T00:00:00.000Z"
+                        start_date: "2023-02-01"
+                        due_date: "2023-02-28"
+                        product_id: "131414752"
+                        progress: 0
+                        progress_source: "progress_manual"
+                        duration_source: "duration_manual"
+                        workflow_status:
+                          id: "934242750"
+                          name: "New"
+                          position: 1
+                          complete: false
+                          color: "#dce7c6"
+                        url: "http://company.aha.io/epics/PRJ1-E-252"
+                        resource: "http://company.aha.io/api/v1/epics/PRJ1-E-252"
         '404':
           description: Goal not found
+          content:
+            application/json:
+              examples:
+                error:
+                  summary: Error response
+                  value:
+                    error:
+                      message: "Goal with ID 'PRJ1-G-999' not found"
+                      status: 404
 
   /initiatives/{initiative_id}/epics:
     get:
