@@ -1,0 +1,54 @@
+CompetitorCreateRequest:
+  type: object
+  properties:
+    competitor:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        strengths:
+          type: string
+        weaknesses:
+          type: string
+        website:
+          type: string
+          format: uri
+
+CompetitorUpdateRequest:
+  type: object
+  properties:
+    competitor:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        strengths:
+          type: string
+        weaknesses:
+          type: string
+        website:
+          type: string
+          format: uri
+
+Competitor:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+    description:
+      type: string
+    strengths:
+      type: string
+    weaknesses:
+      type: string
+    website:
+      type: string
+      format: uri

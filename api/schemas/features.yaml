@@ -1,0 +1,23 @@
+FeatureCreateRequest:
+  type: object
+  properties:
+    name:
+      type: string
+    description:
+      type: string
+    start_date:
+      type: string
+      format: date
+    due_date:
+      type: string
+      format: date
+
+Feature:
+  allOf:
+    - $ref: '#/FeatureCreateRequest'
+    - type: object
+      properties:
+        id:
+          type: string
+        release_id:
+          type: string

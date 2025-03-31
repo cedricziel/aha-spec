@@ -1,0 +1,96 @@
+product_competitors:
+  get:
+    summary: List competitors in a product
+    description: Retrieves a list of competitors associated with the specified product.
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: List of competitors
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                competitors:
+                  type: array
+                  items:
+                    $ref: '../schemas/competitors.yaml#/Competitor'
+  post:
+    summary: Create a competitor
+    description: Adds a new competitor to the specified product.
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/competitors.yaml#/CompetitorCreateRequest'
+    responses:
+      '201':
+        description: Competitor created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/competitors.yaml#/Competitor'
+
+competitor_by_id:
+  get:
+    summary: Get a specific competitor
+    description: Retrieves details of the specified competitor.
+    parameters:
+      - name: competitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: Competitor details
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/competitors.yaml#/Competitor'
+  put:
+    summary: Update a competitor
+    description: Updates the details of the specified competitor.
+    parameters:
+      - name: competitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/competitors.yaml#/CompetitorUpdateRequest'
+    responses:
+      '200':
+        description: Competitor updated
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/competitors.yaml#/Competitor'
+  delete:
+    summary: Delete a competitor
+    description: Removes the specified competitor.
+    parameters:
+      - name: competitor_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: Competitor deleted

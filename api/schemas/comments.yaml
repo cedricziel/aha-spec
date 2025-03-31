@@ -1,0 +1,20 @@
+CommentCreateRequest:
+  type: object
+  properties:
+    body:
+      type: string
+  required:
+    - body
+
+Comment:
+  type: object
+  properties:
+    id:
+      type: string
+    body:
+      type: string
+    created_at:
+      type: string
+      format: date-time
+    user:
+      $ref: './users.yaml#/User'

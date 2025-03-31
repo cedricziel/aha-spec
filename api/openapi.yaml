@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: Aha! REST API
+  description: API for interacting with Aha! product management platform.
+  version: 1.0.0
+
+servers:
+  - url: https://{subdomain}.aha.io/api/v1
+    description: Aha! API server
+    variables:
+      subdomain:
+        default: mycompany
+        description: Your Aha! account subdomain
+
+# Paths are referenced from separate files
+paths:
+  # Users
+  /users:
+    $ref: './paths/users.yaml#/users'
+  /users/{id}:
+    $ref: './paths/users.yaml#/users_by_id'
+
+  # Features
+  /releases/{release_id}/features:
+    $ref: './paths/features.yaml#/release_features'
+
+  # Comments
+  /features/{feature_id}/comments:
+    $ref: './paths/comments.yaml#/feature_comments'
+  /epics/{epic_id}/comments:
+    $ref: './paths/comments.yaml#/epic_comments'
+  /requirements/{requirement_id}/comments:
+    $ref: './paths/comments.yaml#/requirement_comments'
+  /ideas/{idea_id}/comments:
+    $ref: './paths/comments.yaml#/idea_comments'
+  /initiatives/{initiative_id}/comments:
+    $ref: './paths/comments.yaml#/initiative_comments'
+  /goals/{goal_id}/comments:
+    $ref: './paths/comments.yaml#/goal_comments'
+  /releases/{release_id}/comments:
+    $ref: './paths/comments.yaml#/release_comments'
+  /release_phases/{release_phase_id}/comments:
+    $ref: './paths/comments.yaml#/release_phase_comments'
+  /todos/{todo_id}/comments:
+    $ref: './paths/comments.yaml#/todo_comments'
+  /products/{product_id}/comments:
+    $ref: './paths/comments.yaml#/product_comments'
+
+  # Epics
+  /products/{product_id}/epics:
+    $ref: './paths/epics.yaml#/product_epics'
+  /releases/{release_id}/epics:
+    $ref: './paths/epics.yaml#/release_epics'
+  /epics/{epic_id}:
+    $ref: './paths/epics.yaml#/epic_by_id'
+  /goals/{goal_id}/epics:
+    $ref: './paths/epics.yaml#/goal_epics'
+  /initiatives/{initiative_id}/epics:
+    $ref: './paths/epics.yaml#/initiative_epics'
+
+  # Competitors
+  /products/{product_id}/competitors:
+    $ref: './paths/competitors.yaml#/product_competitors'
+  /competitors/{competitor_id}:
+    $ref: './paths/competitors.yaml#/competitor_by_id'
+
+# Components are referenced from separate files
+components:
+  schemas:
+    # User related schemas
+    User:
+      $ref: './schemas/users.yaml#/User'
+
+    # Feature related schemas
+    FeatureCreateRequest:
+      $ref: './schemas/features.yaml#/FeatureCreateRequest'
+    Feature:
+      $ref: './schemas/features.yaml#/Feature'
+
+    # Comment related schemas
+    CommentCreateRequest:
+      $ref: './schemas/comments.yaml#/CommentCreateRequest'
+    Comment:
+      $ref: './schemas/comments.yaml#/Comment'
+
+    # Competitor related schemas
+    CompetitorCreateRequest:
+      $ref: './schemas/competitors.yaml#/CompetitorCreateRequest'
+    CompetitorUpdateRequest:
+      $ref: './schemas/competitors.yaml#/CompetitorUpdateRequest'
+    Competitor:
+      $ref: './schemas/competitors.yaml#/Competitor'
+
+    # Epic related schemas
+    EpicUpdateRequest:
+      $ref: './schemas/epics.yaml#/EpicUpdateRequest'
+    EpicCreateRequest:
+      $ref: './schemas/epics.yaml#/EpicCreateRequest'
+    Epic:
+      $ref: './schemas/epics.yaml#/Epic'
+
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://{subdomain}.aha.io/oauth/authorize
+          tokenUrl: https://{subdomain}.aha.io/oauth/token
+          scopes: {}
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - OAuth2: []
+  - BearerAuth: []
+
+tags:
+  - name: Competitors
+  - name: Users
+  - name: Features
+  - name: Releases
+  - name: Comments
+  - name: Epics
+  - name: Requirements
+  - name: Ideas
+  - name: Initiatives
+  - name: Goals
+  - name: Release Phases
+  - name: Todos
+  - name: Products

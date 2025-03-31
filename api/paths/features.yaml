@@ -1,0 +1,23 @@
+release_features:
+  post:
+    summary: Create a feature
+    description: Adds a new feature to a specified release.
+    parameters:
+      - name: release_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/features.yaml#/FeatureCreateRequest'
+    responses:
+      '201':
+        description: Feature created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/features.yaml#/Feature'
