@@ -59,9 +59,80 @@ paths:
           type: string
         description: Numeric ID or key of the release
     post:
-      $ref: './paths/features/index.yaml#/release_features'
+      summary: Create a feature
+      description: Adds a new feature to a specified release. Features belong to releases. This means that if you want to create one then you must scope it to a release.
+      tags:
+        - Features
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './schemas/features/index.yaml#/FeatureCreateRequest'
+            examples:
+              minimal:
+                summary: Minimal feature creation
+                value:
+                  feature:
+                    name: "New name"
+      responses:
+        '200':
+          description: Feature created
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/index.yaml#/Feature'
     get:
-      $ref: './paths/features/index.yaml#/release_features_get'
+      summary: List features in a release
+      description: |
+        Returns a list of features associated with a specific release.
+      tags:
+        - Features
+      parameters:
+        - name: q
+          in: query
+          description: Search term to match against feature name
+          required: false
+          schema:
+            type: string
+        - name: updated_since
+          in: query
+          description: >-
+            UTC timestamp (in ISO8601 format). If provided, only features updated
+            after the timestamp will be returned
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: tag
+          in: query
+          description: >-
+            String tag value. If provided, only features with the associated tag
+            will be returned
+          required: false
+          schema:
+            type: string
+        - name: assigned_to_user
+          in: query
+          description: >-
+            ID or email address of a user. If provided, only features assigned to
+            that user will be returned
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of features in the release
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/list_response.yaml#/FeaturesListResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Release not found
   /features/{id}:
     parameters:
       - name: id
@@ -71,11 +142,167 @@ paths:
           type: string
         description: Numeric ID or key of the feature
     get:
-      $ref: './paths/features/index.yaml#/get_feature'
+      summary: Get a specific feature
+      description: Retrieves the details of a specific feature.
+      tags:
+        - Features
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/get_response.yaml#/FeatureGetResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Feature not found
     put:
-      $ref: './paths/features/index.yaml#/update_feature'
+      summary: Update a feature
+      description: |
+        Updates an existing feature with the provided attributes.
+      tags:
+        - Features
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feature:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the feature
+                    workflow_kind:
+                      type: string
+                      description: Type of feature
+                    workflow_status:
+                      type: object
+                      description: Status of the feature — must be a valid status for the selected product
+                      properties:
+                        name:
+                          type: string
+                    release:
+                      type: string
+                      description: Numeric ID or key of the release the feature should be created in
+                    description:
+                      type: string
+                      description: Description of the feature — may include HTML formatting
+                    created_by:
+                      type: string
+                      description: Email address of the user who created the feature
+                    assigned_to_user:
+                      type: string
+                      description: Email address of user that is assigned the feature
+                    tags:
+                      type: string
+                      description: Tags to add to the feature. Multiple tags must be separated by commas
+                    initial_estimate_text:
+                      type: string
+                      description: >-
+                        The initial estimated effort in time or story points for this feature, depending on the capacity units configured.
+                        For time: use min, h, d, w, m. Example: "2d 1h".
+                        1d = 8h, 1w = 5d, 1m = 22d.
+                        For story points: Use p to represent points. Example: "4p".
+                    detailed_estimate_text:
+                      type: string
+                      description: >-
+                        The detailed estimated effort in time or story points for this feature, depending on the capacity units configured.
+                        For time: use min, h, d, w, m. Example: "2d 1h".
+                        1d = 8h, 1w = 5d, 1m = 22d.
+                        For story points: Use p to represent points. Example: "4p".
+                    remaining_estimate_text:
+                      type: string
+                      description: >-
+                        The remaining estimated effort in time or story points for this feature, depending on the capacity units configured.
+                        For time: use min, h, d, w, m. Example: "2d 1h".
+                        1d = 8h, 1w = 5d, 1m = 22d.
+                        For story points: Use p to represent points. Example: "4p".
+                    initial_estimate:
+                      type: integer
+                      description: Set the initial estimated effort in minutes or story points, depending on the capacity units configured
+                    detailed_estimate:
+                      type: integer
+                      description: Set the detailed estimated effort in minutes or story points, depending on the capacity units configured
+                    remaining_estimate:
+                      type: integer
+                      description: Set the remaining estimated effort in minutes or story points, depending on the capacity units configured
+                    start_date:
+                      type: string
+                      format: date
+                      description: Date that work will start on the feature in format YYYY-MM-DD
+                    due_date:
+                      type: string
+                      format: date
+                      description: Date that work is due to be completed on the feature in format YYYY-MM-DD
+                    release_phase:
+                      type: string
+                      description: Name or id of release phase which the feature belongs to
+                    initiative:
+                      type: string
+                      description: Name or id of initiative which the feature belongs to
+                    epic:
+                      type: string
+                      description: Name or id of epic which the feature belongs to
+                    progress_source:
+                      type: string
+                      description: >-
+                        Source for calculating progress on the feature. Options are: progress_manual,
+                        progress_from_requirements, progress_from_remaining_estimate, progress_from_todos
+                    progress:
+                      type: integer
+                      description: Progress completed on the feature. May only be set when the progress_source is manual
+                    team:
+                      type: string
+                      description: Numeric ID or key of the Develop team to assign the feature to
+                    team_workflow_status:
+                      type: string
+                      description: Team status of the feature — must be a valid status for the selected team
+                    iteration:
+                      type: string
+                      description: ID of sprint to assign the feature to, must belong to the selected team
+                    program_increment:
+                      type: string
+                      description: Numeric ID or key of the PI to assign the feature to, must belong to the selected team
+            examples:
+              minimal:
+                summary: Minimal feature update
+                value:
+                  feature:
+                    name: "New name"
+                    description: "New description"
+      responses:
+        '200':
+          description: Feature updated
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/index.yaml#/Feature'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Feature not found
     delete:
-      $ref: './paths/features/index.yaml#/delete_feature'
+      summary: Delete a feature
+      description: Deletes the specified feature.
+      tags:
+        - Features
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Feature not found
   /features/{id}/custom_fields:
     parameters:
       - name: id
@@ -85,7 +312,45 @@ paths:
           type: string
         description: Numeric ID or key of the feature
     put:
-      $ref: './paths/features/index.yaml#/update_feature_custom_fields'
+      summary: Update a feature's custom fields
+      description: |
+        Updates the custom fields of an existing feature.
+      tags:
+        - Features
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feature:
+                  type: object
+                  properties:
+                    custom_fields:
+                      type: object
+                      description: Object containing custom field key-value pairs
+                      additionalProperties: true
+            examples:
+              update_priority:
+                summary: Update a feature's priority custom field
+                value:
+                  feature:
+                    custom_fields:
+                      priority: "P3"
+      responses:
+        '200':
+          description: Feature custom fields updated
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/index.yaml#/Feature'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Feature not found
   /features/{id}/custom_fields/tag:
     parameters:
       - name: id
@@ -95,47 +360,59 @@ paths:
           type: string
         description: Numeric ID or key of the feature
     put:
-      $ref: './paths/features/index.yaml#/update_feature_custom_fields_tag'
+      summary: Update a feature's custom fields with tag-like value
+      description: |
+        Updates the custom fields of an existing feature with tag-like values.
+      tags:
+        - Features
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feature:
+                  type: object
+                  properties:
+                    custom_fields:
+                      type: object
+                      description: Object containing custom field key-value pairs
+                      properties:
+                        tags:
+                          type: array
+                          description: Array of tag values for a tag-like custom field
+                          items:
+                            type: string
+                      additionalProperties: true
+            examples:
+              update_tags:
+                summary: Update a feature's tags custom field
+                value:
+                  feature:
+                    custom_fields:
+                      tags: ["tag2", "tag,3"]
+      responses:
+        '200':
+          description: Feature custom fields with tag-like value updated
+          content:
+            application/json:
+              schema:
+                $ref: './schemas/features/index.yaml#/Feature'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Feature not found
   /features/{id}/custom_fields/worksheet:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the feature
-    put:
-      $ref: './paths/features/index.yaml#/update_feature_custom_worksheet_fields'
+    $ref: './paths/features/feature_custom_worksheet_fields_path.yaml#/feature_custom_worksheet_fields_path'
   /features/{id}/epic:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the feature
-    put:
-      $ref: './paths/features/index.yaml#/update_feature_epic'
+    $ref: './paths/features/feature_epic_path.yaml#/feature_epic_path'
   /features/{id}/goals:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the feature
-    put:
-      $ref: './paths/features/index.yaml#/update_feature_goals'
+    $ref: './paths/features/feature_goals_path.yaml#/feature_goals_path'
   /features/{id}/progress:
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the feature
-    put:
-      $ref: './paths/features/index.yaml#/update_feature_progress'
+    $ref: './paths/features/feature_progress_path.yaml#/feature_progress_path'
   /features/{id}/convert_to_epic:
     parameters:
       - name: id

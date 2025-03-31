@@ -1,0 +1,46 @@
+feature_epic_path:
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the feature
+  put:
+    summary: Update a feature's epic
+    description: |
+      Updates the epic of an existing feature.
+    tags:
+      - Features
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              feature:
+                type: object
+                properties:
+                  epic:
+                    type: string
+                    description: Name or id of epic which the feature belongs to
+          examples:
+            update_epic:
+              summary: Update a feature's epic
+              value:
+                feature:
+                  epic: "PRJ1-E-1"
+    responses:
+      '200':
+        description: Feature epic updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/features/index.yaml#/Feature'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
