@@ -1,0 +1,140 @@
+convert_to_epic:
+  post:
+    summary: Convert a feature to an epic
+    description: Converts the specified feature to an epic.
+    tags:
+      - Features
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: false
+      content:
+        application/json:
+          schema:
+            type: object
+            properties: {}
+    responses:
+      '200':
+        description: Feature converted to epic
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/epics.yaml#/Epic'
+            examples:
+              success:
+                summary: Successful response
+                value:
+                  id: "6776757454425734692"
+                  name: "A feature in project 2"
+                  reference_num: "PRJ2-E-251"
+                  initiative_reference_num: null
+                  position: 1000
+                  score: 0
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  start_date: null
+                  due_date: null
+                  product_id: "517761884"
+                  progress: 0
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  status_changed_on: "2019-01-01"
+                  created_by_user:
+                    id: "1020675218"
+                    name: "Mary Humpty"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                  workflow_status:
+                    id: "962984386"
+                    name: "Designed"
+                    position: 2
+                    complete: false
+                    color: "#ecdd8f"
+                  project:
+                    id: "517761884"
+                    reference_prefix: "PRJ2"
+                    name: "Project 2"
+                    product_line: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/PRJ2"
+                  description:
+                    id: "6776757454429457454"
+                    body: ""
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  attachments: []
+                  integration_fields: []
+                  url: "http://company.aha.io/epics/PRJ2-E-251"
+                  resource: "http://company.aha.io/api/v1/epics/PRJ2-E-251"
+                  release:
+                    id: "1000426269"
+                    reference_num: "PRJ2-R-1"
+                    name: "Release 2"
+                    start_date: "2019-01-01"
+                    release_date: "2019-01-01"
+                    parking_lot: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    product_id: "517761884"
+                    integration_fields: []
+                    url: "http://company.aha.io/releases/PRJ2-R-1"
+                    resource: "http://company.aha.io/api/v1/releases/PRJ2-R-1"
+                    owner:
+                      id: "16338845"
+                      name: "John Smith"
+                      email: "no-reply@aha.io"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      updated_at: "2019-01-01T00:00:00.000Z"
+                    project:
+                      id: "517761884"
+                      reference_prefix: "PRJ2"
+                      name: "Project 2"
+                      product_line: false
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      workspace_type: "product_workspace"
+                      url: "http://company.aha.io/projects/PRJ2"
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    default_assignee: false
+                  features: []
+                  goals: []
+                  key_results: []
+                  comments_count: 0
+                  score_facts: []
+                  tags: []
+                  full_tags: []
+                  custom_fields: []
+                  workflow_status_times:
+                    - status_id: "962984386"
+                      status_name: "Designed"
+                      started_at: "2019-01-01T00:00:00.000Z"
+                      ended_at: null
+                  _links: []
+                  master_feature_only_original_estimate: null
+                  master_feature_only_remaining_estimate: null
+                  master_feature_only_work_done: null
+                  epic_only_original_estimate: null
+                  epic_only_remaining_estimate: null
+                  epic_only_work_done: null
+      '404':
+        description: Feature not found
+        content:
+          application/json:
+            examples:
+              error:
+                summary: Error response
+                value:
+                  error:
+                    message: "Feature with ID 'PRJ2-1' not found"
+                    status: 404

@@ -1,0 +1,8 @@
+# Feature schemas index file
+# References to all feature-related schemas
+
+FeatureCreateRequest:
+  $ref: './create_request.yaml#/FeatureCreateRequest'
+
+Feature:
+  $ref: './feature.yaml#/Feature'

@@ -1,0 +1,236 @@
+Feature:
+  type: object
+  properties:
+    id:
+      type: string
+    name:
+      type: string
+    reference_num:
+      type: string
+    initiative_reference_num:
+      type: string
+    release_reference_num:
+      type: string
+    epic_reference_num:
+      type: string
+    position:
+      type: integer
+    score:
+      type: integer
+    created_at:
+      type: string
+      format: date-time
+    updated_at:
+      type: string
+      format: date-time
+    start_date:
+      type: string
+      format: date
+    due_date:
+      type: string
+      format: date
+    product_id:
+      type: string
+    progress:
+      type: integer
+    progress_source:
+      type: string
+    status_changed_on:
+      type: string
+      format: date
+    created_by_user:
+      $ref: '../users.yaml#/User'
+    workflow_kind:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    workflow_status:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        position:
+          type: integer
+        complete:
+          type: boolean
+        color:
+          type: string
+    project:
+      type: object
+      properties:
+        id:
+          type: string
+        reference_prefix:
+          type: string
+        name:
+          type: string
+        product_line:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        workspace_type:
+          type: string
+        url:
+          type: string
+          format: uri
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+        body:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        attachments:
+          type: array
+          items:
+            type: object
+    attachments:
+      type: array
+      items:
+        type: object
+    integration_fields:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          value:
+            type: string
+          integration_id:
+            type: integer
+          service_name:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+    url:
+      type: string
+      format: uri
+    resource:
+      type: string
+      format: uri
+    release:
+      type: object
+      properties:
+        id:
+          type: string
+        reference_num:
+          type: string
+        name:
+          type: string
+        start_date:
+          type: string
+          format: date
+        release_date:
+          type: string
+          format: date
+        parking_lot:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        product_id:
+          type: string
+        integration_fields:
+          type: array
+          items:
+            type: object
+        url:
+          type: string
+          format: uri
+        resource:
+          type: string
+          format: uri
+        owner:
+          $ref: '../users.yaml#/User'
+        project:
+          type: object
+          properties:
+            id:
+              type: string
+            reference_prefix:
+              type: string
+            name:
+              type: string
+            product_line:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            workspace_type:
+              type: string
+            url:
+              type: string
+              format: uri
+    assigned_to_user:
+      $ref: '../users.yaml#/User'
+    requirements:
+      type: array
+      items:
+        type: object
+    goals:
+      type: array
+      items:
+        type: object
+    key_results:
+      type: array
+      items:
+        type: object
+    comments_count:
+      type: integer
+    score_facts:
+      type: array
+      items:
+        type: object
+    tags:
+      type: array
+      items:
+        type: string
+    full_tags:
+      type: array
+      items:
+        type: object
+    custom_fields:
+      type: array
+      items:
+        type: object
+    feature_links:
+      type: array
+      items:
+        type: object
+    workflow_status_times:
+      type: array
+      items:
+        type: object
+        properties:
+          status_id:
+            type: string
+          status_name:
+            type: string
+          started_at:
+            type: string
+            format: date-time
+          ended_at:
+            type: string
+            format: date-time
+    feature_only_original_estimate:
+      type: number
+    feature_only_remaining_estimate:
+      type: number
+    feature_only_work_done:
+      type: number

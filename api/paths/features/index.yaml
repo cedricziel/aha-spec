@@ -1,0 +1,11 @@
+# Feature paths index file
+# References to all feature-related paths
+
+release_features:
+  $ref: './create.yaml#/release_features'
+
+get_feature:
+  $ref: './get.yaml#/get_feature'
+
+convert_to_epic:
+  $ref: './convert.yaml#/convert_to_epic'

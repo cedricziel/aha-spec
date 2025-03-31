@@ -22,9 +22,11 @@ paths:
 
   # Features
   /releases/{release_id}/features:
-    $ref: './paths/features.yaml#/release_features'
+    $ref: './paths/features/index.yaml#/release_features'
+  /features/{id}:
+    $ref: './paths/features/index.yaml#/get_feature'
   /features/{id}/convert_to_epic:
-    $ref: './paths/features.yaml#/convert_to_epic'
+    $ref: './paths/features/index.yaml#/convert_to_epic'
 
   # Comments
   /features/{feature_id}/comments:
@@ -75,9 +77,9 @@ components:
 
     # Feature related schemas
     FeatureCreateRequest:
-      $ref: './schemas/features.yaml#/FeatureCreateRequest'
+      $ref: './schemas/features/index.yaml#/FeatureCreateRequest'
     Feature:
-      $ref: './schemas/features.yaml#/Feature'
+      $ref: './schemas/features/index.yaml#/Feature'
 
     # Comment related schemas
     CommentCreateRequest:
