@@ -25,6 +25,8 @@ product_competitors:
   post:
     summary: Create a competitor
     description: Adds a new competitor to the specified product.
+    tags:
+      - Competitors
     parameters:
       - name: product_id
         in: path
@@ -37,8 +39,6 @@ product_competitors:
         application/json:
           schema:
             $ref: '../schemas/competitors.yaml#/CompetitorCreateRequest'
-    tags:
-      - Competitors
     responses:
       '201':
         description: Competitor created
@@ -51,6 +51,8 @@ competitor_by_id:
   get:
     summary: Get a specific competitor
     description: Retrieves details of the specified competitor.
+    tags:
+      - Competitors
     parameters:
       - name: competitor_id
         in: path
