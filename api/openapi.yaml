@@ -24,17 +24,52 @@ paths:
   /features:
     $ref: './paths/features/index.yaml#/list_features'
   /goals/{goal_id}/features:
+    parameters:
+      - name: goal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the goal
     $ref: './paths/features/index.yaml#/goal_features'
   /initiatives/{initiative_id}/features:
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the initiative
     $ref: './paths/features/index.yaml#/initiative_features'
   /products/{product_id}/features:
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
     $ref: './paths/features/index.yaml#/product_features'
   /releases/{release_id}/features:
+    parameters:
+      - name: release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the release
     post:
       $ref: './paths/features/index.yaml#/release_features'
     get:
       $ref: './paths/features/index.yaml#/release_features_get'
   /features/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     get:
       $ref: './paths/features/index.yaml#/get_feature'
     put:
@@ -42,24 +77,73 @@ paths:
     delete:
       $ref: './paths/features/index.yaml#/delete_feature'
   /features/{id}/custom_fields:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_custom_fields'
   /features/{id}/custom_fields/tag:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_custom_fields_tag'
   /features/{id}/custom_fields/worksheet:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_custom_worksheet_fields'
   /features/{id}/epic:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_epic'
   /features/{id}/goals:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_goals'
   /features/{id}/progress:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     put:
       $ref: './paths/features/index.yaml#/update_feature_progress'
   /features/{id}/convert_to_epic:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
     $ref: './paths/features/index.yaml#/convert_to_epic'
 
   # Comments
@@ -92,6 +176,13 @@ paths:
   /epics/{epic_id}:
     $ref: './paths/epics.yaml#/epic_by_id'
   /epics/{epic_id}/features:
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the epic
     $ref: './paths/features/index.yaml#/epic_features'
   /goals/{goal_id}/epics:
     $ref: './paths/epics.yaml#/goal_epics'
