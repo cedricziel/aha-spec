@@ -1,5 +1,5 @@
 {
     "yaml.schemas": {
-        "https://spec.openapis.org/oas/3.1/schema/2022-10-07": "file:///Users/cedricziel/private/code/aha-spec/api/openapi.yaml"
+        "https://spec.openapis.org/oas/3.0/schema/2021-09-28": "file:///Users/cedricziel/private/code/aha-spec/api/openapi.yaml"
     }
 }

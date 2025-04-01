@@ -1,4 +1,6 @@
-openapi: "3.1.0"
+---
+# ignore the version error
+openapi: 3.0.3
 info:
   title: Aha! REST API
   description: API for interacting with Aha! product management platform.
