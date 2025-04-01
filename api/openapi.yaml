@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Aha! REST API
   description: API for interacting with Aha! product management platform.
@@ -101,6 +101,8 @@ paths:
   # Ideas
   /products/{product_id}/ideas:
     $ref: './paths/ideas/create.yaml#/product_ideas_path'
+  /products/{product_id}/ideas/portal_user:
+    $ref: './paths/ideas/create_by_portal_user.yaml#/product_ideas_portal_user_path'
 
 # Components are referenced from separate files
 components:
@@ -144,6 +146,8 @@ components:
     # Idea related schemas
     IdeaCreateRequest:
       $ref: './schemas/ideas/create_request.yaml#/IdeaCreateRequest'
+    IdeaCreateByPortalUserRequest:
+      $ref: './schemas/ideas/create_by_portal_user_request.yaml#/IdeaCreateByPortalUserRequest'
     IdeaResponse:
       $ref: './schemas/ideas/idea.yaml#/IdeaResponse'
 

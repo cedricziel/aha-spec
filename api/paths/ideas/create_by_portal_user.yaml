@@ -1,0 +1,107 @@
+product_ideas_portal_user_path:
+  post:
+    summary: Create an idea created by a ideas portal user
+    description: |
+      Creates a new idea for the specified product, where the creator is an ideas portal user.
+
+      When creating an idea where the creator is an idea user we strongly suggest to provide
+      the submitted_idea_portal_id attribute to the idea to ensure that the idea is created
+      in the correct ideas portal and the user gets access to the portal.
+
+      If you don't want the idea to be submitted to any portal, you can skip this by setting
+      skip_portal: true in the request body.
+    tags:
+      - Ideas
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/create_by_portal_user_request.yaml#/IdeaCreateByPortalUserRequest'
+          example:
+            idea:
+              name: "New idea"
+              created_by_portal_user:
+                id: 384687358
+                name: "Sammy Smith"
+    responses:
+      '200':
+        description: Idea created
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
+            example:
+              idea:
+                id: "6776881149487577144"
+                name: "New idea"
+                reference_num: "PRJ1-I-10"
+                score: 2
+                created_at: "2019-01-01T00:00:00.000Z"
+                updated_at: "2019-01-01T00:00:00.000Z"
+                product_id: "131414752"
+                votes: 0
+                initial_votes: 0
+                status_changed_at: "2019-01-01T00:00:00.000Z"
+                workflow_status:
+                  id: "3259216"
+                  name: "New"
+                  position: 1
+                  complete: false
+                  color: "#dce7c6"
+                description:
+                  id: "6776881149489732632"
+                  body: ""
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  attachments: []
+                visibility: "Visible to all ideas portal users"
+                url: "http://company.aha.io/ideas/ideas/PRJ1-I-10"
+                resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-10"
+                product:
+                  id: "131414752"
+                  reference_prefix: "PRJ1"
+                  name: "Project 1"
+                  product_line: false
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  workspace_type: "product_workspace"
+                  url: "http://company.aha.io/projects/PRJ1"
+                created_by_portal_user:
+                  id: "384687358"
+                  name: "Sammy Smith"
+                  email: "sammy@smith.com"
+                  created_at: "2019-01-01T00:00:00.000Z"
+                created_by_idea_user:
+                  id: "244576613"
+                  name: "Sammy Smith"
+                  email: "sammy@smith.com"
+                  created_at: "2019-01-01T00:00:00.000Z"
+                assigned_to_user: null
+                endorsements_count: 0
+                comments_count: 0
+                score_facts: []
+                tags: []
+                full_tags: []
+                categories: []
+                custom_fields: []
+                workflow_status_times:
+                  - status_id: "3259216"
+                    status_name: "New"
+                    started_at: "2019-01-01T00:00:00.000Z"
+                    ended_at: null
+                submitted_idea_portal_record_url: "https://testideaportal1.ideas.aha.io:8338/ideas/PRJ1-I-10"
+                integration_fields: []
+    x-code-samples:
+      - lang: curl
+        source: |
+          curl "https://company.aha.io/api/v1/products/PRJ1/ideas" -d '{"idea":{"name":"New idea","created_by_portal_user":{"id":384687358,"name":"Sammy Smith"}}}' -X POST \
+            -H "Authorization: Bearer 15b60d42d4bc417284a246ced6877b0bf13fb4aca415f7b55f7006bc3694a8ab" \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json"

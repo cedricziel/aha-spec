@@ -99,6 +99,30 @@ IdeaResponse:
             updated_at:
               type: string
               format: date-time
+        created_by_portal_user:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+        created_by_idea_user:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+            created_at:
+              type: string
+              format: date-time
         assigned_to_user:
           type: object
           nullable: true
