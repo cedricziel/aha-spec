@@ -1,0 +1,169 @@
+list_initiatives:
+  get:
+    summary: List initiatives
+    description: Retrieves a list of all initiatives in the account.
+    tags:
+      - Initiatives
+    parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against initiative name.
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only initiatives updated after the timestamp will be returned.
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID or email address of a user. If provided, returns only initiatives assigned to that user.
+      - name: only_active
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: When true, returns only active initiatives.
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/initiatives/list_response.yaml#/InitiativesListResponse'
+            example:
+              initiatives:
+                - id: "4125886"
+                  name: "Initiative 2"
+                  reference_num: "PRJ1-S-2"
+                  status: "not_started"
+                  effort: 40
+                  value: 30
+                  presented: true
+                  color: "#bada55"
+                  start_date: null
+                  end_date: null
+                  position: 2
+                  score: 0
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  product_id: "131414752"
+                  progress: null
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  url: "http://company.aha.io/initiatives/PRJ1-S-2"
+                  resource: "http://company.aha.io/api/v1/initiatives/PRJ1-S-2"
+                  project:
+                    id: "131414752"
+                    reference_prefix: "PRJ1"
+                    name: "Project 1"
+                    product_line: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/PRJ1"
+                  workflow_status:
+                    id: "53968949"
+                    name: "Not Started"
+                    position: 1
+                    complete: false
+                    color: "#dce7c6"
+                  description:
+                    id: "824706757"
+                    body: "Description of initiative 2"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  attachments: []
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    default_assignee: false
+                  comments_count: 0
+                  goals: []
+                  key_results: []
+                  score_facts: []
+                  integration_fields: []
+                  created_by_user:
+                    id: "82352673"
+                    name: "Bob Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                - id: "423077122"
+                  name: "Initiative 1"
+                  reference_num: "PRJ1-S-1"
+                  status: "not_started"
+                  effort: 30
+                  value: 50
+                  presented: true
+                  color: "#bada55"
+                  start_date: null
+                  end_date: null
+                  position: 1
+                  score: 4
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  product_id: "131414752"
+                  progress: null
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  url: "http://company.aha.io/initiatives/PRJ1-S-1"
+                  resource: "http://company.aha.io/api/v1/initiatives/PRJ1-S-1"
+                  project:
+                    id: "131414752"
+                    reference_prefix: "PRJ1"
+                    name: "Project 1"
+                    product_line: false
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/PRJ1"
+                  workflow_status:
+                    id: "53968949"
+                    name: "Not Started"
+                    position: 1
+                    complete: false
+                    color: "#dce7c6"
+                  description:
+                    id: "673273729"
+                    body: "Description of initiative 1"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  attachments: []
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    default_assignee: false
+                  comments_count: 1
+                  goals:
+                    - id: "602095703"
+                      name: "Goal 1"
+                      url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-1"
+                      resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-1"
+                      created_at: "2019-01-01T00:00:00.000Z"
+                      description:
+                        id: "166463080"
+                        body: "Description of goal 1"
+                        created_at: "2019-01-01T00:00:00.000Z"
+                        updated_at: "2019-01-01T00:00:00.000Z"
+                        attachments: []
+              pagination:
+                total_records: 7
+                total_pages: 1
+                current_page: 1
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden

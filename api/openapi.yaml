@@ -105,6 +105,8 @@ paths:
     $ref: './paths/products/list.yaml#/list_products'
 
   # Initiatives
+  /initiatives:
+    $ref: './paths/initiatives/list.yaml#/list_initiatives'
   /products/{product_id}/initiatives:
     $ref: './paths/initiatives/create.yaml#/product_initiatives_path'
   /initiatives/{id}:
@@ -180,6 +182,8 @@ components:
       $ref: './schemas/initiatives/create_request.yaml#/InitiativeCreateRequest'
     InitiativeResponse:
       $ref: './schemas/initiatives/initiative.yaml#/InitiativeResponse'
+    InitiativesListResponse:
+      $ref: './schemas/initiatives/list_response.yaml#/InitiativesListResponse'
 
   securitySchemes:
     OAuth2:
