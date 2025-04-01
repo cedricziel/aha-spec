@@ -1,0 +1,83 @@
+IdeaCreateRequest:
+  type: object
+  properties:
+    idea:
+      type: object
+      required:
+        - name
+        - created_by
+      properties:
+        name:
+          type: string
+          description: Name of the idea
+        description:
+          type: string
+          description: Description of the idea — may include HTML formatting.
+        workflow_status:
+          type: string
+          description: >
+            Status of the idea — must be a valid status for the selected
+            product.
+        tags:
+          type: string
+          description: >
+            Tags to add to the idea. Multiple tags must be separated by
+            commas.
+        categories:
+          type: string
+          description: >
+            Names of any existing categories the idea should be assigned to.
+            Multiple categories must be separated by commas.
+        created_by:
+          type: string
+          description: >
+            Email address of user who created the idea — does not need to be
+            an Aha! user email.
+        assigned_to_user:
+          type: string
+          description: Email address of user that is assigned the idea.
+        feature:
+          type: string
+          description: Name or ID of the feature that the idea was promoted to
+        initiative:
+          type: string
+          description: Name or ID of the initiative that the idea was promoted to
+        epic:
+          type: string
+          description: Name or ID of the epic that the idea was promoted to
+        duplicate_idea:
+          type: string
+          description: >
+            Idea ID or key for an idea which this idea duplicates. Setting
+            this value will merge this idea into the provided idea ID;
+            setting it to a null or blank value will unmerge this idea.
+            Note that in the API response, this attribute is called duplicate_of.
+        initial_votes:
+          type: integer
+          description: >
+            Number of votes to seed the vote count with when importing from
+            other systems
+        visibility:
+          type: string
+          description: >
+            Initial visibility of the idea (aha, creator, employee,
+            employee_or_creator, creator_organization, or public -
+            aha is the default)
+        created_at:
+          type: string
+          format: date-time
+          description: >
+            Date of idea creation. In UTC timezone with format YYYY-MM-DD
+            or YYYY-MM-DD HH:MM:SS.
+        spam:
+          type: boolean
+          description: Whether the idea is considered spam. Must be 'true' or 'false'
+        submitted_idea_portal_id:
+          type: string
+          description: >
+            Numeric ID of the ideas portal. We strongly suggest you set this if
+            the creator is an idea user.
+        skip_portal:
+          type: boolean
+          description: >
+            If true, the idea will not be submitted to any portal. Default is false.

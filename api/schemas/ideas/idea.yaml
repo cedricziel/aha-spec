@@ -1,0 +1,158 @@
+IdeaResponse:
+  type: object
+  properties:
+    idea:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        reference_num:
+          type: string
+        score:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        product_id:
+          type: string
+        votes:
+          type: integer
+        initial_votes:
+          type: integer
+        status_changed_at:
+          type: string
+          format: date-time
+        workflow_status:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            position:
+              type: integer
+            complete:
+              type: boolean
+            color:
+              type: string
+        description:
+          type: object
+          properties:
+            id:
+              type: string
+            body:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+            attachments:
+              type: array
+              items:
+                type: object
+        visibility:
+          type: string
+        url:
+          type: string
+          format: uri
+        resource:
+          type: string
+          format: uri
+        product:
+          type: object
+          properties:
+            id:
+              type: string
+            reference_prefix:
+              type: string
+            name:
+              type: string
+            product_line:
+              type: boolean
+            created_at:
+              type: string
+              format: date-time
+            workspace_type:
+              type: string
+            url:
+              type: string
+              format: uri
+        created_by_user:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+        assigned_to_user:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            email:
+              type: string
+        endorsements_count:
+          type: integer
+        comments_count:
+          type: integer
+        score_facts:
+          type: array
+          items:
+            type: object
+        tags:
+          type: array
+          items:
+            type: string
+        full_tags:
+          type: array
+          items:
+            type: object
+        categories:
+          type: array
+          items:
+            type: object
+        custom_fields:
+          type: array
+          items:
+            type: object
+        workflow_status_times:
+          type: array
+          items:
+            type: object
+            properties:
+              status_id:
+                type: string
+              status_name:
+                type: string
+              started_at:
+                type: string
+                format: date-time
+              ended_at:
+                type: string
+                format: date-time
+                nullable: true
+        submitted_idea_portal_record_url:
+          type: string
+          format: uri
+        integration_fields:
+          type: array
+          items:
+            type: object

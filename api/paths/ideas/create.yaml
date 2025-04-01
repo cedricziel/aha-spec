@@ -1,0 +1,35 @@
+product_ideas_path:
+  post:
+    summary: Create an idea
+    description: |
+      Creates a new idea for the specified product.
+
+      When creating an idea where the creator is an idea user we strongly
+      suggest to provide the submitted_idea_portal_id attribute to the idea
+      to ensure that the idea is created in the correct ideas portal and
+      the user gets access to the portal.
+
+      If you don't want the idea to be submitted to any portal, you can
+      skip this by setting skip_portal: true in the request body.
+    tags:
+      - Ideas
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/create_request.yaml#/IdeaCreateRequest'
+    responses:
+      '200':
+        description: Idea created
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'

@@ -98,6 +98,10 @@ paths:
   /competitors/{competitor_id}:
     $ref: './paths/competitors.yaml#/competitor_by_id'
 
+  # Ideas
+  /products/{product_id}/ideas:
+    $ref: './paths/ideas/create.yaml#/product_ideas_path'
+
 # Components are referenced from separate files
 components:
   schemas:
@@ -136,6 +140,12 @@ components:
       $ref: './schemas/epics.yaml#/EpicCreateRequest'
     Epic:
       $ref: './schemas/epics.yaml#/Epic'
+
+    # Idea related schemas
+    IdeaCreateRequest:
+      $ref: './schemas/ideas/create_request.yaml#/IdeaCreateRequest'
+    IdeaResponse:
+      $ref: './schemas/ideas/idea.yaml#/IdeaResponse'
 
   securitySchemes:
     OAuth2:
