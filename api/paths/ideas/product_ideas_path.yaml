@@ -1,0 +1,168 @@
+product_ideas_path:
+  post:
+    summary: Create an idea
+    description: |
+      Creates a new idea for the specified product.
+
+      When creating an idea where the creator is an idea user we strongly
+      suggest to provide the submitted_idea_portal_id attribute to the idea
+      to ensure that the idea is created in the correct ideas portal and
+      the user gets access to the portal.
+
+      If you don't want the idea to be submitted to any portal, you can
+      skip this by setting skip_portal: true in the request body.
+    tags:
+      - Ideas
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/create_request.yaml#/IdeaCreateRequest'
+    responses:
+      '200':
+        description: Idea created
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
+  get:
+    summary: List ideas for a product
+    description: Retrieves a list of ideas for the specified product.
+    tags:
+      - Ideas
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against the idea name
+      - name: spam
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: When true, shows ideas that have been marked as spam. By default, no spam ideas will be shown.
+      - name: workflow_status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: When present, filters to ideas with the provided workflow status ID or name.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [recent, trending, popular]
+        description: Sorting of the list of ideas. Accepted values are recent, trending, or popular.
+      - name: created_before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas created before the timestamp will be returned.
+      - name: created_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas created after the timestamp will be returned.
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas updated or created after the timestamp will be returned.
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag value. If provided, only ideas with the associated tag will be returned.
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID of a user. If provided, only ideas created by that user will be returned.
+      - name: idea_user_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID of an idea user. If provided, only ideas created by that idea user will be returned.
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/list_response.yaml#/IdeasListResponse'
+            example:
+              ideas:
+                - id: "58056975"
+                  reference_num: "PRJ1-I-1"
+                  name: "Idea 1"
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  workflow_status:
+                    id: "3259216"
+                    name: "New"
+                    position: 1
+                    complete: false
+                    color: "#dce7c6"
+                  description:
+                    id: "103757394"
+                    body: "Description of idea 1"
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  url: "http://company.aha.io/ideas/ideas/PRJ1-I-1"
+                  resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-1"
+                - id: "68691224"
+                  reference_num: "PRJ1-I-12"
+                  name: "Idea 5"
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  workflow_status:
+                    id: "3259216"
+                    name: "New"
+                    position: 1
+                    complete: false
+                    color: "#dce7c6"
+                  description:
+                    id: "6776881149489796142"
+                    body: ""
+                    created_at: "2019-01-01T00:00:00.000Z"
+                    updated_at: "2019-01-01T00:00:00.000Z"
+                    attachments: []
+                  url: "http://company.aha.io/ideas/ideas/PRJ1-I-12"
+                  resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-12"
+              pagination:
+                total_records: 6
+                total_pages: 1
+                current_page: 1
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found

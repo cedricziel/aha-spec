@@ -1,0 +1,86 @@
+IdeasListResponse:
+  type: object
+  properties:
+    ideas:
+      type: array
+      description: List of ideas
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Unique identifier of the idea
+          reference_num:
+            type: string
+            description: Reference number of the idea
+          name:
+            type: string
+            description: Name of the idea
+          created_at:
+            type: string
+            format: date-time
+            description: Creation date of the idea
+          updated_at:
+            type: string
+            format: date-time
+            description: Last update date of the idea
+          workflow_status:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier of the workflow status
+              name:
+                type: string
+                description: Name of the workflow status
+              position:
+                type: integer
+                description: Position of the workflow status
+              complete:
+                type: boolean
+                description: Whether the workflow status is complete
+              color:
+                type: string
+                description: Color of the workflow status
+          description:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier of the description
+              body:
+                type: string
+                description: Content of the description
+              created_at:
+                type: string
+                format: date-time
+                description: Creation date of the description
+              updated_at:
+                type: string
+                format: date-time
+                description: Last update date of the description
+              attachments:
+                type: array
+                description: Attachments to the description
+                items:
+                  type: object
+          url:
+            type: string
+            format: uri
+            description: URL to view the idea in the Aha! web application
+          resource:
+            type: string
+            format: uri
+            description: API resource URL for the idea
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of records
+        total_pages:
+          type: integer
+          description: Total number of pages
+        current_page:
+          type: integer
+          description: Current page number
