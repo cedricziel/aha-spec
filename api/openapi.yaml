@@ -107,6 +107,8 @@ paths:
   # Initiatives
   /products/{product_id}/initiatives:
     $ref: './paths/initiatives/create.yaml#/product_initiatives_path'
+  /initiatives/{id}:
+    $ref: './paths/initiatives/get.yaml#/initiative_by_id_path'
 
   # Ideas
   /products/{product_id}/ideas:
