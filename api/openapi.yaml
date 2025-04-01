@@ -100,6 +100,14 @@ paths:
   /competitors/{competitor_id}:
     $ref: './paths/competitors.yaml#/competitor_by_id'
 
+  # Products
+  /products:
+    $ref: './paths/products/list.yaml#/list_products'
+
+  # Initiatives
+  /products/{product_id}/initiatives:
+    $ref: './paths/initiatives/create.yaml#/product_initiatives_path'
+
   # Ideas
   /products/{product_id}/ideas:
     $ref: './paths/ideas/product_ideas_path.yaml#/product_ideas_path'
@@ -160,6 +168,16 @@ components:
       $ref: './schemas/ideas/idea.yaml#/IdeaResponse'
     IdeasListResponse:
       $ref: './schemas/ideas/list_response.yaml#/IdeasListResponse'
+
+    # Product related schemas
+    ProductsListResponse:
+      $ref: './schemas/products/list_response.yaml#/ProductsListResponse'
+
+    # Initiative related schemas
+    InitiativeCreateRequest:
+      $ref: './schemas/initiatives/create_request.yaml#/InitiativeCreateRequest'
+    InitiativeResponse:
+      $ref: './schemas/initiatives/initiative.yaml#/InitiativeResponse'
 
   securitySchemes:
     OAuth2:

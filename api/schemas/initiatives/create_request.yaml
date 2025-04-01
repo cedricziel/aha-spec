@@ -1,0 +1,79 @@
+InitiativeCreateRequest:
+  type: object
+  properties:
+    initiative:
+      type: object
+      required:
+        - name
+        - workflow_status
+      properties:
+        name:
+          type: string
+          description: Name of the initiative
+        workflow_status:
+          type: object
+          description: Status of the initiative
+          properties:
+            name:
+              type: string
+              description: Name of the workflow status
+            id:
+              type: string
+              description: ID of the workflow status
+        description:
+          type: string
+          description: Description of the initiative — may include HTML formatting
+        effort:
+          type: integer
+          description: Effort required for the initiative
+        value:
+          type: integer
+          description: Value the initiative brings to the business
+        parent_id:
+          type: string
+          description: ID of an initiative to roll up to in the parent line
+        position:
+          type: integer
+          description: Used to sort initiatives
+        presented:
+          type: boolean
+          description: Whether this initiative is shown on charts
+        start_date:
+          type: string
+          format: date
+          description: Start date for the initiative in format YYYY-MM-DD
+        end_date:
+          type: string
+          format: date
+          description: End date for the initiative in format YYYY-MM-DD
+        time_frame:
+          type: object
+          description: Time frame for this initiative
+          properties:
+            id:
+              type: integer
+              description: ID of the time frame
+            name:
+              type: string
+              description: Name of the time frame
+        progress_source:
+          type: string
+          enum:
+            - progress_manual
+            - progress_from_features
+            - progress_from_releases
+            - progress_from_children
+            - progress_from_features_completed
+            - progress_from_epics
+          description: Source for calculating progress on the initiative
+        progress:
+          type: integer
+          description: Progress completed on the initiative. May only be set when the progress_source is manual.
+        duration_source:
+          type: string
+          enum:
+            - duration_manual
+            - duration_from_children
+            - duration_from_releases
+            - duration_from_features_epics
+          description: Source for automatically calculating start and end dates

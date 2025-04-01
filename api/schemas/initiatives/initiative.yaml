@@ -1,0 +1,243 @@
+InitiativeResponse:
+  type: object
+  properties:
+    initiative:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the initiative
+        name:
+          type: string
+          description: Name of the initiative
+        reference_num:
+          type: string
+          description: Reference number of the initiative
+        status:
+          type: string
+          description: Status code of the initiative
+        effort:
+          type: integer
+          description: Effort required for the initiative
+        value:
+          type: integer
+          description: Value the initiative brings to the business
+        presented:
+          type: boolean
+          description: Whether this initiative is shown on charts
+        color:
+          type: string
+          description: Color of the initiative
+        start_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: Start date for the initiative
+        end_date:
+          type: string
+          format: date-time
+          nullable: true
+          description: End date for the initiative
+        position:
+          type: integer
+          description: Position for sorting initiatives
+        score:
+          type: integer
+          description: Score of the initiative
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the initiative
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update date of the initiative
+        product_id:
+          type: string
+          description: ID of the product the initiative belongs to
+        progress:
+          type: integer
+          description: Progress completed on the initiative
+        progress_source:
+          type: string
+          description: Source for calculating progress on the initiative
+        duration_source:
+          type: string
+          description: Source for calculating start and end dates
+        url:
+          type: string
+          format: uri
+          description: URL to view the initiative in the Aha! web application
+        resource:
+          type: string
+          format: uri
+          description: API resource URL for the initiative
+        project:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the project
+            reference_prefix:
+              type: string
+              description: Reference prefix of the project
+            name:
+              type: string
+              description: Name of the project
+            product_line:
+              type: boolean
+              description: Whether the project is a product line
+            created_at:
+              type: string
+              format: date-time
+              description: Creation date of the project
+            workspace_type:
+              type: string
+              description: Type of workspace
+            url:
+              type: string
+              format: uri
+              description: URL to view the project in the Aha! web application
+        workflow_status:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the workflow status
+            name:
+              type: string
+              description: Name of the workflow status
+            position:
+              type: integer
+              description: Position of the workflow status
+            complete:
+              type: boolean
+              description: Whether the workflow status is complete
+            color:
+              type: string
+              description: Color of the workflow status
+        description:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the description
+            body:
+              type: string
+              description: Content of the description
+            created_at:
+              type: string
+              format: date-time
+              description: Creation date of the description
+            updated_at:
+              type: string
+              format: date-time
+              description: Last update date of the description
+            attachments:
+              type: array
+              description: Attachments to the description
+              items:
+                type: object
+        attachments:
+          type: array
+          description: Attachments to the initiative
+          items:
+            type: object
+        assigned_to_user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the assigned user
+            name:
+              type: string
+              description: Name of the assigned user
+            email:
+              type: string
+              format: email
+              description: Email of the assigned user
+            created_at:
+              type: string
+              format: date-time
+              description: Creation date of the user
+            updated_at:
+              type: string
+              format: date-time
+              description: Last update date of the user
+            default_assignee:
+              type: boolean
+              description: Whether this user is the default assignee
+        time_frame:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: Unique identifier of the time frame
+            name:
+              type: string
+              description: Name of the time frame
+        comments_count:
+          type: integer
+          description: Number of comments on the initiative
+        goals:
+          type: array
+          description: Goals associated with the initiative
+          items:
+            type: object
+        key_results:
+          type: array
+          description: Key results associated with the initiative
+          items:
+            type: object
+        score_facts:
+          type: array
+          description: Score facts for the initiative
+          items:
+            type: object
+        integration_fields:
+          type: array
+          description: Integration fields for the initiative
+          items:
+            type: object
+        workflow_status_times:
+          type: array
+          description: Workflow status times for the initiative
+          items:
+            type: object
+            properties:
+              status_id:
+                type: string
+                description: ID of the status
+              status_name:
+                type: string
+                description: Name of the status
+              started_at:
+                type: string
+                format: date-time
+                description: When the initiative entered this status
+              ended_at:
+                type: string
+                format: date-time
+                nullable: true
+                description: When the initiative left this status
+        created_by_user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier of the creator
+            name:
+              type: string
+              description: Name of the creator
+            email:
+              type: string
+              format: email
+              description: Email of the creator
+            created_at:
+              type: string
+              format: date-time
+              description: Creation date of the user
+            updated_at:
+              type: string
+              format: date-time
+              description: Last update date of the user
