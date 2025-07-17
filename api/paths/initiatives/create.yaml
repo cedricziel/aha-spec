@@ -1,5 +1,6 @@
 product_initiatives_path:
   post:
+    operationId: initiatives_create
     summary: Create an initiative
     description: Creates a new initiative for the specified product.
     tags:

@@ -1,5 +1,6 @@
 goals_path:
   get:
+    operationId: goals_list
     summary: List goals
     description: Retrieves a list of all goals in the account.
     tags:
@@ -162,6 +163,7 @@ goals_path:
       '403':
         description: Forbidden
   post:
+    operationId: goals_create
     summary: Create a goal
     description: Creates a new goal in the account.
     tags:

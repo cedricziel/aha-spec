@@ -1,5 +1,6 @@
 get_idea:
   get:
+    operationId: ideas_get
     summary: Get a specific idea
     description: Retrieves the details of a specific idea.
     tags:

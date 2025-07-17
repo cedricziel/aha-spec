@@ -1,5 +1,6 @@
 release_by_id_path:
   get:
+    operationId: releases_get
     summary: Get a release
     description: Retrieves a specific release by its ID or reference number.
     tags:
@@ -91,6 +92,7 @@ release_by_id_path:
       '404':
         description: Release not found
   put:
+    operationId: releases_update
     summary: Update a release
     description: Updates a specific release by its ID or reference number.
     tags:
@@ -131,6 +133,7 @@ release_by_id_path:
       '422':
         description: Unprocessable entity
   delete:
+    operationId: releases_delete
     summary: Delete a release
     description: Deletes a specific release by its ID or reference number.
     tags:

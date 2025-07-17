@@ -1,5 +1,6 @@
 list_initiatives:
   get:
+    operationId: initiatives_list
     summary: List initiatives
     description: Retrieves a list of all initiatives in the account.
     tags:

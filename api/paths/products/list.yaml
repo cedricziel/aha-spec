@@ -1,5 +1,6 @@
 list_products:
   get:
+    operationId: products_list
     summary: List products in the account
     description: Retrieves a list of all products in the account.
     tags:

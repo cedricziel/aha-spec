@@ -1,5 +1,6 @@
 product_releases:
   get:
+    operationId: product_releases_list
     summary: List releases for a product
     description: Retrieves a list of all releases for a specific product.
     tags:
@@ -109,6 +110,7 @@ product_releases:
       '404':
         description: Product not found
   post:
+    operationId: releases_create
     summary: Create a release
     description: Creates a new release for the specified product.
     tags:

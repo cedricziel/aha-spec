@@ -1,5 +1,6 @@
 product_ideas_path:
   post:
+    operationId: ideas_create
     summary: Create an idea
     description: |
       Creates a new idea for the specified product.

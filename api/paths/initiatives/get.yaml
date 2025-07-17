@@ -1,5 +1,6 @@
 initiative_by_id_path:
   get:
+    operationId: initiatives_get
     summary: Get a specific initiative
     description: Retrieves the details of a specific initiative.
     tags:

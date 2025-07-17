@@ -1,5 +1,6 @@
 strategic_model_by_id_path:
   get:
+    operationId: strategic_models_get
     summary: Get a strategic model
     description: Retrieves a specific strategic model by its ID.
     tags:
@@ -72,6 +73,7 @@ strategic_model_by_id_path:
       '404':
         description: Strategic model not found
   put:
+    operationId: strategic_models_update
     summary: Update a strategic model
     description: Updates a specific strategic model by its ID.
     tags:
@@ -132,6 +134,7 @@ strategic_model_by_id_path:
       '422':
         description: Unprocessable entity
   delete:
+    operationId: strategic_models_delete
     summary: Delete a strategic model
     description: Deletes a specific strategic model by its ID.
     tags:

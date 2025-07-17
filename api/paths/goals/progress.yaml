@@ -1,5 +1,6 @@
 goal_progress_path:
   put:
+    operationId: goals_update_progress
     summary: Update goal progress
     description: Updates the progress of a specific goal and its key results.
     tags:

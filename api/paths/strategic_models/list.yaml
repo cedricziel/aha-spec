@@ -1,5 +1,6 @@
 strategic_models_path:
   get:
+    operationId: strategic_models_list
     summary: List strategic models
     description: Retrieves a list of all strategic models in the account.
     tags:
@@ -94,6 +95,7 @@ strategic_models_path:
       '403':
         description: Forbidden
   post:
+    operationId: strategic_models_create
     summary: Create a strategic model
     description: Creates a new strategic model in the account.
     tags:

@@ -1,5 +1,6 @@
 goal_by_id_path:
   get:
+    operationId: goals_get
     summary: Get a goal
     description: Retrieves a specific goal by its ID or reference number.
     tags:
@@ -119,6 +120,7 @@ goal_by_id_path:
       '404':
         description: Goal not found
   put:
+    operationId: goals_update
     summary: Update a goal
     description: Updates a specific goal by its ID or reference number.
     tags:
@@ -166,6 +168,7 @@ goal_by_id_path:
       '422':
         description: Unprocessable entity
   delete:
+    operationId: goals_delete
     summary: Delete a goal
     description: Deletes a specific goal by its ID or reference number.
     tags:

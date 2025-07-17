@@ -1,5 +1,6 @@
 list_releases:
   get:
+    operationId: releases_list
     summary: List releases
     description: Retrieves a list of all releases in the account.
     tags:
