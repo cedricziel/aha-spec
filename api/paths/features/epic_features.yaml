@@ -1,5 +1,6 @@
 epic_features:
   get:
+    operationId: features_list_epic
     summary: List features in an epic
     description: |
       Returns a list of features associated with a specific epic.
@@ -43,6 +44,20 @@ epic_features:
         required: false
         schema:
           type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of features per page
     responses:
       '200':
         description: A list of features in the epic
