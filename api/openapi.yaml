@@ -124,6 +124,14 @@ paths:
   /ideas/{id}:
     $ref: './paths/ideas/idea_by_id_path.yaml#/idea_by_id_path'
 
+  # Releases
+  /releases:
+    $ref: './paths/releases/list.yaml#/list_releases'
+  /products/{product_id}/releases:
+    $ref: './paths/releases/product_releases.yaml#/product_releases'
+  /releases/{id}:
+    $ref: './paths/releases/get.yaml#/release_by_id_path'
+
 # Components are referenced from separate files
 components:
   schemas:
@@ -184,6 +192,18 @@ components:
       $ref: './schemas/initiatives/initiative.yaml#/InitiativeResponse'
     InitiativesListResponse:
       $ref: './schemas/initiatives/list_response.yaml#/InitiativesListResponse'
+
+    # Release related schemas
+    ReleaseCreateRequest:
+      $ref: './schemas/releases/create_request.yaml#/ReleaseCreateRequest'
+    ReleaseUpdateRequest:
+      $ref: './schemas/releases/update_request.yaml#/ReleaseUpdateRequest'
+    Release:
+      $ref: './schemas/releases/release.yaml#/Release'
+    ReleaseGetResponse:
+      $ref: './schemas/releases/get_response.yaml#/ReleaseGetResponse'
+    ReleasesListResponse:
+      $ref: './schemas/releases/list_response.yaml#/ReleasesListResponse'
 
   securitySchemes:
     OAuth2:

@@ -1,0 +1,5 @@
+ReleaseGetResponse:
+  type: object
+  properties:
+    release:
+      $ref: './release.yaml#/Release'

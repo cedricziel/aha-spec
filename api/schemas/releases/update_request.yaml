@@ -1,0 +1,57 @@
+ReleaseUpdateRequest:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Name of the release
+      example: "Version 2.1"
+    theme:
+      type: string
+      description: Theme or focus of the release
+      example: "Bug fixes and stability improvements"
+    start_date:
+      type: string
+      format: date
+      description: Planned start date of the release
+      example: "2024-01-15"
+    release_date:
+      type: string
+      format: date
+      description: Planned release date
+      example: "2024-03-15"
+    external_release_date:
+      type: string
+      format: date
+      description: External release date visible to customers
+      example: "2024-03-20"
+    development_started_on:
+      type: string
+      format: date
+      description: Date when development started
+      example: "2024-01-10"
+    released_on:
+      type: string
+      format: date
+      description: Actual release date
+      example: "2024-03-18"
+    parking_lot:
+      type: boolean
+      description: Whether this release is a parking lot
+    assigned_to_user_id:
+      type: string
+      description: ID of the user assigned to the release
+      example: "user123"
+    description:
+      type: string
+      description: Description of the release
+      example: "Updated release focusing on stability"
+    custom_fields:
+      type: object
+      description: Custom field values for the release
+      additionalProperties: true
+    tags:
+      type: array
+      description: Tags to associate with the release
+      items:
+        type: string
+      example: ["bugfix", "stability", "minor"]

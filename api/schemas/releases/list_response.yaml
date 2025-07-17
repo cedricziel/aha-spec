@@ -1,0 +1,22 @@
+ReleasesListResponse:
+  type: object
+  properties:
+    releases:
+      type: array
+      items:
+        $ref: './release.yaml#/Release'
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of releases
+        total_pages:
+          type: integer
+          description: Total number of pages
+        current_page:
+          type: integer
+          description: Current page number
+        per_page:
+          type: integer
+          description: Number of releases per page

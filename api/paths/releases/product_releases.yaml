@@ -1,0 +1,198 @@
+product_releases:
+  get:
+    summary: List releases for a product
+    description: Retrieves a list of all releases for a specific product.
+    tags:
+      - Releases
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against release name.
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only releases updated after the timestamp will be returned.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Status filter for releases.
+      - name: parking_lot
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: When true, returns only parking lot releases.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of releases per page.
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/releases/list_response.yaml#/ReleasesListResponse'
+            example:
+              releases:
+                - id: "4125886"
+                  name: "Version 2.0"
+                  reference_num: "PRJ1-R-2"
+                  theme: "Mobile improvements"
+                  start_date: "2024-01-15"
+                  release_date: "2024-03-15"
+                  external_release_date: "2024-03-20"
+                  parking_lot: false
+                  position: 1
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-01T00:00:00.000Z"
+                  product_id: "131414752"
+                  progress: 65
+                  progress_source: "progress_rollup"
+                  url: "http://company.aha.io/releases/PRJ1-R-2"
+                  resource: "http://company.aha.io/api/v1/releases/PRJ1-R-2"
+                  project:
+                    id: "131414752"
+                    reference_prefix: "PRJ1"
+                    name: "Project 1"
+                    product_line: false
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/PRJ1"
+                  workflow_status:
+                    id: "53968949"
+                    name: "In Progress"
+                    position: 2
+                    complete: false
+                    color: "#ffc107"
+                  owner:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                  comments_count: 3
+                  tags: ["mobile", "performance", "major"]
+              pagination:
+                total_records: 3
+                total_pages: 1
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+  post:
+    summary: Create a release
+    description: Creates a new release for the specified product.
+    tags:
+      - Releases
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/releases/create_request.yaml#/ReleaseCreateRequest'
+          example:
+            release:
+              name: "Version 2.0"
+              theme: "Mobile improvements and performance enhancements"
+              start_date: "2024-01-15"
+              release_date: "2024-03-15"
+              external_release_date: "2024-03-20"
+              parking_lot: false
+              assigned_to_user_id: "user123"
+              description: "Major update focusing on mobile experience"
+              tags: ["mobile", "performance", "major"]
+    responses:
+      '200':
+        description: Release created
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/releases/get_response.yaml#/ReleaseGetResponse'
+            example:
+              release:
+                id: "6776757454433322781"
+                name: "Version 2.0"
+                reference_num: "PRJ1-R-251"
+                theme: "Mobile improvements and performance enhancements"
+                start_date: "2024-01-15"
+                release_date: "2024-03-15"
+                external_release_date: "2024-03-20"
+                parking_lot: false
+                position: 1
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-01T00:00:00.000Z"
+                product_id: "131414752"
+                progress: 0
+                progress_source: "progress_rollup"
+                url: "http://company.aha.io/releases/PRJ1-R-251"
+                resource: "http://company.aha.io/api/v1/releases/PRJ1-R-251"
+                project:
+                  id: "131414752"
+                  reference_prefix: "PRJ1"
+                  name: "Project 1"
+                  product_line: false
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  workspace_type: "product_workspace"
+                  url: "http://company.aha.io/projects/PRJ1"
+                workflow_status:
+                  id: "53968949"
+                  name: "Not Started"
+                  position: 1
+                  complete: false
+                  color: "#dce7c6"
+                owner:
+                  id: "689956296"
+                  name: "Henry Humpty"
+                  email: "no-reply@aha.io"
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-01T00:00:00.000Z"
+                comments_count: 0
+                goals: []
+                integration_fields: []
+                custom_fields: []
+                tags: ["mobile", "performance", "major"]
+                phases: []
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity

@@ -1,0 +1,229 @@
+Release:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier of the release
+    name:
+      type: string
+      description: Name of the release
+    reference_num:
+      type: string
+      description: Reference number of the release
+    development_started_on:
+      type: string
+      format: date
+      nullable: true
+      description: Date when development started
+    start_date:
+      type: string
+      format: date
+      nullable: true
+      description: Planned start date of the release
+    release_date:
+      type: string
+      format: date
+      nullable: true
+      description: Planned release date
+    released_on:
+      type: string
+      format: date
+      nullable: true
+      description: Actual release date
+    external_release_date:
+      type: string
+      format: date
+      nullable: true
+      description: External release date visible to customers
+    theme:
+      type: string
+      description: Theme or focus of the release
+    parking_lot:
+      type: boolean
+      description: Whether this release is a parking lot
+    position:
+      type: integer
+      description: Position for sorting releases
+    created_at:
+      type: string
+      format: date-time
+      description: Creation date of the release
+    updated_at:
+      type: string
+      format: date-time
+      description: Last update date of the release
+    product_id:
+      type: string
+      description: ID of the product the release belongs to
+    progress:
+      type: integer
+      description: Progress completed on the release (0-100)
+    progress_source:
+      type: string
+      description: Source for calculating progress on the release
+    url:
+      type: string
+      format: uri
+      description: URL to view the release in the Aha! web application
+    resource:
+      type: string
+      format: uri
+      description: API resource URL for the release
+    project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the project
+        reference_prefix:
+          type: string
+          description: Reference prefix of the project
+        name:
+          type: string
+          description: Name of the project
+        product_line:
+          type: boolean
+          description: Whether the project is a product line
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the project
+        workspace_type:
+          type: string
+          description: Type of workspace
+        url:
+          type: string
+          format: uri
+          description: URL to view the project in the Aha! web application
+    workflow_status:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the workflow status
+        name:
+          type: string
+          description: Name of the workflow status
+        position:
+          type: integer
+          description: Position of the workflow status
+        complete:
+          type: boolean
+          description: Whether the workflow status is complete
+        color:
+          type: string
+          description: Color of the workflow status
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the description
+        body:
+          type: string
+          description: Content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the description
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update date of the description
+        attachments:
+          type: array
+          description: Attachments to the description
+          items:
+            type: object
+    attachments:
+      type: array
+      description: Attachments to the release
+      items:
+        type: object
+    owner:
+      $ref: '../users.yaml#/User'
+    assigned_to_user:
+      $ref: '../users.yaml#/User'
+    created_by_user:
+      $ref: '../users.yaml#/User'
+    comments_count:
+      type: integer
+      description: Number of comments on the release
+    goals:
+      type: array
+      description: Goals associated with the release
+      items:
+        type: object
+    integration_fields:
+      type: array
+      description: Integration fields for the release
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          value:
+            type: string
+          integration_id:
+            type: integer
+          service_name:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+    workflow_status_times:
+      type: array
+      description: Workflow status times for the release
+      items:
+        type: object
+        properties:
+          status_id:
+            type: string
+            description: ID of the status
+          status_name:
+            type: string
+            description: Name of the status
+          started_at:
+            type: string
+            format: date-time
+            description: When the release entered this status
+          ended_at:
+            type: string
+            format: date-time
+            nullable: true
+            description: When the release left this status
+    custom_fields:
+      type: array
+      description: Custom fields for the release
+      items:
+        type: object
+    tags:
+      type: array
+      description: Tags associated with the release
+      items:
+        type: string
+    full_tags:
+      type: array
+      description: Full tag objects with metadata
+      items:
+        type: object
+    phases:
+      type: array
+      description: Release phases
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          start_date:
+            type: string
+            format: date
+          end_date:
+            type: string
+            format: date
+          position:
+            type: integer
