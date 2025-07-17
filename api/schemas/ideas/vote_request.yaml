@@ -1,0 +1,23 @@
+IdeaVoteRequest:
+  type: object
+  required:
+    - vote_type
+  properties:
+    vote_type:
+      type: string
+      description: Type of vote
+      enum: ["up", "down"]
+      example: "up"
+    proxy_user_id:
+      type: string
+      description: ID of the proxy user (if voting on behalf of someone else)
+      example: "user456"
+    proxy_user_name:
+      type: string
+      description: Name of the proxy user (if voting on behalf of someone else)
+      example: "Jane Doe"
+    proxy_user_email:
+      type: string
+      description: Email of the proxy user (if voting on behalf of someone else)
+      format: email
+      example: "jane.doe@example.com"

@@ -1,0 +1,219 @@
+idea_proxy_votes_path:
+  post:
+    operationId: ideas_create_proxy_vote
+    summary: Create a proxy vote
+    description: Creates a proxy vote on an idea on behalf of another user.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/proxy_vote_request.yaml#/IdeaProxyVoteRequest'
+          example:
+            proxy_vote:
+              vote_type: "up"
+              proxy_user_name: "Jane Doe"
+              proxy_user_email: "jane.doe@example.com"
+              proxy_user_organization: "ACME Corp"
+              idea_portal_id: "portal123"
+              custom_fields:
+                department: "Engineering"
+                role: "Senior Developer"
+    responses:
+      '201':
+        description: Proxy vote created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                proxy_vote:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the proxy vote
+                    vote_type:
+                      type: string
+                      description: Type of vote
+                      enum: ["up", "down"]
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: When the proxy vote was created
+                    proxy_user:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        organization:
+                          type: string
+                        custom_fields:
+                          type: object
+                    created_by_user:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        email:
+                          type: string
+                idea:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    votes_count:
+                      type: integer
+                      description: Updated total vote count
+                    proxy_votes_count:
+                      type: integer
+                      description: Updated proxy vote count
+            example:
+              proxy_vote:
+                id: "proxy_vote123"
+                vote_type: "up"
+                created_at: "2024-01-15T10:30:00.000Z"
+                proxy_user:
+                  name: "Jane Doe"
+                  email: "jane.doe@example.com"
+                  organization: "ACME Corp"
+                  custom_fields:
+                    department: "Engineering"
+                    role: "Senior Developer"
+                created_by_user:
+                  id: "user123"
+                  name: "John Smith"
+                  email: "john.smith@example.com"
+              idea:
+                id: "58056975"
+                votes_count: 44
+                proxy_votes_count: 12
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity
+  get:
+    operationId: ideas_get_proxy_votes
+    summary: Get proxy votes for an idea
+    description: Retrieves all proxy votes for a specific idea.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of proxy votes per page
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                proxy_votes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      vote_type:
+                        type: string
+                        enum: ["up", "down"]
+                      created_at:
+                        type: string
+                        format: date-time
+                      proxy_user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          organization:
+                            type: string
+                          custom_fields:
+                            type: object
+                      created_by_user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                pagination:
+                  type: object
+                  properties:
+                    total_records:
+                      type: integer
+                    total_pages:
+                      type: integer
+                    current_page:
+                      type: integer
+                    per_page:
+                      type: integer
+            example:
+              proxy_votes:
+                - id: "proxy_vote123"
+                  vote_type: "up"
+                  created_at: "2024-01-15T10:30:00.000Z"
+                  proxy_user:
+                    name: "Jane Doe"
+                    email: "jane.doe@example.com"
+                    organization: "ACME Corp"
+                    custom_fields:
+                      department: "Engineering"
+                      role: "Senior Developer"
+                  created_by_user:
+                    id: "user123"
+                    name: "John Smith"
+                    email: "john.smith@example.com"
+              pagination:
+                total_records: 12
+                total_pages: 1
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found

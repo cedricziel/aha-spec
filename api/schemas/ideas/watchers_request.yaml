@@ -1,0 +1,26 @@
+IdeaWatchersRequest:
+  type: object
+  required:
+    - watchers
+  properties:
+    watchers:
+      type: array
+      description: List of watchers for the idea
+      items:
+        type: object
+        properties:
+          user_id:
+            type: string
+            description: ID of the user to watch the idea
+          email:
+            type: string
+            format: email
+            description: Email of the user to watch the idea
+        required:
+          - user_id
+          - email
+      example:
+        - user_id: "user123"
+          email: "john.smith@example.com"
+        - user_id: "user456"
+          email: "jane.doe@example.com"

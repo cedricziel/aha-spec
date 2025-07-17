@@ -1,0 +1,41 @@
+IdeaProxyVoteRequest:
+  type: object
+  required:
+    - vote_type
+    - proxy_user_name
+    - proxy_user_email
+  properties:
+    vote_type:
+      type: string
+      description: Type of vote
+      enum: ["up", "down"]
+      example: "up"
+    proxy_user_name:
+      type: string
+      description: Name of the user on whose behalf the vote is being cast
+      example: "Jane Doe"
+    proxy_user_email:
+      type: string
+      format: email
+      description: Email of the user on whose behalf the vote is being cast
+      example: "jane.doe@example.com"
+    proxy_user_organization:
+      type: string
+      description: Organization of the proxy user
+      example: "ACME Corp"
+    idea_portal_id:
+      type: string
+      description: ID of the idea portal associated with the proxy vote
+      example: "portal123"
+    custom_fields:
+      type: object
+      description: Custom fields for the proxy vote
+      additionalProperties: true
+      example:
+        department: "Engineering"
+        role: "Senior Developer"
+        location: "San Francisco"
+    notes:
+      type: string
+      description: Additional notes about the proxy vote
+      example: "Vote cast during customer feedback session"

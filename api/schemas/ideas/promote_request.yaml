@@ -1,0 +1,46 @@
+IdeaPromoteRequest:
+  type: object
+  required:
+    - promote_to
+  properties:
+    promote_to:
+      type: string
+      description: Type of record to promote the idea to
+      enum: ["feature", "epic", "initiative"]
+      example: "feature"
+    assignee_id:
+      type: string
+      description: ID of the user to assign the promoted record to
+      example: "user123"
+    release_id:
+      type: string
+      description: ID of the release to associate with the promoted record (for features)
+      example: "rel456"
+    epic_id:
+      type: string
+      description: ID of the epic to associate with the promoted record (for features)
+      example: "epic789"
+    initiative_id:
+      type: string
+      description: ID of the initiative to associate with the promoted record
+      example: "init101"
+    copy_tags:
+      type: boolean
+      description: Whether to copy tags from the idea to the promoted record
+      default: true
+      example: true
+    copy_custom_fields:
+      type: boolean
+      description: Whether to copy custom fields from the idea to the promoted record
+      default: true
+      example: true
+    copy_description:
+      type: boolean
+      description: Whether to copy the description from the idea to the promoted record
+      default: true
+      example: true
+    copy_attachments:
+      type: boolean
+      description: Whether to copy attachments from the idea to the promoted record
+      default: true
+      example: true

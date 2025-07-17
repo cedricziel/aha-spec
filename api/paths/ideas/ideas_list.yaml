@@ -1,0 +1,171 @@
+ideas_global_list:
+  get:
+    operationId: ideas_list
+    summary: List ideas
+    description: Retrieves a list of all ideas in the account.
+    tags:
+      - Ideas
+    parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against idea name.
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas updated after the timestamp will be returned.
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID or email address of a user. If provided, returns only ideas assigned to that user.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Status filter for ideas.
+      - name: category
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter ideas by category.
+      - name: product_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter ideas by product ID.
+      - name: idea_portal_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter ideas by idea portal ID.
+      - name: spam
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: When true, shows ideas that have been marked as spam. By default, no spam ideas will be shown.
+      - name: workflow_status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: When present, filters to ideas with the provided workflow status ID or name.
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [recent, trending, popular]
+        description: Sorting of the list of ideas. Accepted values are recent, trending, or popular.
+      - name: created_before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas created before the timestamp will be returned.
+      - name: created_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only ideas created after the timestamp will be returned.
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag value. If provided, only ideas with the associated tag will be returned.
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID of a user. If provided, only ideas created by that user will be returned.
+      - name: idea_user_id
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID of an idea user. If provided, only ideas created by that idea user will be returned.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of ideas per page.
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/list_response.yaml#/IdeasListResponse'
+            example:
+              ideas:
+                - id: "4125886"
+                  reference_num: "PRJ1-I-1"
+                  name: "Dark mode feature"
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-15T00:00:00.000Z"
+                  workflow_status:
+                    id: "3259216"
+                    name: "Under consideration"
+                    position: 2
+                    complete: false
+                    color: "#ffc107"
+                  description:
+                    id: "103757394"
+                    body: "Add dark mode support to the application for better user experience"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-15T00:00:00.000Z"
+                    attachments: []
+                  url: "http://company.aha.io/ideas/ideas/PRJ1-I-1"
+                  resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-1"
+                  product_id: "131414752"
+                  created_by_user:
+                    id: "82352673"
+                    name: "Bob Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                  comments_count: 5
+                  votes_count: 42
+                  tags: ["ui", "dark-mode", "accessibility"]
+                  custom_fields: []
+                  attachments: []
+              pagination:
+                total_records: 150
+                total_pages: 8
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden

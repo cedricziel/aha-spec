@@ -1,0 +1,195 @@
+idea_votes_path:
+  post:
+    operationId: ideas_vote
+    summary: Vote on an idea
+    description: Adds a vote to an idea.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/vote_request.yaml#/IdeaVoteRequest'
+          example:
+            vote:
+              vote_type: "up"
+              proxy_user_id: "user456"
+              proxy_user_name: "Jane Doe"
+              proxy_user_email: "jane.doe@example.com"
+    responses:
+      '200':
+        description: Vote added successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vote:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the vote
+                    vote_type:
+                      type: string
+                      description: Type of vote
+                      enum: ["up", "down"]
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: When the vote was created
+                    user:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        type:
+                          type: string
+                          enum: ["user", "proxy_user"]
+                idea:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    votes_count:
+                      type: integer
+                      description: Updated vote count
+                    votes:
+                      type: integer
+                      description: Net votes (up - down)
+            example:
+              vote:
+                id: "vote123"
+                vote_type: "up"
+                created_at: "2024-01-15T10:30:00.000Z"
+                user:
+                  id: "user123"
+                  name: "John Smith"
+                  email: "john.smith@example.com"
+                  type: "user"
+              idea:
+                id: "58056975"
+                votes_count: 43
+                votes: 41
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity (e.g., user already voted)
+  get:
+    operationId: ideas_get_votes
+    summary: Get votes for an idea
+    description: Retrieves all votes for a specific idea.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of votes per page
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                votes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      vote_type:
+                        type: string
+                        enum: ["up", "down"]
+                      created_at:
+                        type: string
+                        format: date-time
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          type:
+                            type: string
+                            enum: ["user", "proxy_user"]
+                pagination:
+                  type: object
+                  properties:
+                    total_records:
+                      type: integer
+                    total_pages:
+                      type: integer
+                    current_page:
+                      type: integer
+                    per_page:
+                      type: integer
+            example:
+              votes:
+                - id: "vote123"
+                  vote_type: "up"
+                  created_at: "2024-01-15T10:30:00.000Z"
+                  user:
+                    id: "user123"
+                    name: "John Smith"
+                    email: "john.smith@example.com"
+                    type: "user"
+                - id: "vote124"
+                  vote_type: "up"
+                  created_at: "2024-01-14T15:20:00.000Z"
+                  user:
+                    id: "proxy456"
+                    name: "Jane Doe"
+                    email: "jane.doe@example.com"
+                    type: "proxy_user"
+              pagination:
+                total_records: 43
+                total_pages: 3
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found

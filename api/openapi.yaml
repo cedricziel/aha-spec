@@ -113,6 +113,8 @@ paths:
     $ref: './paths/initiatives/get.yaml#/initiative_by_id_path'
 
   # Ideas
+  /ideas:
+    $ref: './paths/ideas/ideas_list.yaml#/ideas_global_list'
   /products/{product_id}/ideas:
     $ref: './paths/ideas/product_ideas_path.yaml#/product_ideas_path'
   /products/{product_id}/ideas/portal_user:
@@ -123,6 +125,16 @@ paths:
     $ref: './paths/ideas/create_with_score.yaml#/product_ideas_with_score_path'
   /ideas/{id}:
     $ref: './paths/ideas/idea_by_id_path.yaml#/idea_by_id_path'
+  /ideas/{id}/promote:
+    $ref: './paths/ideas/promote.yaml#/idea_promote_path'
+  /ideas/{id}/votes:
+    $ref: './paths/ideas/votes.yaml#/idea_votes_path'
+  /ideas/{id}/proxy_votes:
+    $ref: './paths/ideas/proxy_votes.yaml#/idea_proxy_votes_path'
+  /ideas/{id}/spam:
+    $ref: './paths/ideas/spam.yaml#/idea_spam_path'
+  /ideas/{id}/watchers:
+    $ref: './paths/ideas/watchers.yaml#/idea_watchers_path'
 
   # Releases
   /releases:
@@ -190,6 +202,16 @@ components:
       $ref: './schemas/ideas/create_request.yaml#/IdeaCreateRequest'
     IdeaCreateByPortalUserRequest:
       $ref: './schemas/ideas/create_by_portal_user_request.yaml#/IdeaCreateByPortalUserRequest'
+    IdeaUpdateRequest:
+      $ref: './schemas/ideas/update_request.yaml#/IdeaUpdateRequest'
+    IdeaPromoteRequest:
+      $ref: './schemas/ideas/promote_request.yaml#/IdeaPromoteRequest'
+    IdeaVoteRequest:
+      $ref: './schemas/ideas/vote_request.yaml#/IdeaVoteRequest'
+    IdeaProxyVoteRequest:
+      $ref: './schemas/ideas/proxy_vote_request.yaml#/IdeaProxyVoteRequest'
+    IdeaWatchersRequest:
+      $ref: './schemas/ideas/watchers_request.yaml#/IdeaWatchersRequest'
     IdeaResponse:
       $ref: './schemas/ideas/idea.yaml#/IdeaResponse'
     IdeasListResponse:

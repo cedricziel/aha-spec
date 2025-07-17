@@ -1,0 +1,71 @@
+IdeaUpdateRequest:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Name of the idea
+      example: "Enhanced dark mode feature"
+    description:
+      type: string
+      description: Description of the idea
+      example: "Add comprehensive dark mode support with user preferences and system integration"
+    workflow_status_id:
+      type: string
+      description: ID of the workflow status
+      example: "3259217"
+    assigned_to_user_id:
+      type: string
+      description: ID of the user to assign the idea to
+      example: "user123"
+    visibility:
+      type: string
+      description: Visibility setting for the idea
+      enum: ["Visible to all ideas portal users", "Visible to administrators only", "Hidden"]
+      example: "Visible to all ideas portal users"
+    admin_response:
+      type: string
+      description: Administrator response to the idea
+      example: "This is a great idea! We'll evaluate it for the next release."
+    tags:
+      type: array
+      description: Tags to associate with the idea
+      items:
+        type: string
+      example: ["ui", "dark-mode", "accessibility", "enhanced"]
+    categories:
+      type: array
+      description: Categories for the idea
+      items:
+        type: string
+      example: ["UI/UX", "Accessibility"]
+    custom_fields:
+      type: object
+      description: Custom field values for the idea
+      additionalProperties: true
+      example:
+        component: ["web", "mobile"]
+        priority: "high"
+        impact: "medium"
+    watchers:
+      type: array
+      description: User IDs to watch this idea
+      items:
+        type: string
+      example: ["user123", "user456"]
+    score_facts:
+      type: array
+      description: Score facts for the idea
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the score fact
+          value:
+            type: number
+            description: Value of the score fact
+      example:
+        - name: "Effort"
+          value: 8
+        - name: "Benefit"
+          value: 9

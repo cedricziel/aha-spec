@@ -1,5 +1,6 @@
 idea_by_id_path:
   get:
+    operationId: ideas_get_by_id
     summary: Get a specific idea
     description: Retrieves the details of a specific idea.
     tags:
@@ -148,7 +149,54 @@ idea_by_id_path:
         description: Forbidden
       '404':
         description: Idea not found
+  put:
+    operationId: ideas_update
+    summary: Update an idea
+    description: Updates the details of a specific idea.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/update_request.yaml#/IdeaUpdateRequest'
+          example:
+            idea:
+              name: "Enhanced dark mode feature"
+              description: "Add comprehensive dark mode support with user preferences"
+              workflow_status_id: "3259217"
+              assigned_to_user_id: "user123"
+              tags: ["ui", "dark-mode", "accessibility", "enhanced"]
+              custom_fields:
+                component: ["web", "mobile"]
+                priority: "high"
+    responses:
+      '200':
+        description: Idea updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity
   delete:
+    operationId: ideas_delete
     summary: Delete an idea
     description: Deletes the specified idea.
     tags:

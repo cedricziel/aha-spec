@@ -1,0 +1,81 @@
+idea_spam_path:
+  post:
+    operationId: ideas_mark_spam
+    summary: Mark idea as spam
+    description: Marks an idea as spam.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    responses:
+      '200':
+        description: Idea marked as spam
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
+            example:
+              idea:
+                id: "58056975"
+                name: "Spam idea"
+                reference_num: "PRJ1-I-1"
+                spam: true
+                workflow_status:
+                  id: "spam_status"
+                  name: "Spam"
+                  position: 99
+                  complete: true
+                  color: "#dc3545"
+                url: "http://company.aha.io/ideas/ideas/PRJ1-I-1"
+                resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-1"
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+  delete:
+    operationId: ideas_unmark_spam
+    summary: Unmark idea as spam
+    description: Removes the spam flag from an idea.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    responses:
+      '200':
+        description: Idea unmarked as spam
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
+            example:
+              idea:
+                id: "58056975"
+                name: "Restored idea"
+                reference_num: "PRJ1-I-1"
+                spam: false
+                workflow_status:
+                  id: "3259216"
+                  name: "New"
+                  position: 1
+                  complete: false
+                  color: "#dce7c6"
+                url: "http://company.aha.io/ideas/ideas/PRJ1-I-1"
+                resource: "http://company.aha.io/api/v1/ideas/PRJ1-I-1"
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found

@@ -1,0 +1,79 @@
+idea_promote_path:
+  post:
+    operationId: ideas_promote
+    summary: Promote an idea
+    description: Promotes an idea to a feature, epic, or initiative.
+    tags:
+      - Ideas
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/ideas/promote_request.yaml#/IdeaPromoteRequest'
+          example:
+            idea:
+              promote_to: "feature"
+              assignee_id: "user123"
+              release_id: "rel456"
+              epic_id: "epic789"
+              initiative_id: "init101"
+              copy_tags: true
+              copy_custom_fields: true
+    responses:
+      '200':
+        description: Idea promoted successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                promoted_record:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: ID of the newly created feature/epic/initiative
+                    type:
+                      type: string
+                      description: Type of the promoted record
+                      enum: ["feature", "epic", "initiative"]
+                    reference_num:
+                      type: string
+                      description: Reference number of the promoted record
+                    name:
+                      type: string
+                      description: Name of the promoted record
+                    url:
+                      type: string
+                      format: uri
+                      description: URL to view the promoted record
+                    resource:
+                      type: string
+                      format: uri
+                      description: API resource URL for the promoted record
+            example:
+              promoted_record:
+                id: "feat123"
+                type: "feature"
+                reference_num: "PRJ1-F-45"
+                name: "Enhanced dark mode feature"
+                url: "http://company.aha.io/features/PRJ1-F-45"
+                resource: "http://company.aha.io/api/v1/features/PRJ1-F-45"
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity

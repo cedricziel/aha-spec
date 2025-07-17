@@ -1,5 +1,6 @@
 list_ideas:
   get:
+    operationId: product_ideas_list
     summary: List ideas for a product
     description: Retrieves a list of ideas for the specified product.
     tags:
