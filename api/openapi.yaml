@@ -132,6 +132,20 @@ paths:
   /releases/{id}:
     $ref: './paths/releases/get.yaml#/release_by_id_path'
 
+  # Goals
+  /goals:
+    $ref: './paths/goals/list.yaml#/goals_path'
+  /goals/{id}:
+    $ref: './paths/goals/get.yaml#/goal_by_id_path'
+  /goals/{id}/progress:
+    $ref: './paths/goals/progress.yaml#/goal_progress_path'
+
+  # Strategic Models
+  /strategic_models:
+    $ref: './paths/strategic_models/list.yaml#/strategic_models_path'
+  /strategic_models/{id}:
+    $ref: './paths/strategic_models/get.yaml#/strategic_model_by_id_path'
+
 # Components are referenced from separate files
 components:
   schemas:
@@ -205,6 +219,32 @@ components:
     ReleasesListResponse:
       $ref: './schemas/releases/list_response.yaml#/ReleasesListResponse'
 
+    # Goal related schemas
+    GoalCreateRequest:
+      $ref: './schemas/goals/create_request.yaml#/GoalCreateRequest'
+    GoalUpdateRequest:
+      $ref: './schemas/goals/update_request.yaml#/GoalUpdateRequest'
+    GoalProgressUpdateRequest:
+      $ref: './schemas/goals/progress_update_request.yaml#/GoalProgressUpdateRequest'
+    Goal:
+      $ref: './schemas/goals/goal.yaml#/Goal'
+    GoalGetResponse:
+      $ref: './schemas/goals/get_response.yaml#/GoalGetResponse'
+    GoalsListResponse:
+      $ref: './schemas/goals/list_response.yaml#/GoalsListResponse'
+
+    # Strategic Model related schemas
+    StrategicModelCreateRequest:
+      $ref: './schemas/strategic_models/create_request.yaml#/StrategicModelCreateRequest'
+    StrategicModelUpdateRequest:
+      $ref: './schemas/strategic_models/update_request.yaml#/StrategicModelUpdateRequest'
+    StrategicModel:
+      $ref: './schemas/strategic_models/strategic_model.yaml#/StrategicModel'
+    StrategicModelGetResponse:
+      $ref: './schemas/strategic_models/get_response.yaml#/StrategicModelGetResponse'
+    StrategicModelsListResponse:
+      $ref: './schemas/strategic_models/list_response.yaml#/StrategicModelsListResponse'
+
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -233,6 +273,7 @@ tags:
   - name: Ideas
   - name: Initiatives
   - name: Goals
+  - name: Strategic Models
   - name: Release Phases
   - name: Todos
   - name: Products

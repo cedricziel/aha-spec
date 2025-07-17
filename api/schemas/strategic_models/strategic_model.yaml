@@ -1,0 +1,79 @@
+StrategicModel:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier of the strategic model
+    name:
+      type: string
+      description: Name of the strategic model
+    description:
+      type: string
+      description: Description of the strategic model
+    type:
+      type: string
+      description: Type of strategic model
+      enum: ["swot", "porter_five_forces", "ansoff_matrix", "value_proposition_canvas", "business_model_canvas", "lean_canvas", "custom"]
+    created_at:
+      type: string
+      format: date-time
+      description: Creation date of the strategic model
+    updated_at:
+      type: string
+      format: date-time
+      description: Last update date of the strategic model
+    created_by_user:
+      $ref: '../users.yaml#/User'
+    url:
+      type: string
+      format: uri
+      description: URL to view the strategic model in the Aha! web application
+    resource:
+      type: string
+      format: uri
+      description: API resource URL for the strategic model
+    project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the project
+        reference_prefix:
+          type: string
+          description: Reference prefix of the project
+        name:
+          type: string
+          description: Name of the project
+        product_line:
+          type: boolean
+          description: Whether the project is a product line
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the project
+        workspace_type:
+          type: string
+          description: Type of workspace
+        url:
+          type: string
+          format: uri
+          description: URL to view the project in the Aha! web application
+    data:
+      type: object
+      description: Strategic model data structure (varies by type)
+      additionalProperties: true
+    attachments:
+      type: array
+      description: Attachments to the strategic model
+      items:
+        type: object
+    tags:
+      type: array
+      description: Tags associated with the strategic model
+      items:
+        type: string
+    full_tags:
+      type: array
+      description: Full tag objects with metadata
+      items:
+        type: object

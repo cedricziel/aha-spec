@@ -1,0 +1,255 @@
+Goal:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier of the goal
+    name:
+      type: string
+      description: Name of the goal
+    reference_num:
+      type: string
+      description: Reference number of the goal
+    status:
+      type: string
+      description: Current status of the goal
+    position:
+      type: integer
+      description: Position for sorting goals
+    score:
+      type: number
+      description: Score associated with the goal
+    created_at:
+      type: string
+      format: date-time
+      description: Creation date of the goal
+    updated_at:
+      type: string
+      format: date-time
+      description: Last update date of the goal
+    start_date:
+      type: string
+      format: date
+      nullable: true
+      description: Start date of the goal
+    end_date:
+      type: string
+      format: date
+      nullable: true
+      description: End date of the goal
+    progress:
+      type: number
+      minimum: 0
+      maximum: 100
+      description: Progress percentage towards goal completion
+    progress_source:
+      type: string
+      description: Source for calculating progress
+    url:
+      type: string
+      format: uri
+      description: URL to view the goal in the Aha! web application
+    resource:
+      type: string
+      format: uri
+      description: API resource URL for the goal
+    project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the project
+        reference_prefix:
+          type: string
+          description: Reference prefix of the project
+        name:
+          type: string
+          description: Name of the project
+        product_line:
+          type: boolean
+          description: Whether the project is a product line
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the project
+        workspace_type:
+          type: string
+          description: Type of workspace
+        url:
+          type: string
+          format: uri
+          description: URL to view the project in the Aha! web application
+    workflow_status:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the workflow status
+        name:
+          type: string
+          description: Name of the workflow status
+        position:
+          type: integer
+          description: Position of the workflow status
+        complete:
+          type: boolean
+          description: Whether the workflow status is complete
+        color:
+          type: string
+          description: Color of the workflow status
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the description
+        body:
+          type: string
+          description: Content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: Creation date of the description
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update date of the description
+        attachments:
+          type: array
+          description: Attachments to the description
+          items:
+            type: object
+    attachments:
+      type: array
+      description: Attachments to the goal
+      items:
+        type: object
+    assigned_to_user:
+      $ref: '../users.yaml#/User'
+    created_by_user:
+      $ref: '../users.yaml#/User'
+    comments_count:
+      type: integer
+      description: Number of comments on the goal
+    key_results:
+      type: array
+      description: Key results associated with the goal
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Unique identifier of the key result
+          name:
+            type: string
+            description: Name of the key result
+          target_value:
+            type: number
+            description: Target value for the key result
+          current_value:
+            type: number
+            description: Current value of the key result
+          unit:
+            type: string
+            description: Unit of measurement for the key result
+          progress:
+            type: number
+            minimum: 0
+            maximum: 100
+            description: Progress percentage towards key result completion
+          created_at:
+            type: string
+            format: date-time
+            description: Creation date of the key result
+          updated_at:
+            type: string
+            format: date-time
+            description: Last update date of the key result
+    initiatives:
+      type: array
+      description: Initiatives associated with the goal
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          reference_num:
+            type: string
+          url:
+            type: string
+            format: uri
+          resource:
+            type: string
+            format: uri
+    features:
+      type: array
+      description: Features associated with the goal
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          reference_num:
+            type: string
+          url:
+            type: string
+            format: uri
+          resource:
+            type: string
+            format: uri
+    releases:
+      type: array
+      description: Releases associated with the goal
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          reference_num:
+            type: string
+          url:
+            type: string
+            format: uri
+          resource:
+            type: string
+            format: uri
+    integration_fields:
+      type: array
+      description: Integration fields for the goal
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          value:
+            type: string
+          integration_id:
+            type: integer
+          service_name:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+    custom_fields:
+      type: array
+      description: Custom fields for the goal
+      items:
+        type: object
+    tags:
+      type: array
+      description: Tags associated with the goal
+      items:
+        type: string
+    full_tags:
+      type: array
+      description: Full tag objects with metadata
+      items:
+        type: object

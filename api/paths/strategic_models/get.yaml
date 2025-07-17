@@ -1,0 +1,154 @@
+strategic_model_by_id_path:
+  get:
+    summary: Get a strategic model
+    description: Retrieves a specific strategic model by its ID.
+    tags:
+      - Strategic Models
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the strategic model
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/strategic_models/get_response.yaml#/StrategicModelGetResponse'
+            example:
+              strategic_model:
+                id: "sm123"
+                name: "Q1 2024 SWOT Analysis"
+                description: "Quarterly strategic analysis for product planning"
+                type: "swot"
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-15T00:00:00.000Z"
+                created_by_user:
+                  id: "82352673"
+                  name: "Bob Smith"
+                  email: "no-reply@aha.io"
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-01T00:00:00.000Z"
+                url: "http://company.aha.io/strategic_models/sm123"
+                resource: "http://company.aha.io/api/v1/strategic_models/sm123"
+                project:
+                  id: "131414752"
+                  reference_prefix: "PRJ1"
+                  name: "Project 1"
+                  product_line: false
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  workspace_type: "product_workspace"
+                  url: "http://company.aha.io/projects/PRJ1"
+                data:
+                  strengths:
+                    - "Strong brand recognition"
+                    - "Experienced development team"
+                    - "Loyal customer base"
+                    - "Agile development process"
+                  weaknesses:
+                    - "Limited mobile presence"
+                    - "Outdated technology stack"
+                    - "Resource constraints"
+                  opportunities:
+                    - "Growing mobile market"
+                    - "AI/ML integration potential"
+                    - "International expansion"
+                    - "Partnership opportunities"
+                  threats:
+                    - "Increased competition"
+                    - "Economic uncertainty"
+                    - "Regulatory changes"
+                    - "Technology disruption"
+                attachments: []
+                tags: ["strategic", "planning", "Q1", "analysis"]
+                full_tags: []
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Strategic model not found
+  put:
+    summary: Update a strategic model
+    description: Updates a specific strategic model by its ID.
+    tags:
+      - Strategic Models
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the strategic model
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/strategic_models/update_request.yaml#/StrategicModelUpdateRequest'
+          example:
+            strategic_model:
+              name: "Q1 2024 SWOT Analysis - Updated"
+              description: "Updated quarterly strategic analysis for product planning"
+              data:
+                strengths:
+                  - "Strong brand recognition"
+                  - "Experienced development team"
+                  - "Loyal customer base"
+                  - "Agile development process"
+                weaknesses:
+                  - "Limited mobile presence"
+                  - "Outdated technology stack"
+                  - "Resource constraints"
+                opportunities:
+                  - "Growing mobile market"
+                  - "AI/ML integration potential"
+                  - "International expansion"
+                  - "Partnership opportunities"
+                threats:
+                  - "Increased competition"
+                  - "Economic uncertainty"
+                  - "Regulatory changes"
+                  - "Technology disruption"
+              tags: ["strategic", "planning", "Q1", "analysis", "updated"]
+    responses:
+      '200':
+        description: Strategic model updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/strategic_models/get_response.yaml#/StrategicModelGetResponse'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Strategic model not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    summary: Delete a strategic model
+    description: Deletes a specific strategic model by its ID.
+    tags:
+      - Strategic Models
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the strategic model
+    responses:
+      '204':
+        description: Strategic model deleted
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Strategic model not found

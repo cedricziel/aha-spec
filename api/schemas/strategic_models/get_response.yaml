@@ -1,0 +1,5 @@
+StrategicModelGetResponse:
+  type: object
+  properties:
+    strategic_model:
+      $ref: './strategic_model.yaml#/StrategicModel'

@@ -1,0 +1,254 @@
+goals_path:
+  get:
+    summary: List goals
+    description: Retrieves a list of all goals in the account.
+    tags:
+      - Goals
+    parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against goal name.
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp (in ISO8601 format). If provided, only goals updated after the timestamp will be returned.
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: ID or email address of a user. If provided, returns only goals assigned to that user.
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Status filter for goals.
+      - name: start_date_after
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Filter goals with start date after this date.
+      - name: end_date_before
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date
+        description: Filter goals with end date before this date.
+      - name: progress_min
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 100
+        description: Filter goals with progress greater than or equal to this value.
+      - name: progress_max
+        in: query
+        required: false
+        schema:
+          type: number
+          minimum: 0
+          maximum: 100
+        description: Filter goals with progress less than or equal to this value.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination.
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of goals per page.
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/goals/list_response.yaml#/GoalsListResponse'
+            example:
+              goals:
+                - id: "602095703"
+                  name: "Increase user engagement"
+                  reference_num: "DEMOENT-G-1"
+                  status: "in_progress"
+                  position: 1
+                  score: 85
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-15T00:00:00.000Z"
+                  start_date: "2024-01-01"
+                  end_date: "2024-03-31"
+                  progress: 65
+                  progress_source: "progress_rollup"
+                  url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-1"
+                  resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-1"
+                  project:
+                    id: "131414752"
+                    reference_prefix: "DEMOENT"
+                    name: "Demo Enterprise"
+                    product_line: false
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    workspace_type: "product_workspace"
+                    url: "http://company.aha.io/projects/DEMOENT"
+                  workflow_status:
+                    id: "53968949"
+                    name: "In Progress"
+                    position: 2
+                    complete: false
+                    color: "#ffc107"
+                  description:
+                    id: "166463080"
+                    body: "Improve user engagement metrics by 25% over next quarter"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-15T00:00:00.000Z"
+                    attachments: []
+                  attachments: []
+                  assigned_to_user:
+                    id: "16338845"
+                    name: "John Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                  created_by_user:
+                    id: "82352673"
+                    name: "Bob Smith"
+                    email: "no-reply@aha.io"
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                  comments_count: 2
+                  key_results:
+                    - id: "kr123"
+                      name: "Daily active users"
+                      target_value: 10000
+                      current_value: 8500
+                      unit: "users"
+                      progress: 85
+                      created_at: "2024-01-01T00:00:00.000Z"
+                      updated_at: "2024-01-15T00:00:00.000Z"
+                  initiatives:
+                    - id: "4125886"
+                      name: "Mobile App Initiative"
+                      reference_num: "PRJ1-S-2"
+                      url: "http://company.aha.io/initiatives/PRJ1-S-2"
+                      resource: "http://company.aha.io/api/v1/initiatives/PRJ1-S-2"
+                  features: []
+                  releases: []
+                  integration_fields: []
+                  custom_fields: []
+                  tags: ["engagement", "growth", "Q1"]
+                  full_tags: []
+              pagination:
+                total_records: 8
+                total_pages: 1
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+  post:
+    summary: Create a goal
+    description: Creates a new goal in the account.
+    tags:
+      - Goals
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/goals/create_request.yaml#/GoalCreateRequest'
+          example:
+            goal:
+              name: "Increase user engagement"
+              description: "Improve user engagement metrics by 25% over next quarter"
+              start_date: "2024-01-01"
+              end_date: "2024-03-31"
+              progress: 0
+              progress_source: "progress_manual"
+              assigned_to_user_id: "user123"
+              key_results:
+                - name: "Daily active users"
+                  target_value: 10000
+                  current_value: 8000
+                  unit: "users"
+                - name: "Session duration"
+                  target_value: 300
+                  current_value: 240
+                  unit: "seconds"
+              initiative_ids: ["init1", "init2"]
+              tags: ["engagement", "growth", "Q1"]
+    responses:
+      '201':
+        description: Goal created
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/goals/get_response.yaml#/GoalGetResponse'
+            example:
+              goal:
+                id: "602095703"
+                name: "Increase user engagement"
+                reference_num: "DEMOENT-G-1"
+                status: "not_started"
+                position: 1
+                score: 0
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-01T00:00:00.000Z"
+                start_date: "2024-01-01"
+                end_date: "2024-03-31"
+                progress: 0
+                progress_source: "progress_manual"
+                url: "http://company.aha.io/strategic_imperatives/DEMOENT-G-1"
+                resource: "http://company.aha.io/api/v1/goals/DEMOENT-G-1"
+                assigned_to_user:
+                  id: "16338845"
+                  name: "John Smith"
+                  email: "no-reply@aha.io"
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-01T00:00:00.000Z"
+                created_by_user:
+                  id: "82352673"
+                  name: "Bob Smith"
+                  email: "no-reply@aha.io"
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-01T00:00:00.000Z"
+                comments_count: 0
+                key_results:
+                  - id: "kr123"
+                    name: "Daily active users"
+                    target_value: 10000
+                    current_value: 8000
+                    unit: "users"
+                    progress: 80
+                    created_at: "2024-01-01T00:00:00.000Z"
+                    updated_at: "2024-01-01T00:00:00.000Z"
+                initiatives: []
+                features: []
+                releases: []
+                integration_fields: []
+                custom_fields: []
+                tags: ["engagement", "growth", "Q1"]
+                full_tags: []
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity

@@ -1,0 +1,5 @@
+GoalGetResponse:
+  type: object
+  properties:
+    goal:
+      $ref: './goal.yaml#/Goal'

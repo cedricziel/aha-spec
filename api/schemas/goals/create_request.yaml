@@ -1,0 +1,95 @@
+GoalCreateRequest:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      description: Name of the goal
+      example: "Increase user engagement"
+    description:
+      type: string
+      description: Description of the goal
+      example: "Improve user engagement metrics by 25% over next quarter"
+    start_date:
+      type: string
+      format: date
+      description: Start date of the goal
+      example: "2024-01-01"
+    end_date:
+      type: string
+      format: date
+      description: End date of the goal
+      example: "2024-03-31"
+    progress:
+      type: number
+      minimum: 0
+      maximum: 100
+      description: Initial progress percentage
+      example: 0
+    progress_source:
+      type: string
+      description: Source for calculating progress
+      example: "progress_manual"
+      enum: ["progress_manual", "progress_rollup"]
+    assigned_to_user_id:
+      type: string
+      description: ID of the user assigned to the goal
+      example: "user123"
+    workflow_status_id:
+      type: string
+      description: ID of the workflow status
+      example: "status456"
+    key_results:
+      type: array
+      description: Key results to create with the goal
+      items:
+        type: object
+        required:
+          - name
+          - target_value
+        properties:
+          name:
+            type: string
+            description: Name of the key result
+            example: "Daily active users"
+          target_value:
+            type: number
+            description: Target value for the key result
+            example: 10000
+          current_value:
+            type: number
+            description: Current value of the key result
+            example: 8000
+          unit:
+            type: string
+            description: Unit of measurement
+            example: "users"
+    initiative_ids:
+      type: array
+      description: IDs of initiatives to associate with the goal
+      items:
+        type: string
+      example: ["init1", "init2"]
+    feature_ids:
+      type: array
+      description: IDs of features to associate with the goal
+      items:
+        type: string
+      example: ["feat1", "feat2"]
+    release_ids:
+      type: array
+      description: IDs of releases to associate with the goal
+      items:
+        type: string
+      example: ["rel1", "rel2"]
+    custom_fields:
+      type: object
+      description: Custom field values for the goal
+      additionalProperties: true
+    tags:
+      type: array
+      description: Tags to associate with the goal
+      items:
+        type: string
+      example: ["engagement", "growth", "Q1"]

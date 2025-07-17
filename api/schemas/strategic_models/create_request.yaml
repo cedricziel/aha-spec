@@ -1,0 +1,44 @@
+StrategicModelCreateRequest:
+  type: object
+  required:
+    - name
+    - type
+  properties:
+    name:
+      type: string
+      description: Name of the strategic model
+      example: "Q1 2024 SWOT Analysis"
+    description:
+      type: string
+      description: Description of the strategic model
+      example: "Quarterly strategic analysis for product planning"
+    type:
+      type: string
+      description: Type of strategic model
+      enum: ["swot", "porter_five_forces", "ansoff_matrix", "value_proposition_canvas", "business_model_canvas", "lean_canvas", "custom"]
+      example: "swot"
+    data:
+      type: object
+      description: Strategic model data structure (varies by type)
+      example:
+        strengths:
+          - "Strong brand recognition"
+          - "Experienced development team"
+          - "Loyal customer base"
+        weaknesses:
+          - "Limited mobile presence"
+          - "Outdated technology stack"
+        opportunities:
+          - "Growing mobile market"
+          - "AI/ML integration potential"
+          - "International expansion"
+        threats:
+          - "Increased competition"
+          - "Economic uncertainty"
+          - "Regulatory changes"
+    tags:
+      type: array
+      description: Tags to associate with the strategic model
+      items:
+        type: string
+      example: ["strategic", "planning", "Q1", "analysis"]

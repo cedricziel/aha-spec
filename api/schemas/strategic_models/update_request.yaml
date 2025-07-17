@@ -1,0 +1,40 @@
+StrategicModelUpdateRequest:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Name of the strategic model
+      example: "Q1 2024 SWOT Analysis - Updated"
+    description:
+      type: string
+      description: Description of the strategic model
+      example: "Updated quarterly strategic analysis for product planning"
+    data:
+      type: object
+      description: Strategic model data structure (varies by type)
+      example:
+        strengths:
+          - "Strong brand recognition"
+          - "Experienced development team"
+          - "Loyal customer base"
+          - "Agile development process"
+        weaknesses:
+          - "Limited mobile presence"
+          - "Outdated technology stack"
+          - "Resource constraints"
+        opportunities:
+          - "Growing mobile market"
+          - "AI/ML integration potential"
+          - "International expansion"
+          - "Partnership opportunities"
+        threats:
+          - "Increased competition"
+          - "Economic uncertainty"
+          - "Regulatory changes"
+          - "Technology disruption"
+    tags:
+      type: array
+      description: Tags to associate with the strategic model
+      items:
+        type: string
+      example: ["strategic", "planning", "Q1", "analysis", "updated"]

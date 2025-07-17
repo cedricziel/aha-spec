@@ -1,0 +1,39 @@
+GoalProgressUpdateRequest:
+  type: object
+  properties:
+    progress:
+      type: number
+      minimum: 0
+      maximum: 100
+      description: Progress percentage towards goal completion
+      example: 75
+    progress_source:
+      type: string
+      description: Source for calculating progress
+      example: "progress_manual"
+      enum: ["progress_manual", "progress_rollup"]
+    key_results:
+      type: array
+      description: Key results progress updates
+      items:
+        type: object
+        required:
+          - id
+          - current_value
+        properties:
+          id:
+            type: string
+            description: ID of the key result
+            example: "kr123"
+          current_value:
+            type: number
+            description: Current value of the key result
+            example: 9800
+          target_value:
+            type: number
+            description: Updated target value (optional)
+            example: 12000
+    notes:
+      type: string
+      description: Notes about the progress update
+      example: "Significant improvement in user engagement this week"

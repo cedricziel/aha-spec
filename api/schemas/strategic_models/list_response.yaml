@@ -1,0 +1,22 @@
+StrategicModelsListResponse:
+  type: object
+  properties:
+    strategic_models:
+      type: array
+      items:
+        $ref: './strategic_model.yaml#/StrategicModel'
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of strategic models
+        total_pages:
+          type: integer
+          description: Total number of pages
+        current_page:
+          type: integer
+          description: Current page number
+        per_page:
+          type: integer
+          description: Number of strategic models per page
