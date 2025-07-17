@@ -1,5 +1,136 @@
+epics_global_list:
+  get:
+    operationId: epics_list
+    summary: List epics
+    description: Retrieves a list of epics with optional filtering by search term, updated date, tags, and assignee.
+    tags:
+      - Epics
+    parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against epic name
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp for filtering recently updated epics
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag to filter epics
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User ID or email to filter by assignee
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of epics per page
+    responses:
+      '200':
+        description: A list of epics
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                epics:
+                  type: array
+                  items:
+                    $ref: '../schemas/epics.yaml#/Epic'
+                pagination:
+                  type: object
+                  properties:
+                    total_records:
+                      type: integer
+                      description: Total number of epics
+                    total_pages:
+                      type: integer
+                      description: Total number of pages
+                    current_page:
+                      type: integer
+                      description: Current page number
+                    per_page:
+                      type: integer
+                      description: Number of epics per page
+            example:
+              epics:
+                - id: "6776757454427279043"
+                  name: "Epic 1"
+                  reference_num: "PRJ1-E-251"
+                  initiative_reference_num: null
+                  position: 1
+                  score: 2
+                  created_at: "2019-01-01T00:00:00.000Z"
+                  updated_at: "2019-01-01T00:00:00.000Z"
+                  start_date: "2023-01-01"
+                  due_date: "2023-01-31"
+                  product_id: "131414752"
+                  progress: 25
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  workflow_status:
+                    id: "934242751"
+                    name: "In Progress"
+                    position: 2
+                    complete: false
+                    color: "#dce7c6"
+                  url: "http://company.aha.io/epics/PRJ1-E-251"
+                  resource: "http://company.aha.io/api/v1/epics/PRJ1-E-251"
+                - id: "6776757454427279044"
+                  name: "Epic 2"
+                  reference_num: "PRJ1-E-252"
+                  initiative_reference_num: null
+                  position: 2
+                  score: 1
+                  created_at: "2019-01-02T00:00:00.000Z"
+                  updated_at: "2019-01-02T00:00:00.000Z"
+                  start_date: "2023-02-01"
+                  due_date: "2023-02-28"
+                  product_id: "131414752"
+                  progress: 0
+                  progress_source: "progress_manual"
+                  duration_source: "duration_manual"
+                  workflow_status:
+                    id: "934242750"
+                    name: "New"
+                    position: 1
+                    complete: false
+                    color: "#dce7c6"
+                  url: "http://company.aha.io/epics/PRJ1-E-252"
+                  resource: "http://company.aha.io/api/v1/epics/PRJ1-E-252"
+              pagination:
+                total_records: 45
+                total_pages: 3
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
 product_epics:
   post:
+    operationId: epics_create_in_product
     summary: Create an epic in a product
     description: Creates a new epic in the specified product.
     tags:
@@ -110,6 +241,7 @@ product_epics:
         description: Product not found
 
   get:
+    operationId: epics_list_in_product
     summary: List epics in a product
     description: Retrieves a list of epics associated with the specified product.
     tags:
@@ -121,6 +253,45 @@ product_epics:
         schema:
           type: string
         description: Numeric ID or key of the product
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against epic name
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp for filtering recently updated epics
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag to filter epics
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User ID or email to filter by assignee
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of epics per page
     responses:
       '200':
         description: A list of epics
@@ -196,6 +367,7 @@ product_epics:
 
 release_epics:
   post:
+    operationId: epics_create_in_release
     summary: Create an epic in a release
     description: Creates a new epic in the specified release.
     tags:
@@ -306,6 +478,7 @@ release_epics:
         description: Release not found
 
   get:
+    operationId: epics_list_in_release
     summary: List epics in a release
     description: Retrieves a list of epics associated with the specified release.
     tags:
@@ -317,6 +490,45 @@ release_epics:
         schema:
           type: string
         description: Numeric ID or key of the release
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against epic name
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp for filtering recently updated epics
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag to filter epics
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User ID or email to filter by assignee
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of epics per page
     responses:
       '200':
         description: A list of epics
@@ -392,6 +604,7 @@ release_epics:
 
 epic_by_id:
   get:
+    operationId: epics_get
     summary: Get a specific epic
     description: Retrieves details of a specific epic by its ID.
     tags:
@@ -481,6 +694,7 @@ epic_by_id:
         description: Epic not found
 
   put:
+    operationId: epics_update
     summary: Update an epic
     description: Updates the details of the specified epic.
     tags:
@@ -527,6 +741,30 @@ epic_by_id:
                   team_workflow_status: "In Progress"
                   iteration: "sprint-789"
                   program_increment: "pi-123"
+            update_score:
+              summary: Update epic score facts
+              value:
+                epic:
+                  score_facts:
+                    - name: "Benefit"
+                      value: 4
+                    - name: "Effort"
+                      value: 5
+            update_tags_array:
+              summary: Update epic tags with array
+              value:
+                epic:
+                  tags: ["tag2", "tag3"]
+            update_tags_string:
+              summary: Update epic tags with comma-separated string
+              value:
+                epic:
+                  tags: "tag2, tag3"
+            update_watchers:
+              summary: Update epic watchers
+              value:
+                epic:
+                  watchers: [689956296]
     responses:
       '200':
         description: Epic updated
@@ -607,6 +845,7 @@ epic_by_id:
         description: Epic not found
 
   delete:
+    operationId: epics_delete
     summary: Delete an epic
     description: Deletes the specified epic.
     tags:
@@ -636,6 +875,7 @@ epic_by_id:
 
 goal_epics:
   get:
+    operationId: epics_list_by_goal
     summary: List epics associated with a goal
     description: Retrieves a list of epics associated with the specified goal.
     tags:
@@ -648,6 +888,45 @@ goal_epics:
         schema:
           type: string
         description: Numeric ID or key of the goal
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against epic name
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp for filtering recently updated epics
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag to filter epics
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User ID or email to filter by assignee
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of epics per page
     responses:
       '200':
         description: A list of epics
@@ -723,6 +1002,7 @@ goal_epics:
 
 initiative_epics:
   get:
+    operationId: epics_list_by_initiative
     summary: List epics associated with an initiative
     description: Retrieves a list of epics associated with the specified initiative.
     tags:
@@ -735,6 +1015,45 @@ initiative_epics:
         schema:
           type: string
         description: Numeric ID or key of the initiative
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against epic name
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: UTC timestamp for filtering recently updated epics
+      - name: tag
+        in: query
+        required: false
+        schema:
+          type: string
+        description: String tag to filter epics
+      - name: assigned_to_user
+        in: query
+        required: false
+        schema:
+          type: string
+        description: User ID or email to filter by assignee
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of epics per page
     responses:
       '200':
         description: A list of epics

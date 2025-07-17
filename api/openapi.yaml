@@ -81,6 +81,8 @@ paths:
     $ref: './paths/comments.yaml#/product_comments'
 
   # Epics
+  /epics:
+    $ref: './paths/epics.yaml#/epics_global_list'
   /products/{product_id}/epics:
     $ref: './paths/epics.yaml#/product_epics'
   /releases/{release_id}/epics:
