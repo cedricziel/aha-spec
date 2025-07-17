@@ -1,5 +1,6 @@
 product_ideas_with_category_path:
   post:
+    operationId: ideas_create_with_category
     summary: Create an idea with a category
     description: |
       Creates a new idea for the specified product with a category.

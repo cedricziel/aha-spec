@@ -1,5 +1,6 @@
 update_feature_custom_fields_tag:
   put:
+    operationId: features_update_custom_fields_tag
     summary: Update a feature's custom fields with tag-like value
     description: |
       Updates the custom fields of an existing feature with tag-like values.

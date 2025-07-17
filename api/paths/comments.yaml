@@ -1,5 +1,6 @@
 feature_comments:
   post:
+    operationId: comments_create_feature
     summary: Create a comment on a feature
     description: Adds a new comment to the specified feature.
     tags:
@@ -27,6 +28,7 @@ feature_comments:
 
 epic_comments:
   get:
+    operationId: comments_get_epic
     summary: List comments on an epic
     description: Retrieves a list of comments associated with the specified epic.
     tags:
@@ -57,6 +59,7 @@ epic_comments:
 
 requirement_comments:
   get:
+    operationId: comments_get_requirement
     summary: List comments on a requirement
     description: Retrieves a list of comments associated with the specified requirement.
     tags:
@@ -87,6 +90,7 @@ requirement_comments:
 
 idea_comments:
   get:
+    operationId: comments_get_idea
     summary: List comments on an idea
     description: Retrieves a list of comments associated with the specified idea.
     tags:
@@ -113,6 +117,7 @@ idea_comments:
 
 initiative_comments:
   get:
+    operationId: comments_get_initiative
     summary: List comments on an initiative
     description: Retrieves a list of comments associated with the specified initiative.
     tags:
@@ -139,6 +144,7 @@ initiative_comments:
 
 goal_comments:
   get:
+    operationId: comments_get_goal
     summary: List comments on a goal
     description: Retrieves a list of comments associated with the specified goal.
     tags:
@@ -165,6 +171,7 @@ goal_comments:
 
 release_comments:
   get:
+    operationId: comments_get_release
     summary: List comments on a release
     description: Retrieves a list of comments associated with the specified release.
     tags:
@@ -191,6 +198,7 @@ release_comments:
 
 release_phase_comments:
   get:
+    operationId: comments_get_release_phase
     summary: List comments on a release phase
     description: Retrieves a list of comments associated with the specified release phase.
     tags:
@@ -217,6 +225,7 @@ release_phase_comments:
 
 todo_comments:
   get:
+    operationId: comments_get_todo
     summary: List comments on a to-do
     description: Retrieves a list of comments associated with the specified to-do.
     tags:
@@ -243,6 +252,7 @@ todo_comments:
 
 product_comments:
   get:
+    operationId: comments_get_product
     summary: List comments in a product
     description: Retrieves a list of comments associated with the specified product.
     tags:

@@ -1,5 +1,6 @@
 update_feature_custom_fields:
   put:
+    operationId: features_update_custom_fields
     summary: Update a feature's custom fields
     description: |
       Updates the custom fields of an existing feature.

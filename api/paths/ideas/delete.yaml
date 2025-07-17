@@ -1,5 +1,6 @@
 delete_idea:
   delete:
+    operationId: ideas_delete
     summary: Delete an idea
     description: Deletes the specified idea.
     tags:

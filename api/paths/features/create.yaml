@@ -1,5 +1,6 @@
 release_features:
   post:
+    operationId: features_create_release
     summary: Create a feature
     description: Adds a new feature to a specified release. Features belong to releases. This means that if you want to create one then you must scope it to a release.
     tags:

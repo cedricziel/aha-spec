@@ -1,5 +1,6 @@
 update_feature:
   put:
+    operationId: features_update
     summary: Update a feature
     description: |
       Updates an existing feature with the provided attributes.

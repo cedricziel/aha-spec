@@ -1,5 +1,6 @@
 users:
   get:
+    operationId: users_list
     summary: List users
     description: Fetches a list of users associated with the Aha! account.
     tags:
@@ -16,6 +17,7 @@ users:
 
 users_by_id:
   get:
+    operationId: users_get
     summary: Get a specific user
     description: Retrieves details of a specific user by their ID.
     tags:

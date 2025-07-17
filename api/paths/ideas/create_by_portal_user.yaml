@@ -1,5 +1,6 @@
 product_ideas_portal_user_path:
   post:
+    operationId: ideas_create_by_portal_user
     summary: Create an idea created by a ideas portal user
     description: |
       Creates a new idea for the specified product, where the creator is an ideas portal user.

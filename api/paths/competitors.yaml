@@ -1,5 +1,6 @@
 product_competitors:
   get:
+    operationId: competitors_list_product
     summary: List competitors in a product
     description: Retrieves a list of competitors associated with the specified product.
     parameters:
@@ -49,6 +50,7 @@ product_competitors:
 
 competitor_by_id:
   get:
+    operationId: competitors_get
     summary: Get a specific competitor
     description: Retrieves details of the specified competitor.
     tags:

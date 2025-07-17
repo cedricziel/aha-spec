@@ -1,5 +1,6 @@
 release_features_get:
   get:
+    operationId: features_list_release
     summary: List features in a release
     description: |
       Returns a list of features associated with a specific release.

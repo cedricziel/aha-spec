@@ -1,5 +1,6 @@
 product_ideas_path:
   post:
+    operationId: ideas_list_product
     operationId: ideas_create
     summary: Create an idea
     description: |

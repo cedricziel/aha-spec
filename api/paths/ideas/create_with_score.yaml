@@ -1,5 +1,6 @@
 product_ideas_with_score_path:
   post:
+    operationId: ideas_create_with_score
     summary: Create an idea with a score
     description: |
       Creates a new idea for the specified product with a score.

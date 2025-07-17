@@ -1,5 +1,6 @@
 list_features:
   get:
+    operationId: features_list
     summary: List features
     description: |
       Returns a list of features. You can filter by various criteria like name,

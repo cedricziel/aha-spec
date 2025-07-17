@@ -1,5 +1,6 @@
 delete_feature:
   delete:
+    operationId: features_delete
     summary: Delete a feature
     description: Deletes the specified feature.
     tags:
