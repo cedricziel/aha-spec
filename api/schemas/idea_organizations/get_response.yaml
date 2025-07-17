@@ -1,0 +1,7 @@
+IdeaOrganizationGetResponse:
+  type: object
+  properties:
+    idea_organization:
+      $ref: './idea_organization.yaml#/IdeaOrganization'
+  required:
+    - idea_organization

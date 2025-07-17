@@ -1,0 +1,88 @@
+MeProfileResponse:
+  type: object
+  properties:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+          example: "user123"
+        name:
+          type: string
+          description: Full name of the user
+          example: "John Smith"
+        email:
+          type: string
+          format: email
+          description: Email address of the user
+          example: "john.smith@example.com"
+        first_name:
+          type: string
+          description: First name of the user
+          example: "John"
+        last_name:
+          type: string
+          description: Last name of the user
+          example: "Smith"
+        initials:
+          type: string
+          description: User initials
+          example: "JS"
+        created_at:
+          type: string
+          format: date-time
+          description: When the user was created
+          example: "2024-01-01T00:00:00.000Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: When the user was last updated
+          example: "2024-01-15T10:30:00.000Z"
+        admin:
+          type: boolean
+          description: Whether the user is an admin
+          example: false
+        product_owner:
+          type: boolean
+          description: Whether the user is a product owner
+          example: true
+        reviewer:
+          type: boolean
+          description: Whether the user is a reviewer
+          example: false
+        viewer:
+          type: boolean
+          description: Whether the user is a viewer
+          example: false
+        time_zone:
+          type: string
+          description: User's time zone
+          example: "America/New_York"
+        locale:
+          type: string
+          description: User's locale
+          example: "en-US"
+        avatar_url:
+          type: string
+          format: uri
+          description: URL to user's avatar image
+          example: "https://secure.gravatar.com/avatar/123.png"
+        url:
+          type: string
+          format: uri
+          description: URL to user's profile page
+          example: "http://company.aha.io/users/user123"
+        resource:
+          type: string
+          format: uri
+          description: URL to user's API resource
+          example: "http://company.aha.io/api/v1/users/user123"
+      required:
+        - id
+        - name
+        - email
+        - created_at
+        - updated_at
+  required:
+    - user

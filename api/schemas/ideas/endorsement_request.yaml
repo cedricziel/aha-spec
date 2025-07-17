@@ -1,0 +1,27 @@
+IdeaEndorsementRequest:
+  type: object
+  required:
+    - email
+  properties:
+    email:
+      type: string
+      format: email
+      description: Email address of the portal user on whose behalf the endorsement is being created
+      example: "jane.doe@example.com"
+    idea_organization_id:
+      type: string
+      description: Numeric ID of the organization associated with the endorsement
+      example: "org123"
+    value:
+      type: number
+      description: Dollar value representing the importance/weight of the endorsement
+      example: 1000
+    link:
+      type: string
+      format: uri
+      description: Optional URL associated with the endorsement (e.g., feedback source)
+      example: "https://feedback.example.com/feature-request"
+    description:
+      type: string
+      description: Optional description of the endorsement (HTML supported)
+      example: "Customer requested this feature during quarterly review"

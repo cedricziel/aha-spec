@@ -1,8 +1,8 @@
-idea_proxy_votes_path:
+idea_endorsements_path:
   post:
-    operationId: ideas_create_proxy_vote
-    summary: Create a proxy vote
-    description: Creates a proxy vote on an idea on behalf of another user.
+    operationId: ideas_create_endorsement
+    summary: Create an endorsement (proxy vote)
+    description: Creates an endorsement (proxy vote) on an idea on behalf of another user.
     tags:
       - Ideas
     parameters:
@@ -17,50 +17,49 @@ idea_proxy_votes_path:
       content:
         application/json:
           schema:
-            $ref: '../../schemas/ideas/proxy_vote_request.yaml#/IdeaProxyVoteRequest'
+            $ref: '../../schemas/ideas/endorsement_request.yaml#/IdeaEndorsementRequest'
           example:
-            proxy_vote:
-              vote_type: "up"
-              proxy_user_name: "Jane Doe"
-              proxy_user_email: "jane.doe@example.com"
-              proxy_user_organization: "ACME Corp"
-              idea_portal_id: "portal123"
-              custom_fields:
-                department: "Engineering"
-                role: "Senior Developer"
+            endorsement:
+              email: "jane.doe@example.com"
+              idea_organization_id: "org123"
+              value: 1000
+              link: "https://feedback.example.com/feature-request"
+              description: "Customer requested this feature during quarterly review"
     responses:
       '201':
-        description: Proxy vote created successfully
+        description: Endorsement created successfully
         content:
           application/json:
             schema:
               type: object
               properties:
-                proxy_vote:
+                endorsement:
                   type: object
                   properties:
                     id:
                       type: string
-                      description: ID of the proxy vote
-                    vote_type:
+                      description: ID of the endorsement
+                    email:
                       type: string
-                      description: Type of vote
-                      enum: ["up", "down"]
+                      format: email
+                      description: Email of the portal user
+                    idea_organization_id:
+                      type: string
+                      description: Organization ID
+                    value:
+                      type: number
+                      description: Dollar value of the endorsement
+                    link:
+                      type: string
+                      format: uri
+                      description: Associated URL
+                    description:
+                      type: string
+                      description: Endorsement description
                     created_at:
                       type: string
                       format: date-time
-                      description: When the proxy vote was created
-                    proxy_user:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        email:
-                          type: string
-                        organization:
-                          type: string
-                        custom_fields:
-                          type: object
+                      description: When the endorsement was created
                     created_by_user:
                       type: object
                       properties:
@@ -75,32 +74,29 @@ idea_proxy_votes_path:
                   properties:
                     id:
                       type: string
-                    votes_count:
+                    endorsements_count:
                       type: integer
-                      description: Updated total vote count
-                    proxy_votes_count:
-                      type: integer
-                      description: Updated proxy vote count
+                      description: Updated total endorsement count
+                    endorsements_value:
+                      type: number
+                      description: Updated total endorsement value
             example:
-              proxy_vote:
-                id: "proxy_vote123"
-                vote_type: "up"
+              endorsement:
+                id: "endorsement123"
+                email: "jane.doe@example.com"
+                idea_organization_id: "org123"
+                value: 1000
+                link: "https://feedback.example.com/feature-request"
+                description: "Customer requested this feature during quarterly review"
                 created_at: "2024-01-15T10:30:00.000Z"
-                proxy_user:
-                  name: "Jane Doe"
-                  email: "jane.doe@example.com"
-                  organization: "ACME Corp"
-                  custom_fields:
-                    department: "Engineering"
-                    role: "Senior Developer"
                 created_by_user:
                   id: "user123"
                   name: "John Smith"
                   email: "john.smith@example.com"
               idea:
                 id: "58056975"
-                votes_count: 44
-                proxy_votes_count: 12
+                endorsements_count: 12
+                endorsements_value: 15000
       '400':
         description: Bad request
       '401':
@@ -112,9 +108,9 @@ idea_proxy_votes_path:
       '422':
         description: Unprocessable entity
   get:
-    operationId: ideas_get_proxy_votes
-    summary: Get proxy votes for an idea
-    description: Retrieves all proxy votes for a specific idea.
+    operationId: ideas_get_endorsements
+    summary: Get endorsements for an idea
+    description: Retrieves all endorsements for a specific idea.
     tags:
       - Ideas
     parameters:
@@ -137,7 +133,7 @@ idea_proxy_votes_path:
         schema:
           type: integer
           default: 20
-        description: Number of proxy votes per page
+        description: Number of endorsements per page
     responses:
       '200':
         description: OK
@@ -146,30 +142,28 @@ idea_proxy_votes_path:
             schema:
               type: object
               properties:
-                proxy_votes:
+                endorsements:
                   type: array
                   items:
                     type: object
                     properties:
                       id:
                         type: string
-                      vote_type:
+                      email:
                         type: string
-                        enum: ["up", "down"]
+                        format: email
+                      idea_organization_id:
+                        type: string
+                      value:
+                        type: number
+                      link:
+                        type: string
+                        format: uri
+                      description:
+                        type: string
                       created_at:
                         type: string
                         format: date-time
-                      proxy_user:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          email:
-                            type: string
-                          organization:
-                            type: string
-                          custom_fields:
-                            type: object
                       created_by_user:
                         type: object
                         properties:
@@ -191,17 +185,14 @@ idea_proxy_votes_path:
                     per_page:
                       type: integer
             example:
-              proxy_votes:
-                - id: "proxy_vote123"
-                  vote_type: "up"
+              endorsements:
+                - id: "endorsement123"
+                  email: "jane.doe@example.com"
+                  idea_organization_id: "org123"
+                  value: 1000
+                  link: "https://feedback.example.com/feature-request"
+                  description: "Customer requested this feature during quarterly review"
                   created_at: "2024-01-15T10:30:00.000Z"
-                  proxy_user:
-                    name: "Jane Doe"
-                    email: "jane.doe@example.com"
-                    organization: "ACME Corp"
-                    custom_fields:
-                      department: "Engineering"
-                      role: "Senior Developer"
                   created_by_user:
                     id: "user123"
                     name: "John Smith"

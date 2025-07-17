@@ -1,0 +1,253 @@
+idea_organizations_list:
+  get:
+    operationId: idea_organizations_list
+    summary: List idea organizations
+    description: Retrieves a list of idea organizations with optional filtering.
+    tags:
+      - Idea Organizations
+    parameters:
+      - name: q
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Search term to match against organization name
+      - name: email_domain
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Returns organizations with matching email domain
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 20
+        description: Number of organizations per page
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/idea_organizations/list_response.yaml#/IdeaOrganizationsListResponse'
+            example:
+              idea_organizations:
+                - id: "138732915"
+                  name: "ACME Corporation"
+                  email_domains: ["acme.com", "acmecorp.com"]
+                  revenue: 1000000
+                  created_at: "2024-01-01T00:00:00.000Z"
+                  updated_at: "2024-01-15T10:30:00.000Z"
+                  custom_fields:
+                    industry: "Technology"
+                    size: "Large"
+                  url: "http://company.aha.io/idea_organizations/138732915"
+                  resource: "http://company.aha.io/api/v1/idea_organizations/138732915"
+                - id: "138732916"
+                  name: "Startup Inc"
+                  email_domains: ["startup.com"]
+                  revenue: 50000
+                  created_at: "2024-01-02T00:00:00.000Z"
+                  updated_at: "2024-01-16T09:15:00.000Z"
+                  custom_fields:
+                    industry: "SaaS"
+                    size: "Small"
+                  url: "http://company.aha.io/idea_organizations/138732916"
+                  resource: "http://company.aha.io/api/v1/idea_organizations/138732916"
+              pagination:
+                total_records: 25
+                total_pages: 2
+                current_page: 1
+                per_page: 20
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+  post:
+    operationId: idea_organizations_create
+    summary: Create an idea organization
+    description: Creates a new idea organization.
+    tags:
+      - Idea Organizations
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_organizations/create_request.yaml#/IdeaOrganizationCreateRequest'
+          example:
+            idea_organization:
+              name: "ACME Corporation"
+              email_domains: ["acme.com", "acmecorp.com"]
+              revenue: 1000000
+              custom_fields:
+                industry: "Technology"
+                size: "Large"
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/idea_organizations/get_response.yaml#/IdeaOrganizationGetResponse'
+            example:
+              idea_organization:
+                id: "138732915"
+                name: "ACME Corporation"
+                email_domains: ["acme.com", "acmecorp.com"]
+                revenue: 1000000
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-01T00:00:00.000Z"
+                custom_fields:
+                  industry: "Technology"
+                  size: "Large"
+                url: "http://company.aha.io/idea_organizations/138732915"
+                resource: "http://company.aha.io/api/v1/idea_organizations/138732915"
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity
+
+idea_organization_by_id:
+  get:
+    operationId: idea_organizations_get
+    summary: Get an idea organization
+    description: Retrieves a specific idea organization by ID.
+    tags:
+      - Idea Organizations
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the idea organization
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/idea_organizations/get_response.yaml#/IdeaOrganizationGetResponse'
+            example:
+              idea_organization:
+                id: "138732915"
+                name: "ACME Corporation"
+                email_domains: ["acme.com", "acmecorp.com"]
+                revenue: 1000000
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-15T10:30:00.000Z"
+                custom_fields:
+                  industry: "Technology"
+                  size: "Large"
+                url: "http://company.aha.io/idea_organizations/138732915"
+                resource: "http://company.aha.io/api/v1/idea_organizations/138732915"
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea organization not found
+  put:
+    operationId: idea_organizations_update
+    summary: Update an idea organization
+    description: Updates an existing idea organization.
+    tags:
+      - Idea Organizations
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the idea organization
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_organizations/update_request.yaml#/IdeaOrganizationUpdateRequest'
+          example:
+            idea_organization:
+              name: "ACME Corporation Updated"
+              email_domains: ["acme.com", "acmecorp.com", "acme.org"]
+              revenue: 1200000
+              custom_fields:
+                industry: "Technology"
+                size: "Large"
+                region: "North America"
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/idea_organizations/get_response.yaml#/IdeaOrganizationGetResponse'
+            example:
+              idea_organization:
+                id: "138732915"
+                name: "ACME Corporation Updated"
+                email_domains: ["acme.com", "acmecorp.com", "acme.org"]
+                revenue: 1200000
+                created_at: "2024-01-01T00:00:00.000Z"
+                updated_at: "2024-01-15T10:30:00.000Z"
+                custom_fields:
+                  industry: "Technology"
+                  size: "Large"
+                  region: "North America"
+                url: "http://company.aha.io/idea_organizations/138732915"
+                resource: "http://company.aha.io/api/v1/idea_organizations/138732915"
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea organization not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: idea_organizations_delete
+    summary: Delete an idea organization
+    description: Deletes an idea organization.
+    tags:
+      - Idea Organizations
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the idea organization
+      - name: delete_proxy_votes
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+        description: Delete the organization even if it has proxy votes
+    responses:
+      '204':
+        description: No content (successfully deleted)
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea organization not found
+      '409':
+        description: Conflict (organization has proxy votes and delete_proxy_votes is false)

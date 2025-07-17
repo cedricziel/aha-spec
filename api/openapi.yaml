@@ -129,12 +129,18 @@ paths:
     $ref: './paths/ideas/promote.yaml#/idea_promote_path'
   /ideas/{id}/votes:
     $ref: './paths/ideas/votes.yaml#/idea_votes_path'
-  /ideas/{id}/proxy_votes:
-    $ref: './paths/ideas/proxy_votes.yaml#/idea_proxy_votes_path'
+  /ideas/{id}/endorsements:
+    $ref: './paths/ideas/endorsements.yaml#/idea_endorsements_path'
   /ideas/{id}/spam:
     $ref: './paths/ideas/spam.yaml#/idea_spam_path'
   /ideas/{id}/watchers:
     $ref: './paths/ideas/watchers.yaml#/idea_watchers_path'
+
+  # Idea Organizations
+  /idea_organizations:
+    $ref: './paths/idea_organizations.yaml#/idea_organizations_list'
+  /idea_organizations/{id}:
+    $ref: './paths/idea_organizations.yaml#/idea_organization_by_id'
 
   # Releases
   /releases:
@@ -157,6 +163,14 @@ paths:
     $ref: './paths/strategic_models/list.yaml#/strategic_models_path'
   /strategic_models/{id}:
     $ref: './paths/strategic_models/get.yaml#/strategic_model_by_id_path'
+
+  # Me (Current User)
+  /me:
+    $ref: './paths/me.yaml#/me_profile'
+  /me/assigned:
+    $ref: './paths/me.yaml#/me_assigned_records'
+  /me/tasks:
+    $ref: './paths/me.yaml#/me_pending_tasks'
 
 # Components are referenced from separate files
 components:
@@ -208,8 +222,8 @@ components:
       $ref: './schemas/ideas/promote_request.yaml#/IdeaPromoteRequest'
     IdeaVoteRequest:
       $ref: './schemas/ideas/vote_request.yaml#/IdeaVoteRequest'
-    IdeaProxyVoteRequest:
-      $ref: './schemas/ideas/proxy_vote_request.yaml#/IdeaProxyVoteRequest'
+    IdeaEndorsementRequest:
+      $ref: './schemas/ideas/endorsement_request.yaml#/IdeaEndorsementRequest'
     IdeaWatchersRequest:
       $ref: './schemas/ideas/watchers_request.yaml#/IdeaWatchersRequest'
     IdeaResponse:
@@ -267,6 +281,26 @@ components:
     StrategicModelsListResponse:
       $ref: './schemas/strategic_models/list_response.yaml#/StrategicModelsListResponse'
 
+    # Me (Current User) related schemas
+    MeProfileResponse:
+      $ref: './schemas/me/profile_response.yaml#/MeProfileResponse'
+    MeAssignedRecordsResponse:
+      $ref: './schemas/me/assigned_records_response.yaml#/MeAssignedRecordsResponse'
+    MePendingTasksResponse:
+      $ref: './schemas/me/pending_tasks_response.yaml#/MePendingTasksResponse'
+
+    # Idea Organization related schemas
+    IdeaOrganizationCreateRequest:
+      $ref: './schemas/idea_organizations/create_request.yaml#/IdeaOrganizationCreateRequest'
+    IdeaOrganizationUpdateRequest:
+      $ref: './schemas/idea_organizations/update_request.yaml#/IdeaOrganizationUpdateRequest'
+    IdeaOrganization:
+      $ref: './schemas/idea_organizations/idea_organization.yaml#/IdeaOrganization'
+    IdeaOrganizationGetResponse:
+      $ref: './schemas/idea_organizations/get_response.yaml#/IdeaOrganizationGetResponse'
+    IdeaOrganizationsListResponse:
+      $ref: './schemas/idea_organizations/list_response.yaml#/IdeaOrganizationsListResponse'
+
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -299,3 +333,5 @@ tags:
   - name: Release Phases
   - name: Todos
   - name: Products
+  - name: Me
+  - name: Idea Organizations

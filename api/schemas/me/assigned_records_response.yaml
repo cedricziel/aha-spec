@@ -1,0 +1,116 @@
+MeAssignedRecordsResponse:
+  type: object
+  properties:
+    records:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Record ID
+            example: "feature123"
+          type:
+            type: string
+            description: Type of record
+            enum: ["feature", "epic", "requirement", "idea", "initiative", "goal", "release", "todo"]
+            example: "feature"
+          name:
+            type: string
+            description: Name of the record
+            example: "Dark mode feature"
+          reference_num:
+            type: string
+            description: Reference number for the record
+            example: "PRJ1-F-123"
+          workflow_status:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Status ID
+                example: "status123"
+              name:
+                type: string
+                description: Status name
+                example: "In Progress"
+              color:
+                type: string
+                description: Color code for the status
+                example: "#3498db"
+            required:
+              - id
+              - name
+          assigned_to_user:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User ID
+                example: "user123"
+              name:
+                type: string
+                description: User name
+                example: "John Smith"
+              email:
+                type: string
+                format: email
+                description: User email
+                example: "john.smith@example.com"
+            required:
+              - id
+              - name
+              - email
+          created_at:
+            type: string
+            format: date-time
+            description: When the record was created
+            example: "2024-01-01T00:00:00.000Z"
+          updated_at:
+            type: string
+            format: date-time
+            description: When the record was last updated
+            example: "2024-01-15T10:30:00.000Z"
+          url:
+            type: string
+            format: uri
+            description: URL to the record's page
+            example: "http://company.aha.io/features/PRJ1-F-123"
+          resource:
+            type: string
+            format: uri
+            description: URL to the record's API resource
+            example: "http://company.aha.io/api/v1/features/PRJ1-F-123"
+        required:
+          - id
+          - type
+          - name
+          - created_at
+          - updated_at
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of records
+          example: 25
+        total_pages:
+          type: integer
+          description: Total number of pages
+          example: 2
+        current_page:
+          type: integer
+          description: Current page number
+          example: 1
+        per_page:
+          type: integer
+          description: Number of records per page
+          example: 20
+      required:
+        - total_records
+        - total_pages
+        - current_page
+        - per_page
+  required:
+    - records
+    - pagination

@@ -1,0 +1,34 @@
+IdeaOrganizationsListResponse:
+  type: object
+  properties:
+    idea_organizations:
+      type: array
+      items:
+        $ref: './idea_organization.yaml#/IdeaOrganization'
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of idea organizations
+          example: 25
+        total_pages:
+          type: integer
+          description: Total number of pages
+          example: 2
+        current_page:
+          type: integer
+          description: Current page number
+          example: 1
+        per_page:
+          type: integer
+          description: Number of organizations per page
+          example: 20
+      required:
+        - total_records
+        - total_pages
+        - current_page
+        - per_page
+  required:
+    - idea_organizations
+    - pagination

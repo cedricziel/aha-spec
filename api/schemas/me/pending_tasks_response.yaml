@@ -1,0 +1,129 @@
+MePendingTasksResponse:
+  type: object
+  properties:
+    tasks:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Task ID
+            example: "task123"
+          name:
+            type: string
+            description: Task name
+            example: "Review feature specifications"
+          description:
+            type: string
+            description: Task description
+            example: "Review and approve the technical specifications for the new feature"
+          due_date:
+            type: string
+            format: date
+            description: Task due date
+            example: "2024-01-20"
+          priority:
+            type: string
+            description: Task priority level
+            enum: ["low", "medium", "high", "urgent"]
+            example: "high"
+          status:
+            type: string
+            description: Task status
+            enum: ["pending", "in_progress", "completed", "cancelled"]
+            example: "pending"
+          assigned_to_user:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User ID
+                example: "user123"
+              name:
+                type: string
+                description: User name
+                example: "John Smith"
+              email:
+                type: string
+                format: email
+                description: User email
+                example: "john.smith@example.com"
+            required:
+              - id
+              - name
+              - email
+          assigned_by_user:
+            type: object
+            properties:
+              id:
+                type: string
+                description: User ID
+                example: "user456"
+              name:
+                type: string
+                description: User name
+                example: "Jane Doe"
+              email:
+                type: string
+                format: email
+                description: User email
+                example: "jane.doe@example.com"
+            required:
+              - id
+              - name
+              - email
+          created_at:
+            type: string
+            format: date-time
+            description: When the task was created
+            example: "2024-01-15T10:30:00.000Z"
+          updated_at:
+            type: string
+            format: date-time
+            description: When the task was last updated
+            example: "2024-01-15T10:30:00.000Z"
+          url:
+            type: string
+            format: uri
+            description: URL to the task's page
+            example: "http://company.aha.io/todos/task123"
+          resource:
+            type: string
+            format: uri
+            description: URL to the task's API resource
+            example: "http://company.aha.io/api/v1/todos/task123"
+        required:
+          - id
+          - name
+          - status
+          - assigned_to_user
+          - created_at
+          - updated_at
+    pagination:
+      type: object
+      properties:
+        total_records:
+          type: integer
+          description: Total number of tasks
+          example: 8
+        total_pages:
+          type: integer
+          description: Total number of pages
+          example: 1
+        current_page:
+          type: integer
+          description: Current page number
+          example: 1
+        per_page:
+          type: integer
+          description: Number of tasks per page
+          example: 20
+      required:
+        - total_records
+        - total_pages
+        - current_page
+        - per_page
+  required:
+    - tasks
+    - pagination

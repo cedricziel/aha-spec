@@ -1,0 +1,25 @@
+IdeaOrganizationUpdateRequest:
+  type: object
+  properties:
+    name:
+      type: string
+      description: Name of the idea organization
+      example: "ACME Corporation Updated"
+    email_domains:
+      type: array
+      items:
+        type: string
+      description: Email domains associated with the organization
+      example: ["acme.com", "acmecorp.com", "acme.org"]
+    revenue:
+      type: number
+      description: Revenue value for the organization
+      example: 1200000
+    custom_fields:
+      type: object
+      description: Custom fields for the organization
+      additionalProperties: true
+      example:
+        industry: "Technology"
+        size: "Large"
+        region: "North America"
