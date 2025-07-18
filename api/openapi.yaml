@@ -4,7 +4,7 @@ openapi: 3.0.3
 info:
   title: Aha! REST API
   description: API for interacting with Aha! product management platform.
-  version: 1.0.1
+  version: 1.0.2
 
 servers:
   - url: https://{subdomain}.aha.io/api/v1

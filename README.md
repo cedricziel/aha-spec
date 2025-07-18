@@ -2,7 +2,7 @@
 
 API for interacting with Aha! product management platform.
 
-**Version:** 1.0.1
+**Version:** 1.0.2
 
 ## Overview
 
