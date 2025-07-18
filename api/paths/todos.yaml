@@ -332,7 +332,7 @@ todo_by_id:
     tags:
       - To-Dos
     parameters:
-      - name: todo_id
+      - name: id
         in: path
         required: true
         schema:
@@ -361,7 +361,7 @@ todo_by_id:
     tags:
       - To-Dos
     parameters:
-      - name: todo_id
+      - name: id
         in: path
         required: true
         schema:
@@ -400,7 +400,7 @@ todo_by_id:
     tags:
       - To-Dos
     parameters:
-      - name: todo_id
+      - name: id
         in: path
         required: true
         schema:

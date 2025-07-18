@@ -1,0 +1,7 @@
+ProductGetResponse:
+  type: object
+  properties:
+    product:
+      $ref: './product.yaml#/Product'
+  required:
+    - product

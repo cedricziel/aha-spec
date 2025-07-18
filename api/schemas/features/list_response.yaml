@@ -4,25 +4,7 @@ FeaturesListResponse:
     features:
       type: array
       items:
-        type: object
-        properties:
-          id:
-            type: string
-          reference_num:
-            type: string
-          name:
-            type: string
-          created_at:
-            type: string
-            format: date-time
-          url:
-            type: string
-            format: uri
-          resource:
-            type: string
-            format: uri
-          product_id:
-            type: string
+        $ref: './feature.yaml#/Feature'
     pagination:
       type: object
       properties:

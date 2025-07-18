@@ -5,31 +5,7 @@ ProductsListResponse:
       type: array
       description: List of products
       items:
-        type: object
-        properties:
-          id:
-            type: string
-            description: Unique identifier of the product
-          reference_prefix:
-            type: string
-            description: Reference prefix of the product
-          name:
-            type: string
-            description: Name of the product
-          product_line:
-            type: boolean
-            description: Whether the product is a product line
-          created_at:
-            type: string
-            format: date-time
-            description: Creation date of the product
-          workspace_type:
-            type: string
-            description: Type of workspace (product_workspace, marketing_workspace, etc.)
-          url:
-            type: string
-            format: uri
-            description: URL to view the product in the Aha! web application
+        $ref: './product.yaml#/Product'
     pagination:
       type: object
       properties:

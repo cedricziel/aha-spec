@@ -105,6 +105,8 @@ paths:
   # Products
   /products:
     $ref: './paths/products/list.yaml#/list_products'
+  /products/{id}:
+    $ref: './paths/products/get.yaml#/product_by_id'
 
   # Initiatives
   /initiatives:
@@ -174,6 +176,22 @@ paths:
   /me/tasks:
     $ref: './paths/me.yaml#/me_pending_tasks'
 
+  # Todos
+  /todos:
+    $ref: './paths/todos.yaml#/tasks'
+  /todos/{id}:
+    $ref: './paths/todos.yaml#/todo_by_id'
+
+  # Requirements
+  /requirements/{id}:
+    $ref: './paths/requirements.yaml#/requirement_by_id'
+
+  # Release Phases
+  /release_phases:
+    $ref: './paths/release_phases.yaml#/release_phases'
+  /release_phases/{id}:
+    $ref: './paths/release_phases.yaml#/release_phase_by_id'
+
 # Components are referenced from separate files
 components:
   schemas:
@@ -240,6 +258,10 @@ components:
       $ref: './schemas/ideas/list_response.yaml#/IdeasListResponse'
 
     # Product related schemas
+    Product:
+      $ref: './schemas/products/product.yaml#/Product'
+    ProductGetResponse:
+      $ref: './schemas/products/get_response.yaml#/ProductGetResponse'
     ProductsListResponse:
       $ref: './schemas/products/list_response.yaml#/ProductsListResponse'
 

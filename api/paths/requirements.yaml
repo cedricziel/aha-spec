@@ -112,7 +112,7 @@ requirement_by_id:
     tags:
       - Requirements
     parameters:
-      - name: requirement_id
+      - name: id
         in: path
         required: true
         schema:
@@ -141,7 +141,7 @@ requirement_by_id:
     tags:
       - Requirements
     parameters:
-      - name: requirement_id
+      - name: id
         in: path
         required: true
         schema:
@@ -180,7 +180,7 @@ requirement_by_id:
     tags:
       - Requirements
     parameters:
-      - name: requirement_id
+      - name: id
         in: path
         required: true
         schema:
@@ -205,7 +205,7 @@ requirement_custom_fields:
       - Requirements
       - Custom Fields
     parameters:
-      - name: requirement_id
+      - name: id
         in: path
         required: true
         schema:
@@ -247,7 +247,7 @@ requirement_convert_to_feature:
       - Requirements
       - Features
     parameters:
-      - name: requirement_id
+      - name: id
         in: path
         required: true
         schema:
