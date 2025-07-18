@@ -1,0 +1,293 @@
+Requirement:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the requirement
+    name:
+      type: string
+      description: Name of the requirement
+    reference_num:
+      type: string
+      description: Reference number of the requirement
+    position:
+      type: integer
+      description: Position of the requirement in the list
+    created_at:
+      type: string
+      format: date-time
+      description: When the requirement was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the requirement was last updated
+    release_id:
+      type: integer
+      description: ID of the release this requirement belongs to
+    created_by_user:
+      $ref: '../schemas/users.yaml#/User'
+      description: User who created this requirement
+    workflow_status:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the workflow status
+        name:
+          type: string
+          description: Name of the workflow status
+        position:
+          type: integer
+          description: Position of the status in the workflow
+        complete:
+          type: boolean
+          description: Whether this status indicates completion
+        color:
+          type: string
+          description: Color associated with this status
+      description: Current workflow status of the requirement
+    url:
+      type: string
+      format: uri
+      description: URL to view the requirement in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this requirement
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the description
+        body:
+          type: string
+          description: HTML content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: When the description was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the description was last updated
+        attachments:
+          type: array
+          items:
+            $ref: '../schemas/attachments.yaml#/Attachment'
+          description: Attachments in the description
+      description: Description of the requirement
+    feature:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the feature
+        reference_num:
+          type: string
+          description: Reference number of the feature
+        name:
+          type: string
+          description: Name of the feature
+        created_at:
+          type: string
+          format: date-time
+          description: When the feature was created
+        url:
+          type: string
+          format: uri
+          description: URL to view the feature in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the feature
+        product_id:
+          type: string
+          description: ID of the product
+      description: The feature this requirement belongs to
+    assigned_to_user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the assigned user
+        name:
+          type: string
+          description: Name of the assigned user
+        email:
+          type: string
+          format: email
+          description: Email of the assigned user
+        created_at:
+          type: string
+          format: date-time
+          description: When the user was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the user was last updated
+        default_assignee:
+          type: boolean
+          description: Whether this user is the default assignee
+      description: User assigned to this requirement
+    attachments:
+      type: array
+      items:
+        $ref: '../schemas/attachments.yaml#/Attachment'
+      description: Attachments associated with this requirement
+    tags:
+      type: array
+      items:
+        type: string
+      description: Tags associated with this requirement
+    full_tags:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the tag
+          name:
+            type: string
+            description: Name of the tag
+      description: Full tag objects with IDs and names
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this requirement
+    integration_fields:
+      type: array
+      items:
+        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      description: Integration fields associated with this requirement
+    comments_count:
+      type: integer
+      description: Number of comments on this requirement
+    workflow_status_times:
+      type: array
+      items:
+        type: object
+        properties:
+          status_id:
+            type: string
+            description: ID of the workflow status
+          status_name:
+            type: string
+            description: Name of the workflow status
+          started_at:
+            type: string
+            format: date-time
+            description: When this status was started
+          ended_at:
+            type: string
+            format: date-time
+            nullable: true
+            description: When this status was ended
+      description: History of workflow status changes
+  required:
+    - id
+    - name
+    - reference_num
+    - created_at
+    - updated_at
+    - workflow_status
+    - url
+    - resource
+    - feature
+
+RequirementCreateRequest:
+  type: object
+  properties:
+    requirement:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the requirement
+        workflow_status:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the workflow status
+          description: Initial workflow status
+        description:
+          type: string
+          description: HTML description of the requirement
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the requirement to
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the requirement
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+  required:
+    - requirement
+
+RequirementUpdateRequest:
+  type: object
+  properties:
+    requirement:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the requirement
+        workflow_status:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the workflow status
+          description: Workflow status to update to
+        description:
+          type: string
+          description: HTML description of the requirement
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the requirement to
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the requirement
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - requirement
+
+RequirementCustomFieldsUpdateRequest:
+  type: object
+  properties:
+    requirement:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values to update
+      required:
+        - custom_fields
+  required:
+    - requirement

@@ -1,0 +1,299 @@
+feature_requirements:
+  get:
+    operationId: requirements_list_feature
+    summary: List requirements for a feature
+    description: Retrieves a list of requirements for the specified feature.
+    tags:
+      - Requirements
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    responses:
+      '200':
+        description: A list of requirements
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirements:
+                  type: array
+                  items:
+                    $ref: '../schemas/requirements.yaml#/Requirement'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+  post:
+    operationId: requirements_create_feature
+    summary: Create a requirement for a feature
+    description: Creates a new requirement for the specified feature.
+    tags:
+      - Requirements
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/requirements.yaml#/RequirementCreateRequest'
+    responses:
+      '201':
+        description: Requirement created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirement:
+                  $ref: '../schemas/requirements.yaml#/Requirement'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+      '422':
+        description: Unprocessable entity
+
+requirements:
+  get:
+    operationId: requirements_list
+    summary: Get requirements updated after a certain time
+    description: Retrieves requirements that have been updated after the specified timestamp.
+    tags:
+      - Requirements
+    parameters:
+      - name: updated_since
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: Return requirements updated after this timestamp
+    responses:
+      '200':
+        description: A list of requirements
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirements:
+                  type: array
+                  items:
+                    $ref: '../schemas/requirements.yaml#/Requirement'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+requirement_by_id:
+  get:
+    operationId: requirements_get
+    summary: Get a specific requirement
+    description: Retrieves details of a specific requirement.
+    tags:
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    responses:
+      '200':
+        description: Requirement details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirement:
+                  $ref: '../schemas/requirements.yaml#/Requirement'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+  put:
+    operationId: requirements_update
+    summary: Update a requirement
+    description: Updates the specified requirement.
+    tags:
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/requirements.yaml#/RequirementUpdateRequest'
+    responses:
+      '200':
+        description: Requirement updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirement:
+                  $ref: '../schemas/requirements.yaml#/Requirement'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: requirements_delete
+    summary: Delete a requirement
+    description: Deletes the specified requirement.
+    tags:
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    responses:
+      '204':
+        description: Requirement deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+
+requirement_custom_fields:
+  put:
+    operationId: requirements_update_custom_fields
+    summary: Update a requirement's custom fields
+    description: Updates the custom fields of the specified requirement.
+    tags:
+      - Requirements
+      - Custom Fields
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/requirements.yaml#/RequirementCustomFieldsUpdateRequest'
+    responses:
+      '200':
+        description: Requirement custom fields updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirement:
+                  $ref: '../schemas/requirements.yaml#/Requirement'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+      '422':
+        description: Unprocessable entity
+
+requirement_convert_to_feature:
+  post:
+    operationId: requirements_convert_to_feature
+    summary: Convert a requirement to a feature
+    description: Converts the specified requirement to a feature.
+    tags:
+      - Requirements
+      - Features
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              requirement:
+                type: object
+                properties:
+                  release_id:
+                    type: string
+                    description: ID of the release to assign the new feature to
+                  assigned_to_user:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        description: Email of the user to assign the feature to
+                    description: User to assign the feature to
+                description: Conversion options
+            required:
+              - requirement
+    responses:
+      '200':
+        description: Requirement converted to feature successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                feature:
+                  $ref: '../schemas/features/feature.yaml#/Feature'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+      '422':
+        description: Unprocessable entity

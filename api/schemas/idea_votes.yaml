@@ -1,0 +1,308 @@
+IdeaVote:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the vote
+    idea_id:
+      type: string
+      description: ID of the idea this vote belongs to
+    created_at:
+      type: string
+      format: date-time
+      description: When the vote was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the vote was last updated
+    value:
+      type: number
+      nullable: true
+      description: Dollar value of the vote (for proxy votes)
+    link:
+      type: string
+      format: uri
+      nullable: true
+      description: Associated URL for the vote
+    weight:
+      type: integer
+      description: Weight of the vote (typically 1 for regular votes)
+    endorsed_by_portal_user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the portal user
+        name:
+          type: string
+          description: Name of the portal user
+        email:
+          type: string
+          format: email
+          description: Email of the portal user
+        created_at:
+          type: string
+          format: date-time
+          description: When the portal user was created
+      description: Portal user who created the vote
+    endorsed_by_idea_user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the idea user
+        name:
+          type: string
+          description: Name of the idea user
+        email:
+          type: string
+          format: email
+          description: Email of the idea user
+        created_at:
+          type: string
+          format: date-time
+          description: When the idea user was created
+      description: Idea user who created the vote
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the description
+        body:
+          type: string
+          description: HTML content of the description
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the description was created
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the description was last updated
+        attachments:
+          type: array
+          items:
+            $ref: '../schemas/attachments.yaml#/Attachment'
+          description: Attachments in the description
+      description: Description of the vote
+    integration_fields:
+      type: array
+      items:
+        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      description: Integration fields associated with this vote
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this vote
+    idea:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the idea
+        reference_num:
+          type: string
+          description: Reference number of the idea
+        name:
+          type: string
+          description: Name of the idea
+        created_at:
+          type: string
+          format: date-time
+          description: When the idea was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the idea was last updated
+        workflow_status:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ID of the workflow status
+            name:
+              type: string
+              description: Name of the workflow status
+            position:
+              type: integer
+              description: Position of the status in the workflow
+            complete:
+              type: boolean
+              description: Whether this status indicates completion
+            color:
+              type: string
+              description: Color associated with this status
+          description: Current workflow status of the idea
+        description:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ID of the description
+            body:
+              type: string
+              description: HTML content of the description
+            created_at:
+              type: string
+              format: date-time
+              description: When the description was created
+            updated_at:
+              type: string
+              format: date-time
+              description: When the description was last updated
+            attachments:
+              type: array
+              items:
+                $ref: '../schemas/attachments.yaml#/Attachment'
+              description: Attachments in the description
+          description: Description of the idea
+        url:
+          type: string
+          format: uri
+          description: URL to view the idea in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the idea
+      description: The idea this vote belongs to
+    idea_organization:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the idea organization
+        name:
+          type: string
+          description: Name of the idea organization
+        created_at:
+          type: string
+          format: date-time
+          description: When the idea organization was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the idea organization was last updated
+      description: The idea organization associated with this vote (for proxy votes)
+  required:
+    - id
+    - idea_id
+    - created_at
+    - updated_at
+    - weight
+    - idea
+
+IdeaVoteCreateRequest:
+  type: object
+  properties:
+    idea_endorsement:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of portal user who created the vote
+        created_by_user:
+          type: string
+          format: email
+          description: Email address of Aha! user who created the vote
+        value:
+          type: number
+          description: Dollar value of the vote (for proxy votes)
+        link:
+          type: string
+          format: uri
+          description: Associated URL for the vote
+        description:
+          type: string
+          description: Description of the vote
+        idea_organization_id:
+          type: string
+          description: ID of the idea organization (for proxy votes)
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      description: Vote details
+  required:
+    - idea_endorsement
+
+ProxyVoteCreateRequest:
+  type: object
+  properties:
+    idea_endorsement:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of portal user who created the vote
+        created_by_user:
+          type: string
+          format: email
+          description: Email address of Aha! user who created the vote
+        value:
+          type: number
+          description: Dollar value of the vote
+        link:
+          type: string
+          format: uri
+          description: Associated URL for the vote
+        description:
+          type: string
+          description: Description of the vote
+        idea_organization_id:
+          type: string
+          description: ID of the idea organization
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - idea_organization_id
+      description: Proxy vote details
+  required:
+    - idea_endorsement
+
+IdeaVoteUpdateRequest:
+  type: object
+  properties:
+    idea_endorsement:
+      type: object
+      properties:
+        value:
+          type: number
+          description: Dollar value of the vote
+        link:
+          type: string
+          format: uri
+          description: Associated URL for the vote
+        description:
+          type: string
+          description: Description of the vote
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      description: Vote details to update
+  required:
+    - idea_endorsement
+
+IdeaVoteCustomFieldsUpdateRequest:
+  type: object
+  properties:
+    idea_endorsement:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values to update
+      required:
+        - custom_fields
+      description: Custom field updates
+  required:
+    - idea_endorsement

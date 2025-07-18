@@ -1,0 +1,370 @@
+idea_votes_by_idea:
+  get:
+    operationId: idea_votes_list_idea
+    summary: List votes for an idea
+    description: Retrieves a list of votes for the specified idea.
+    tags:
+      - IdeaVotes
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: proxy
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: If set to true, only returns proxy votes (votes with an associated organization)
+    responses:
+      '200':
+        description: A list of votes
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsements:
+                  type: array
+                  items:
+                    $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+  post:
+    operationId: idea_votes_create_idea
+    summary: Create a vote for an idea
+    description: Creates a new vote for the specified idea.
+    tags:
+      - IdeaVotes
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_votes.yaml#/IdeaVoteCreateRequest'
+    responses:
+      '201':
+        description: Vote created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsement:
+                  $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity
+
+idea_votes_by_account:
+  get:
+    operationId: idea_votes_list_account
+    summary: List votes for an account
+    description: Retrieves a list of votes for the entire account.
+    tags:
+      - IdeaVotes
+    responses:
+      '200':
+        description: A list of votes
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsements:
+                  type: array
+                  items:
+                    $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+idea_vote_by_id:
+  get:
+    operationId: idea_votes_get
+    summary: Get a specific vote for an idea
+    description: Retrieves details of a specific vote.
+    tags:
+      - IdeaVotes
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: vote_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the vote
+    responses:
+      '200':
+        description: Vote details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsement:
+                  $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Vote not found
+  put:
+    operationId: idea_votes_update
+    summary: Update an idea vote
+    description: Updates the specified idea vote.
+    tags:
+      - IdeaVotes
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: vote_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the vote
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_votes.yaml#/IdeaVoteUpdateRequest'
+    responses:
+      '200':
+        description: Vote updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsement:
+                  $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Vote not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: idea_votes_delete
+    summary: Delete an idea vote
+    description: Deletes the specified idea vote.
+    tags:
+      - IdeaVotes
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: vote_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the vote
+    responses:
+      '204':
+        description: Vote deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Vote not found
+
+idea_vote_custom_fields:
+  put:
+    operationId: idea_votes_update_custom_fields
+    summary: Update an idea vote's custom fields
+    description: Updates the custom fields of the specified idea vote.
+    tags:
+      - IdeaVotes
+      - Custom Fields
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+      - name: vote_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the vote
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_votes.yaml#/IdeaVoteCustomFieldsUpdateRequest'
+    responses:
+      '200':
+        description: Vote custom fields updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsement:
+                  $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Vote not found
+      '422':
+        description: Unprocessable entity
+
+idea_vote_organizations:
+  get:
+    operationId: idea_votes_get_organizations
+    summary: Get all related idea organizations for votes associated with an idea
+    description: Retrieves all idea organizations related to votes for the specified idea.
+    tags:
+      - IdeaVotes
+      - Ideas
+      - Idea Organizations
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    responses:
+      '200':
+        description: A list of idea organizations
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_organizations:
+                  type: array
+                  items:
+                    $ref: '../schemas/idea_organizations.yaml#/IdeaOrganization'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+
+proxy_votes:
+  get:
+    operationId: idea_votes_list_proxy_votes
+    summary: List only proxy votes for an idea
+    description: Retrieves a list of proxy votes (votes with an associated organization) for the specified idea.
+    tags:
+      - IdeaVotes
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    responses:
+      '200':
+        description: A list of proxy votes
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsements:
+                  type: array
+                  items:
+                    $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+  post:
+    operationId: idea_votes_create_proxy_vote
+    summary: Create a proxy vote
+    description: Creates a new proxy vote (vote with an associated organization) for the specified idea.
+    tags:
+      - IdeaVotes
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/idea_votes.yaml#/ProxyVoteCreateRequest'
+    responses:
+      '201':
+        description: Proxy vote created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_endorsement:
+                  $ref: '../schemas/idea_votes.yaml#/IdeaVote'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+      '422':
+        description: Unprocessable entity
