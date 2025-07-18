@@ -1,1 +1,3 @@
 .clinefile
+/docs
+/__pycache__
