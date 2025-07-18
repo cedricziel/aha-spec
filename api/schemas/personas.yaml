@@ -1,0 +1,109 @@
+Persona:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the persona
+    name:
+      type: string
+      description: Name of the persona
+    color:
+      type: integer
+      description: Color code for the persona in the Aha! UI
+    created_at:
+      type: string
+      format: date-time
+      description: When the persona was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the persona was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the persona in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this persona
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this persona
+    comments_count:
+      type: integer
+      description: Number of comments on this persona
+    product_id:
+      type: string
+      description: ID of the product this persona belongs to
+    description:
+      type: string
+      description: Description of the persona
+    avatar_url:
+      type: string
+      format: uri
+      description: URL to the persona's avatar image
+  required:
+    - id
+    - name
+    - color
+    - created_at
+    - updated_at
+    - url
+    - resource
+    - comments_count
+
+PersonaCreateRequest:
+  type: object
+  properties:
+    persona:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the persona
+        color:
+          type: string
+          description: Hex color of the persona in the Aha! UI
+        description:
+          type: string
+          description: Description of the persona
+        avatar_url:
+          type: string
+          format: uri
+          description: URL to the persona's avatar image
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+  required:
+    - persona
+
+PersonaUpdateRequest:
+  type: object
+  properties:
+    persona:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the persona
+        color:
+          type: string
+          description: Hex color of the persona in the Aha! UI
+        description:
+          type: string
+          description: Description of the persona
+        avatar_url:
+          type: string
+          format: uri
+          description: URL to the persona's avatar image
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - persona

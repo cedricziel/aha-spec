@@ -1,0 +1,165 @@
+product_creative_briefs:
+  get:
+    operationId: creative_briefs_list_product
+    summary: List creative briefs in a product
+    description: Retrieves a list of creative briefs for the specified product.
+    tags:
+      - Creative Briefs
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    responses:
+      '200':
+        description: A list of creative briefs
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creative_briefs:
+                  type: array
+                  items:
+                    $ref: '../schemas/creative_briefs.yaml#/CreativeBrief'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+  post:
+    operationId: creative_briefs_create_product
+    summary: Create a creative brief for a product
+    description: Creates a new creative brief for the specified product.
+    tags:
+      - Creative Briefs
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/creative_briefs.yaml#/CreativeBriefCreateRequest'
+    responses:
+      '201':
+        description: Creative brief created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creative_brief:
+                  $ref: '../schemas/creative_briefs.yaml#/CreativeBrief'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity
+
+creative_brief_by_id:
+  get:
+    operationId: creative_briefs_get
+    summary: Get a specific creative brief
+    description: Retrieves details of a specific creative brief.
+    tags:
+      - Creative Briefs
+    parameters:
+      - name: creative_brief_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the creative brief
+    responses:
+      '200':
+        description: Creative brief details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creative_brief:
+                  $ref: '../schemas/creative_briefs.yaml#/CreativeBrief'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Creative brief not found
+  put:
+    operationId: creative_briefs_update
+    summary: Update a creative brief
+    description: Updates the specified creative brief.
+    tags:
+      - Creative Briefs
+    parameters:
+      - name: creative_brief_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the creative brief
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/creative_briefs.yaml#/CreativeBriefUpdateRequest'
+    responses:
+      '200':
+        description: Creative brief updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                creative_brief:
+                  $ref: '../schemas/creative_briefs.yaml#/CreativeBrief'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Creative brief not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: creative_briefs_delete
+    summary: Delete a creative brief
+    description: Deletes the specified creative brief.
+    tags:
+      - Creative Briefs
+    parameters:
+      - name: creative_brief_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the creative brief
+    responses:
+      '204':
+        description: Creative brief deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Creative brief not found

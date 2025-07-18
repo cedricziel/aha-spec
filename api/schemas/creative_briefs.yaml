@@ -1,0 +1,152 @@
+CreativeBrief:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the creative brief
+    name:
+      type: string
+      description: Name of the creative brief
+    color:
+      type: integer
+      description: Color code for the creative brief in the Aha! UI
+    created_at:
+      type: string
+      format: date-time
+      description: When the creative brief was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the creative brief was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the creative brief in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this creative brief
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this creative brief
+    comments_count:
+      type: integer
+      description: Number of comments on this creative brief
+    product_id:
+      type: string
+      description: ID of the product this creative brief belongs to
+    description:
+      type: string
+      description: Description of the creative brief
+    status:
+      type: string
+      description: Status of the creative brief
+    assigned_to_user:
+      $ref: '../schemas/users.yaml#/User'
+      description: User assigned to this creative brief
+    due_date:
+      type: string
+      format: date
+      description: Due date for the creative brief
+    tags:
+      type: array
+      items:
+        type: string
+      description: Tags associated with this creative brief
+  required:
+    - id
+    - name
+    - color
+    - created_at
+    - updated_at
+    - url
+    - resource
+    - comments_count
+
+CreativeBriefCreateRequest:
+  type: object
+  properties:
+    creative_brief:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the creative brief
+        color:
+          type: string
+          description: Hex color of the creative brief in the Aha! UI
+        description:
+          type: string
+          description: Description of the creative brief
+        status:
+          type: string
+          description: Status of the creative brief
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the creative brief to
+        due_date:
+          type: string
+          format: date
+          description: Due date for the creative brief
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the creative brief
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+  required:
+    - creative_brief
+
+CreativeBriefUpdateRequest:
+  type: object
+  properties:
+    creative_brief:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the creative brief
+        color:
+          type: string
+          description: Hex color of the creative brief in the Aha! UI
+        description:
+          type: string
+          description: Description of the creative brief
+        status:
+          type: string
+          description: Status of the creative brief
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the creative brief to
+        due_date:
+          type: string
+          format: date
+          description: Due date for the creative brief
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the creative brief
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - creative_brief

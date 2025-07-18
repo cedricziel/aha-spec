@@ -1,0 +1,207 @@
+goal_key_results:
+  get:
+    operationId: key_results_list_goal
+    summary: List key results for a goal
+    description: Retrieves a list of key results for the specified goal.
+    tags:
+      - Key Results
+      - Goals
+    parameters:
+      - name: goal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the goal
+    responses:
+      '200':
+        description: A list of key results
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key_results:
+                  type: array
+                  items:
+                    $ref: '../schemas/key_results.yaml#/KeyResult'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Goal not found
+  post:
+    operationId: key_results_create_goal
+    summary: Create a key result for a goal
+    description: Creates a new key result for the specified goal.
+    tags:
+      - Key Results
+      - Goals
+    parameters:
+      - name: goal_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the goal
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/key_results.yaml#/KeyResultCreateRequest'
+    responses:
+      '201':
+        description: Key result created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key_result:
+                  $ref: '../schemas/key_results.yaml#/KeyResult'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Goal not found
+      '422':
+        description: Unprocessable entity
+
+key_result_by_id:
+  get:
+    operationId: key_results_get
+    summary: Get a specific key result
+    description: Retrieves details of a specific key result.
+    tags:
+      - Key Results
+    parameters:
+      - name: key_result_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the key result
+    responses:
+      '200':
+        description: Key result details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key_result:
+                  $ref: '../schemas/key_results.yaml#/KeyResult'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Key result not found
+  put:
+    operationId: key_results_update
+    summary: Update a key result
+    description: Updates the specified key result.
+    tags:
+      - Key Results
+    parameters:
+      - name: key_result_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the key result
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/key_results.yaml#/KeyResultUpdateRequest'
+    responses:
+      '200':
+        description: Key result updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key_result:
+                  $ref: '../schemas/key_results.yaml#/KeyResult'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Key result not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: key_results_delete
+    summary: Delete a key result
+    description: Deletes the specified key result.
+    tags:
+      - Key Results
+    parameters:
+      - name: key_result_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the key result
+    responses:
+      '204':
+        description: Key result deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Key result not found
+
+key_result_custom_fields:
+  put:
+    operationId: key_results_update_custom_fields
+    summary: Update a key result's custom fields
+    description: Updates the custom fields of the specified key result.
+    tags:
+      - Key Results
+      - Custom Fields
+    parameters:
+      - name: key_result_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the key result
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/key_results.yaml#/KeyResultCustomFieldsUpdateRequest'
+    responses:
+      '200':
+        description: Key result custom fields updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key_result:
+                  $ref: '../schemas/key_results.yaml#/KeyResult'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Key result not found
+      '422':
+        description: Unprocessable entity

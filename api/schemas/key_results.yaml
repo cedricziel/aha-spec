@@ -1,0 +1,257 @@
+KeyResult:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the key result
+    name:
+      type: string
+      description: Name of the key result
+    reference_num:
+      type: string
+      description: Reference number of the key result
+    position:
+      type: integer
+      description: Position of the key result in the list
+    created_at:
+      type: string
+      format: date-time
+      description: When the key result was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the key result was last updated
+    progress:
+      type: integer
+      description: Progress percentage of the key result
+    target_metric:
+      type: number
+      nullable: true
+      description: Target metric value for the key result
+    starting_metric:
+      type: number
+      nullable: true
+      description: Starting metric value for the key result
+    current_metric:
+      type: number
+      nullable: true
+      description: Current metric value for the key result
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the description
+        body:
+          type: string
+          description: HTML content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: When the description was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the description was last updated
+        attachments:
+          type: array
+          items:
+            $ref: '../schemas/attachments.yaml#/Attachment'
+          description: Attachments in the description
+      description: Description of the key result
+    assigned_to_user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the assigned user
+        name:
+          type: string
+          description: Name of the assigned user
+        email:
+          type: string
+          format: email
+          description: Email of the assigned user
+        created_at:
+          type: string
+          format: date-time
+          description: When the user was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the user was last updated
+        default_assignee:
+          type: boolean
+          description: Whether this user is the default assignee
+      description: User assigned to this key result
+    workflow_status:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the workflow status
+        name:
+          type: string
+          description: Name of the workflow status
+        position:
+          type: integer
+          description: Position of the status in the workflow
+        complete:
+          type: boolean
+          description: Whether this status indicates completion
+        color:
+          type: string
+          description: Color associated with this status
+      description: Current workflow status of the key result
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this key result
+    goal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the goal
+        name:
+          type: string
+          description: Name of the goal
+        reference_num:
+          type: string
+          description: Reference number of the goal
+        url:
+          type: string
+          format: uri
+          description: URL to view the goal in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the goal
+      description: The goal this key result belongs to
+    url:
+      type: string
+      format: uri
+      description: URL to view the key result in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this key result
+    comments_count:
+      type: integer
+      description: Number of comments on this key result
+  required:
+    - id
+    - name
+    - reference_num
+    - position
+    - created_at
+    - updated_at
+    - progress
+    - workflow_status
+
+KeyResultCreateRequest:
+  type: object
+  properties:
+    key_result:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the key result
+        workflow_status:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the workflow status
+          description: Initial workflow status
+        description:
+          type: string
+          description: HTML description of the key result
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the key result to
+        target_metric:
+          type: number
+          description: Target metric value
+        starting_metric:
+          type: number
+          description: Starting metric value
+        current_metric:
+          type: number
+          description: Current metric value
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+  required:
+    - key_result
+
+KeyResultUpdateRequest:
+  type: object
+  properties:
+    key_result:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the key result
+        workflow_status:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the workflow status
+          description: Workflow status to update to
+        description:
+          type: string
+          description: HTML description of the key result
+        assigned_to_user:
+          type: object
+          properties:
+            email:
+              type: string
+              format: email
+              description: Email of the user to assign
+          description: User to assign the key result to
+        target_metric:
+          type: number
+          description: Target metric value
+        starting_metric:
+          type: number
+          description: Starting metric value
+        current_metric:
+          type: number
+          description: Current metric value
+        progress:
+          type: integer
+          description: Progress percentage
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - key_result
+
+KeyResultCustomFieldsUpdateRequest:
+  type: object
+  properties:
+    key_result:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values to update
+      required:
+        - custom_fields
+  required:
+    - key_result
