@@ -22,10 +22,6 @@ api/openapi.yaml:
     - '#/tags/15/description'
   no-unresolved-refs:
     - '#/paths/~1products~1{product_id}~1ideas'
-api/paths/users.yaml:
-  operation-4xx-response:
-    - '#/users/get/responses'
-    - '#/users_by_id/get/responses'
 api/paths/features/create.yaml:
   no-invalid-media-type-examples:
     - >-
@@ -40,8 +36,6 @@ api/paths/features/create.yaml:
       #/post/responses/200/content/application~1json/examples/with_assignee/value/feature
     - >-
       #/post/responses/200/content/application~1json/examples/with_score/value/feature
-  operation-4xx-response:
-    - '#/post/responses'
 api/paths/features/update_custom_fields.yaml:
   no-invalid-media-type-examples:
     - '#/put/responses/200/content/application~1json/example/feature'
@@ -156,7 +150,6 @@ api/paths/features/convert.yaml:
       #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_work_done
 api/paths/comments.yaml:
   operation-4xx-response:
-    - '#/feature_comments/post/responses'
     - '#/idea_comments/get/responses'
     - '#/initiative_comments/get/responses'
     - '#/goal_comments/get/responses'

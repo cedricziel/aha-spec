@@ -681,3 +681,17 @@ post:
                     score_facts:
                       - id: "6776757454426554593"
                         value: 3
+                        name: "Effort"
+                      - id: "6776757454426580197"
+                        value: 10
+                        name: "Benefit"
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Release not found
+      '422':
+        description: Unprocessable entity
