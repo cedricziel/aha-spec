@@ -1,0 +1,152 @@
+historical_audits:
+  get:
+    operationId: historical_audits_read_index
+    summary: Read the contents of the historical audit index
+    description: Reads the contents of the historical audit index with filtering options.
+    tags:
+      - Historical Audits
+      - Audits
+    parameters:
+      - name: created_since
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: ISO8601 timestamp for search range start (required)
+      - name: created_before
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+        description: ISO8601 timestamp for search range end (required)
+      - name: user_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric user ID to filter by actor
+      - name: auditable_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric ID of the record to audit
+      - name: auditable_type
+        in: query
+        schema:
+          type: string
+        description: String identifier of the record type
+      - name: associated_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric ID of the primary record
+      - name: associated_type
+        in: query
+        schema:
+          type: string
+        description: String identifier of the primary record type
+    responses:
+      '200':
+        description: Historical audit index retrieved successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audits:
+                  type: array
+                  items:
+                    $ref: '../schemas/audits.yaml#/Audit'
+                total_records:
+                  type: integer
+                  description: Total number of audit records
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+  post:
+    operationId: historical_audits_create_search
+    summary: Create an audit search
+    description: Creates an asynchronous audit search job for large-scale historical audit searches.
+    tags:
+      - Historical Audits
+      - Audits
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/audits.yaml#/HistoricalAuditSearchRequest'
+    responses:
+      '201':
+        description: Audit search created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                search_id:
+                  type: string
+                  description: Identifier for retrieving search results
+                status:
+                  type: string
+                  description: Status of the search job
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity
+
+historical_audit_search_results:
+  get:
+    operationId: historical_audits_get_search_results
+    summary: Read the results of an audit search
+    description: Retrieves results from a previously created audit search job.
+    tags:
+      - Historical Audits
+      - Audits
+    parameters:
+      - name: search_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The identifier returned from the Create call
+      - name: next_token
+        in: query
+        schema:
+          type: string
+        description: Pagination token for retrieving next page
+    responses:
+      '200':
+        description: Search results retrieved successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audits:
+                  type: array
+                  items:
+                    $ref: '../schemas/audits.yaml#/Audit'
+                running:
+                  type: boolean
+                  description: Whether the search is still running
+                next_token:
+                  type: string
+                  description: Token for pagination
+                results_complete:
+                  type: boolean
+                  description: Whether all results are available
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Search not found

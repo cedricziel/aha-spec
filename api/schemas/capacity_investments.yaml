@@ -259,3 +259,124 @@ CapacityInvestmentUpdateRequest:
           description: Custom field values
   required:
     - capacity_investment
+
+EstimateValue:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the estimate value
+    team_id:
+      type: string
+      description: Team identifier
+    team_membership_id:
+      type: string
+      description: Team membership identifier
+    period_start:
+      type: string
+      format: date
+      description: Start date of the period
+    total:
+      type: number
+      description: Capacity estimate for the period
+    computed:
+      type: boolean
+      description: Whether the value is computed automatically
+    ignored:
+      type: boolean
+      description: Whether the value is ignored in calculations
+    created_at:
+      type: string
+      format: date-time
+      description: When the estimate value was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the estimate value was last updated
+    team:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Team ID
+        name:
+          type: string
+          description: Team name
+        url:
+          type: string
+          format: uri
+          description: URL to view the team in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the team
+      description: Team associated with this estimate value
+  required:
+    - id
+    - period_start
+    - total
+
+EstimateValuesCreateRequest:
+  type: object
+  properties:
+    estimate_values:
+      type: array
+      items:
+        type: object
+        properties:
+          team_id:
+            type: string
+            description: Team identifier
+          team_membership_id:
+            type: string
+            description: Team membership identifier
+          period_start:
+            type: string
+            format: date
+            description: Start date of the period
+          total:
+            type: number
+            description: Capacity estimate for the period
+          computed:
+            type: boolean
+            description: Whether the value is computed automatically
+            default: false
+          ignored:
+            type: boolean
+            description: Whether the value is ignored in calculations
+            default: false
+        required:
+          - period_start
+          - total
+      minItems: 1
+      description: Array of estimate values to create
+  required:
+    - estimate_values
+
+EstimateValueUpdateRequest:
+  type: object
+  properties:
+    estimate_value:
+      type: object
+      properties:
+        team_id:
+          type: string
+          description: Team identifier
+        team_membership_id:
+          type: string
+          description: Team membership identifier
+        period_start:
+          type: string
+          format: date
+          description: Start date of the period
+        total:
+          type: number
+          description: Capacity estimate for the period
+        computed:
+          type: boolean
+          description: Whether the value is computed automatically
+        ignored:
+          type: boolean
+          description: Whether the value is ignored in calculations
+  required:
+    - estimate_value

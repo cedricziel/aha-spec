@@ -1,0 +1,99 @@
+audits:
+  get:
+    operationId: audits_retrieve_record_history
+    summary: Retrieve audit history for records
+    description: Retrieves audit history for specific records with comprehensive filtering options.
+    tags:
+      - Audits
+      - Records
+    parameters:
+      - name: auditable_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric ID of the record to audit
+      - name: auditable_type
+        in: query
+        schema:
+          type: string
+        description: String identifier of the record type (e.g., Feature, Epic, Initiative)
+      - name: associated_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric ID of the primary record (for secondary records)
+      - name: associated_type
+        in: query
+        schema:
+          type: string
+        description: String identifier of the primary record type
+      - name: audit_action
+        in: query
+        schema:
+          type: string
+          enum: [create, update, destroy]
+        description: Type of action to filter by
+      - name: created_since
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: ISO8601 timestamp for search range start
+      - name: created_before
+        in: query
+        schema:
+          type: string
+          format: date-time
+        description: ISO8601 timestamp for search range end
+      - name: after_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric identifier for cursor-based pagination
+      - name: user_id
+        in: query
+        schema:
+          type: integer
+        description: Numeric user ID to filter by actor
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: Audit records retrieved successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audits:
+                  type: array
+                  items:
+                    $ref: '../schemas/audits.yaml#/Audit'
+                total_records:
+                  type: integer
+                  description: Total number of audit records
+                total_pages:
+                  type: integer
+                  description: Total number of pages
+                current_page:
+                  type: integer
+                  description: Current page number
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden

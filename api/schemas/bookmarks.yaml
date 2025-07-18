@@ -1,0 +1,210 @@
+CustomPivotListResponse:
+  type: object
+  properties:
+    data:
+      type: array
+      items:
+        type: object
+        additionalProperties: true
+        description: Row data with dynamic fields based on report configuration
+      description: Array of data rows
+    columns:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Column name
+          type:
+            type: string
+            description: Column data type
+          label:
+            type: string
+            description: Human-readable column label
+        required:
+          - name
+          - type
+          - label
+      description: Column definitions for the tabular data
+    pagination:
+      type: object
+      properties:
+        current_page:
+          type: integer
+          description: Current page number
+        total_pages:
+          type: integer
+          description: Total number of pages
+        total_records:
+          type: integer
+          description: Total number of records
+        per_page:
+          type: integer
+          description: Number of records per page
+      description: Pagination information
+    report_metadata:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Report ID
+        name:
+          type: string
+          description: Report name
+        description:
+          type: string
+          description: Report description
+        created_at:
+          type: string
+          format: date-time
+          description: When the report was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the report was last updated
+      description: Metadata about the report
+  required:
+    - data
+    - columns
+    - pagination
+
+CustomPivotPivotResponse:
+  type: object
+  properties:
+    columns:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Column name
+          label:
+            type: string
+            description: Human-readable column label
+          type:
+            type: string
+            description: Column data type
+          field_type:
+            type: string
+            description: Field type (dimension, measure, etc.)
+        required:
+          - name
+          - label
+          - type
+      description: Column definitions for the pivot table
+    rows:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Row name
+          label:
+            type: string
+            description: Human-readable row label
+          type:
+            type: string
+            description: Row data type
+          field_type:
+            type: string
+            description: Field type (dimension, measure, etc.)
+        required:
+          - name
+          - label
+          - type
+      description: Row definitions for the pivot table
+    cells:
+      type: array
+      items:
+        type: object
+        properties:
+          row_key:
+            type: string
+            description: Key identifying the row
+          column_key:
+            type: string
+            description: Key identifying the column
+          value:
+            description: Cell value (can be string, number, or null)
+          formatted_value:
+            type: string
+            description: Formatted display value
+        required:
+          - row_key
+          - column_key
+          - value
+      description: Cell data for the pivot table
+    field_definitions:
+      type: object
+      properties:
+        dimensions:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name
+              label:
+                type: string
+                description: Human-readable field label
+              data_type:
+                type: string
+                description: Data type of the field
+            required:
+              - name
+              - label
+              - data_type
+          description: Dimension field definitions
+        measures:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: Field name
+              label:
+                type: string
+                description: Human-readable field label
+              data_type:
+                type: string
+                description: Data type of the field
+              aggregation:
+                type: string
+                description: Aggregation method (sum, count, average, etc.)
+            required:
+              - name
+              - label
+              - data_type
+          description: Measure field definitions
+      description: Field definitions used in the pivot table
+    report_metadata:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Report ID
+        name:
+          type: string
+          description: Report name
+        description:
+          type: string
+          description: Report description
+        created_at:
+          type: string
+          format: date-time
+          description: When the report was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the report was last updated
+      description: Metadata about the report
+  required:
+    - columns
+    - rows
+    - cells
+    - field_definitions

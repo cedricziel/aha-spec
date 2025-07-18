@@ -1,0 +1,132 @@
+Audit:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the audit record
+    audit_action:
+      type: string
+      enum: [create, update, destroy]
+      description: Type of action performed
+    created_at:
+      type: string
+      format: date-time
+      description: When the audit record was created
+    interesting:
+      type: boolean
+      description: Whether this audit record is marked as interesting
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID who performed the action
+        name:
+          type: string
+          description: Name of the user
+        email:
+          type: string
+          format: email
+          description: Email of the user
+        created_at:
+          type: string
+          format: date-time
+          description: When the user was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the user was last updated
+      description: User who performed the audited action
+    contributors:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Contributor user ID
+          name:
+            type: string
+            description: Name of the contributor
+          email:
+            type: string
+            format: email
+            description: Email of the contributor
+      description: Array of users who contributed to the action
+    auditable_type:
+      type: string
+      description: Type of the audited record (e.g., Feature, Epic, Initiative)
+    auditable_id:
+      type: string
+      description: ID of the audited record
+    associated_type:
+      type: string
+      nullable: true
+      description: Type of the associated record
+    associated_id:
+      type: string
+      nullable: true
+      description: ID of the associated record
+    description:
+      type: string
+      description: Human-readable description of the audit action
+    auditable_url:
+      type: string
+      format: uri
+      description: URL to view the audited record in the web interface
+    changes:
+      type: array
+      items:
+        type: object
+        properties:
+          field_name:
+            type: string
+            description: Name of the field that changed
+          value:
+            type: string
+            description: New value of the field
+        required:
+          - field_name
+          - value
+      description: Array of field changes made in this audit action
+  required:
+    - id
+    - audit_action
+    - created_at
+    - user
+    - auditable_type
+    - auditable_id
+
+HistoricalAuditSearchRequest:
+  type: object
+  properties:
+    created_since:
+      type: string
+      format: date-time
+      description: ISO8601 timestamp for search range start (required)
+    created_before:
+      type: string
+      format: date-time
+      description: ISO8601 timestamp for search range end (required)
+    user_id:
+      type: integer
+      description: Numeric user ID to filter by actor
+    auditable_id:
+      type: integer
+      description: Numeric ID of the record to audit
+    auditable_type:
+      type: string
+      description: String identifier of the record type
+    associated_id:
+      type: integer
+      description: Numeric ID of the primary record
+    associated_type:
+      type: string
+      description: String identifier of the primary record type
+    audit_action:
+      type: string
+      enum: [create, update, destroy]
+      description: Type of action to filter by
+  required:
+    - created_since
+    - created_before

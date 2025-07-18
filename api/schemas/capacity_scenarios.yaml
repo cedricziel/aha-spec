@@ -1,0 +1,51 @@
+CapacityScenario:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the capacity scenario
+    name:
+      type: string
+      description: Name of the capacity scenario
+    planning_interval:
+      type: string
+      description: Planning interval (e.g., month, quarter, week)
+    planning_start_date:
+      type: string
+      format: date
+      description: Start date of the planning period
+    planning_end_date:
+      type: string
+      format: date
+      description: End date of the planning period
+    estimate_value_layout:
+      type: string
+      description: Layout style for estimate values (e.g., team_by_time)
+    data_entry_units:
+      type: string
+      description: Units for data entry (e.g., headcount, custom, hours)
+    archived:
+      type: boolean
+      description: Whether the capacity scenario is archived
+    created_at:
+      type: string
+      format: date-time
+      description: When the capacity scenario was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the capacity scenario was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the capacity scenario in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this capacity scenario
+  required:
+    - id
+    - name
+    - planning_interval
+    - planning_start_date
+    - planning_end_date
