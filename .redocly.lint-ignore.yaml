@@ -129,15 +129,6 @@ api/paths/features/convert.yaml:
       #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_remaining_estimate
     - >-
       #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_work_done
-api/paths/comments.yaml:
-  operation-4xx-response:
-    - '#/idea_comments/get/responses'
-    - '#/initiative_comments/get/responses'
-    - '#/goal_comments/get/responses'
-    - '#/release_comments/get/responses'
-    - '#/release_phase_comments/get/responses'
-    - '#/todo_comments/get/responses'
-    - '#/product_comments/get/responses'
 api/paths/epics.yaml:
   no-invalid-media-type-examples:
     - >-
@@ -202,17 +193,6 @@ api/paths/epics.yaml:
       #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/progress_source
     - >-
       #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/duration_source
-api/paths/competitors.yaml:
-  operation-4xx-response:
-    - '#/product_competitors/get/responses'
-    - '#/product_competitors/post/responses'
-    - '#/competitor_by_id/get/responses'
-    - '#/competitor_by_id/put/responses'
-    - '#/competitor_by_id/delete/responses'
-  operation-operationId:
-    - '#/product_competitors/post/operationId'
-    - '#/competitor_by_id/put/operationId'
-    - '#/competitor_by_id/delete/operationId'
 api/paths/initiatives/get.yaml:
   no-invalid-media-type-examples:
     - >-
@@ -247,23 +227,16 @@ api/paths/ideas/ideas_list.yaml:
       #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/attachments
     - >-
       #/ideas_global_list/get/responses/200/content/application~1json/example/pagination/per_page
-api/paths/ideas/create_by_portal_user.yaml:
-  operation-4xx-response:
-    - '#/product_ideas_portal_user_path/post/responses'
 api/paths/ideas/create_with_category.yaml:
   no-invalid-media-type-examples:
     - >-
       #/product_ideas_with_category_path/post/requestBody/content/application~1json/example/idea
     - >-
       #/product_ideas_with_category_path/post/requestBody/content/application~1json/example/idea/categories
-  operation-4xx-response:
-    - '#/product_ideas_with_category_path/post/responses'
 api/paths/ideas/create_with_score.yaml:
   no-invalid-media-type-examples:
     - >-
       #/product_ideas_with_score_path/post/requestBody/content/application~1json/example/idea
-  operation-4xx-response:
-    - '#/product_ideas_with_score_path/post/responses'
 api/paths/ideas/idea_by_id_path.yaml:
   no-invalid-media-type-examples:
     - >-

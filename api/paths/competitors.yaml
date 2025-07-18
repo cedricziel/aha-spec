@@ -23,7 +23,14 @@ product_competitors:
                   type: array
                   items:
                     $ref: '../schemas/competitors.yaml#/Competitor'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
   post:
+    operationId: competitors_create
     summary: Create a competitor
     description: Adds a new competitor to the specified product.
     tags:
@@ -47,6 +54,16 @@ product_competitors:
           application/json:
             schema:
               $ref: '../schemas/competitors.yaml#/Competitor'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity
 
 competitor_by_id:
   get:
@@ -68,7 +85,14 @@ competitor_by_id:
           application/json:
             schema:
               $ref: '../schemas/competitors.yaml#/Competitor'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Competitor not found
   put:
+    operationId: competitors_update
     summary: Update a competitor
     description: Updates the details of the specified competitor.
     tags:
@@ -92,7 +116,18 @@ competitor_by_id:
           application/json:
             schema:
               $ref: '../schemas/competitors.yaml#/Competitor'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Competitor not found
+      '422':
+        description: Unprocessable entity
   delete:
+    operationId: competitors_delete
     summary: Delete a competitor
     description: Removes the specified competitor.
     tags:
@@ -106,3 +141,9 @@ competitor_by_id:
     responses:
       '204':
         description: Competitor deleted
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Competitor not found

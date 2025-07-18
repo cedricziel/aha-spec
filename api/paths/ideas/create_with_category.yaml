@@ -31,7 +31,7 @@ product_ideas_with_category_path:
               name: "New idea with category"
               categories: ["Storage"]
     responses:
-      '200':
+      '201':
         description: Idea created
         content:
           application/json:
@@ -98,6 +98,16 @@ product_ideas_with_category_path:
                     ended_at: null
                 submitted_idea_portal_record_url: "https://testideaportal1.ideas.aha.io:8338/ideas/PRJ1-I-10"
                 integration_fields: []
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity
     x-code-samples:
       - lang: curl
         source: |

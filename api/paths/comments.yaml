@@ -184,6 +184,12 @@ idea_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
   post:
     operationId: comments_create_idea
     summary: Create a comment on an idea
@@ -241,6 +247,12 @@ initiative_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Initiative not found
   post:
     operationId: comments_create_initiative
     summary: Create a comment on an initiative
@@ -298,6 +310,12 @@ goal_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Goal not found
 
 release_comments:
   get:
@@ -325,6 +343,12 @@ release_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Release not found
 
 release_phase_comments:
   get:
@@ -352,6 +376,12 @@ release_phase_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Release phase not found
 
 todo_comments:
   get:
@@ -379,6 +409,12 @@ todo_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: To-do not found
 
 product_comments:
   get:
@@ -406,6 +442,12 @@ product_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
 
 note_comments:
   get:
