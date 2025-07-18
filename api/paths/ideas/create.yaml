@@ -21,6 +21,7 @@ product_ideas_path:
         schema:
           type: string
         description: Numeric ID or key of the product
+      - $ref: '../../openapi.yaml#/components/parameters/DisableMailersParameter'
     requestBody:
       required: true
       content:

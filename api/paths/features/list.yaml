@@ -9,6 +9,9 @@ list_features:
     tags:
       - Features
     parameters:
+      - $ref: '../../openapi.yaml#/components/parameters/PageParameter'
+      - $ref: '../../openapi.yaml#/components/parameters/PerPageParameter'
+      - $ref: '../../openapi.yaml#/components/parameters/FieldsParameter'
       - name: q
         in: query
         description: Search term to match against feature name
@@ -51,3 +54,7 @@ list_features:
         description: Unauthorized
       '403':
         description: Forbidden
+      '429':
+        $ref: '../../openapi.yaml#/components/responses/RateLimitResponse'
+      '504':
+        $ref: '../../openapi.yaml#/components/responses/GatewayTimeoutResponse'

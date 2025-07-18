@@ -1,6 +1,6 @@
 # Aha! REST API
 
-API for interacting with Aha! product management platform.
+|
 
 **Version:** 1.0.4
 
@@ -16,19 +16,25 @@ https://{subdomain}.aha.io/api/v1
 
 ## Authentication
 
-The API supports the following authentication methods:
+The API supports two authentication methods:
 
-- **OAuth2**: oauth2 authentication (OAuth 2.0)
-- **BearerAuth**: http authentication (bearer scheme)
+- **OAuth 2.0**: For web applications and integrations requiring user consent
+- **Bearer Token (API Key)**: For server-to-server integrations and personal access
+
+### Rate Limiting
+- **300 requests per minute** per account
+- **20 requests per second** per account
+
+When rate limits are exceeded, the API returns a `429 Too Many Requests` response.
 
 ## API Statistics
 
 | Feature | Count |
 |---------|-------|
-| References | 66 |
+| References | 73 |
 | External Documents | 0 |
-| Schemas | 66 |
-| Parameters | 41 |
+| Schemas | 67 |
+| Parameters | 43 |
 | Links | 0 |
 | Path Items | 72 |
 | Webhooks | 0 |
