@@ -7,4 +7,4 @@ feature_custom_fields_path:
         type: string
       description: Numeric ID or key of the feature
   put:
-    $ref: './update_custom_fields.yaml#/update_feature_custom_fields'
+    $ref: './update_custom_fields.yaml#/put'

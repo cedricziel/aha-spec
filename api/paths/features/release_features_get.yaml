@@ -1,5 +1,4 @@
-release_features_get:
-  get:
+get:
     operationId: features_list_release
     summary: List features in a release
     description: |

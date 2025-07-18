@@ -1,5 +1,4 @@
-update_feature:
-  put:
+put:
     operationId: features_update
     summary: Update a feature
     description: |

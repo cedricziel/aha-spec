@@ -1,0 +1,438 @@
+# This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
+# See https://redocly.com/docs/cli/ for more information.
+api/openapi.yaml:
+  info-license:
+    - '#/info'
+  tag-description:
+    - '#/tags/0/description'
+    - '#/tags/1/description'
+    - '#/tags/2/description'
+    - '#/tags/3/description'
+    - '#/tags/4/description'
+    - '#/tags/5/description'
+    - '#/tags/6/description'
+    - '#/tags/7/description'
+    - '#/tags/8/description'
+    - '#/tags/9/description'
+    - '#/tags/10/description'
+    - '#/tags/11/description'
+    - '#/tags/12/description'
+    - '#/tags/13/description'
+    - '#/tags/14/description'
+    - '#/tags/15/description'
+  no-unresolved-refs:
+    - '#/paths/~1products~1{product_id}~1ideas'
+api/paths/users.yaml:
+  operation-4xx-response:
+    - '#/users/get/responses'
+    - '#/users_by_id/get/responses'
+api/paths/features/create.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/post/requestBody/content/application~1json/examples/with_watchers/value/fields
+    - >-
+      #/post/responses/200/content/application~1json/examples/success/value/feature
+    - >-
+      #/post/responses/200/content/application~1json/examples/with_tags/value/feature
+    - >-
+      #/post/responses/200/content/application~1json/examples/with_goals/value/feature
+    - >-
+      #/post/responses/200/content/application~1json/examples/with_assignee/value/feature
+    - >-
+      #/post/responses/200/content/application~1json/examples/with_score/value/feature
+  operation-4xx-response:
+    - '#/post/responses'
+api/paths/features/update_custom_fields.yaml:
+  no-invalid-media-type-examples:
+    - '#/put/responses/200/content/application~1json/example/feature'
+api/paths/features/update_custom_fields_tag.yaml:
+  struct:
+    - '#/update_feature_custom_fields_tag'
+    - '#/update_feature_custom_fields_tag/put'
+  operation-operationId:
+    - '#/update_feature_custom_fields_tag/operationId'
+  operation-summary:
+    - '#/update_feature_custom_fields_tag/summary'
+api/paths/features/feature_custom_worksheet_fields_path.yaml:
+  operation-operationId:
+    - '#/feature_custom_worksheet_fields_path/put/operationId'
+api/paths/features/feature_epic_path.yaml:
+  operation-operationId:
+    - '#/feature_epic_path/put/operationId'
+api/paths/features/feature_goals_path.yaml:
+  operation-operationId:
+    - '#/feature_goals_path/put/operationId'
+api/paths/features/feature_progress_path.yaml:
+  operation-operationId:
+    - '#/feature_progress_path/put/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/feature_progress_path/put/responses/200/content/application~1json/example/feature
+api/paths/features/feature_progress_source_path.yaml:
+  operation-operationId:
+    - '#/feature_progress_source_path/put/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/feature_progress_source_path/put/responses/200/content/application~1json/example/feature
+api/paths/features/feature_release_path.yaml:
+  operation-operationId:
+    - '#/feature_release_path/put/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/feature_release_path/put/responses/200/content/application~1json/example/feature
+api/paths/features/feature_score_path.yaml:
+  operation-operationId:
+    - '#/feature_score_path/put/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/feature_score_path/put/responses/200/content/application~1json/example/feature
+api/paths/features/feature_tags_array_path.yaml:
+  operation-operationId:
+    - '#/feature_tags_array_path/put/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/feature_tags_array_path/put/responses/200/content/application~1json/example/feature
+api/paths/features/convert.yaml:
+  operation-operationId:
+    - '#/convert_to_epic/post/operationId'
+  no-invalid-media-type-examples:
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/initiative_reference_num
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/start_date
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/due_date
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/description/attachments
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/progress_source
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/duration_source
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/status_changed_on
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/created_by_user
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/project
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/attachments
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/integration_fields
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/release
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/assigned_to_user
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/features
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/goals
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/key_results
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/comments_count
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/score_facts
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/tags
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/full_tags
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/custom_fields
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/workflow_status_times
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/_links
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/master_feature_only_original_estimate
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/master_feature_only_remaining_estimate
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/master_feature_only_work_done
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_original_estimate
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_remaining_estimate
+    - >-
+      #/convert_to_epic/post/responses/200/content/application~1json/examples/success/value/epic_only_work_done
+api/paths/comments.yaml:
+  operation-4xx-response:
+    - '#/feature_comments/post/responses'
+    - '#/idea_comments/get/responses'
+    - '#/initiative_comments/get/responses'
+    - '#/goal_comments/get/responses'
+    - '#/release_comments/get/responses'
+    - '#/release_phase_comments/get/responses'
+    - '#/todo_comments/get/responses'
+    - '#/product_comments/get/responses'
+api/paths/epics.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/0/initiative_reference_num
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/0/progress_source
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/0/duration_source
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/1/initiative_reference_num
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/1/progress_source
+    - >-
+      #/epics_global_list/get/responses/200/content/application~1json/example/epics/1/duration_source
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/initiative_reference_num
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/progress_source
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/duration_source
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/initiative_reference_num
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/progress_source
+    - >-
+      #/product_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/duration_source
+    - >-
+      #/product_epics/post/responses/201/content/application~1json/examples/success/value/epic
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/initiative_reference_num
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/progress_source
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/duration_source
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/initiative_reference_num
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/progress_source
+    - >-
+      #/release_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/duration_source
+    - >-
+      #/release_epics/post/responses/201/content/application~1json/examples/success/value/epic
+    - >-
+      #/epic_by_id/get/responses/200/content/application~1json/examples/success/value/epic
+    - >-
+      #/epic_by_id/put/requestBody/content/application~1json/examples/update_score/value/epic/score_facts
+    - >-
+      #/epic_by_id/put/requestBody/content/application~1json/examples/update_tags_array/value/epic/tags
+    - >-
+      #/epic_by_id/put/requestBody/content/application~1json/examples/update_watchers/value/epic/watchers
+    - >-
+      #/epic_by_id/put/responses/200/content/application~1json/examples/success/value/epic
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/initiative_reference_num
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/progress_source
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/0/duration_source
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/initiative_reference_num
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/progress_source
+    - >-
+      #/goal_epics/get/responses/200/content/application~1json/examples/success/value/epics/1/duration_source
+api/paths/competitors.yaml:
+  operation-4xx-response:
+    - '#/product_competitors/get/responses'
+    - '#/product_competitors/post/responses'
+    - '#/competitor_by_id/get/responses'
+    - '#/competitor_by_id/put/responses'
+    - '#/competitor_by_id/delete/responses'
+  operation-operationId:
+    - '#/product_competitors/post/operationId'
+    - '#/competitor_by_id/put/operationId'
+    - '#/competitor_by_id/delete/operationId'
+api/paths/initiatives/get.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/progress
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/features
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/master_features
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/epic
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/releases
+    - >-
+      #/initiative_by_id_path/get/responses/200/content/application~1json/example/initiative/custom_fields
+api/paths/ideas/ideas_list.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/product_id
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/created_by_user
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/assigned_to_user
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/comments_count
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/votes_count
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/tags
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/custom_fields
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/ideas/0/attachments
+    - >-
+      #/ideas_global_list/get/responses/200/content/application~1json/example/pagination/per_page
+api/paths/ideas/create_by_portal_user.yaml:
+  operation-4xx-response:
+    - '#/product_ideas_portal_user_path/post/responses'
+api/paths/ideas/create_with_category.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/product_ideas_with_category_path/post/requestBody/content/application~1json/example/idea
+    - >-
+      #/product_ideas_with_category_path/post/requestBody/content/application~1json/example/idea/categories
+  operation-4xx-response:
+    - '#/product_ideas_with_category_path/post/responses'
+api/paths/ideas/create_with_score.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/product_ideas_with_score_path/post/requestBody/content/application~1json/example/idea
+  operation-4xx-response:
+    - '#/product_ideas_with_score_path/post/responses'
+api/paths/ideas/idea_by_id_path.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/idea_by_id_path/get/responses/200/content/application~1json/example/idea/status_changed_at
+    - >-
+      #/idea_by_id_path/get/responses/200/content/application~1json/example/idea/admin_response
+    - >-
+      #/idea_by_id_path/get/responses/200/content/application~1json/example/idea/custom_object_links
+    - '#/idea_by_id_path/put/requestBody/content/application~1json/example/idea'
+api/paths/ideas/promote.yaml:
+  no-invalid-media-type-examples:
+    - '#/idea_promote_path/post/requestBody/content/application~1json/example'
+    - >-
+      #/idea_promote_path/post/requestBody/content/application~1json/example/idea
+api/paths/ideas/votes.yaml:
+  no-invalid-media-type-examples:
+    - '#/idea_votes_path/post/requestBody/content/application~1json/example'
+    - '#/idea_votes_path/post/requestBody/content/application~1json/example/vote'
+api/paths/ideas/endorsements.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/idea_endorsements_path/post/requestBody/content/application~1json/example
+    - >-
+      #/idea_endorsements_path/post/requestBody/content/application~1json/example/endorsement
+api/paths/ideas/spam.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/idea_spam_path/post/responses/200/content/application~1json/example/idea/spam
+    - >-
+      #/idea_spam_path/delete/responses/200/content/application~1json/example/idea/spam
+api/paths/ideas/watchers.yaml:
+  no-invalid-media-type-examples:
+    - '#/idea_watchers_path/put/requestBody/content/application~1json/example'
+    - >-
+      #/idea_watchers_path/put/requestBody/content/application~1json/example/idea
+    - >-
+      #/idea_watchers_path/put/responses/200/content/application~1json/example/idea/watchers
+    - >-
+      #/idea_watchers_path/put/responses/200/content/application~1json/example/idea/watchers_count
+api/paths/idea_organizations.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/idea_organizations_list/post/requestBody/content/application~1json/example
+    - >-
+      #/idea_organizations_list/post/requestBody/content/application~1json/example/idea_organization
+    - >-
+      #/idea_organization_by_id/put/requestBody/content/application~1json/example/idea_organization
+api/paths/releases/list.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/list_releases/get/responses/200/content/application~1json/example/releases/0/owner/created_at
+    - >-
+      #/list_releases/get/responses/200/content/application~1json/example/releases/0/owner/updated_at
+api/paths/releases/product_releases.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/product_releases/get/responses/200/content/application~1json/example/releases/0/owner/created_at
+    - >-
+      #/product_releases/get/responses/200/content/application~1json/example/releases/0/owner/updated_at
+    - '#/product_releases/post/requestBody/content/application~1json/example'
+    - >-
+      #/product_releases/post/requestBody/content/application~1json/example/release
+    - >-
+      #/product_releases/post/responses/200/content/application~1json/example/release/owner/created_at
+    - >-
+      #/product_releases/post/responses/200/content/application~1json/example/release/owner/updated_at
+api/paths/releases/get.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/owner/created_at
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/owner/updated_at
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/assigned_to_user/created_at
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/assigned_to_user/updated_at
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/created_by_user/created_at
+    - >-
+      #/release_by_id_path/get/responses/200/content/application~1json/example/release/created_by_user/updated_at
+    - >-
+      #/release_by_id_path/put/requestBody/content/application~1json/example/release
+api/paths/goals/list.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/goals_path/get/responses/200/content/application~1json/example/goals/0/assigned_to_user/created_at
+    - >-
+      #/goals_path/get/responses/200/content/application~1json/example/goals/0/assigned_to_user/updated_at
+    - >-
+      #/goals_path/get/responses/200/content/application~1json/example/goals/0/created_by_user/created_at
+    - >-
+      #/goals_path/get/responses/200/content/application~1json/example/goals/0/created_by_user/updated_at
+    - '#/goals_path/post/requestBody/content/application~1json/example'
+    - '#/goals_path/post/requestBody/content/application~1json/example/goal'
+    - >-
+      #/goals_path/post/responses/201/content/application~1json/example/goal/assigned_to_user/created_at
+    - >-
+      #/goals_path/post/responses/201/content/application~1json/example/goal/assigned_to_user/updated_at
+    - >-
+      #/goals_path/post/responses/201/content/application~1json/example/goal/created_by_user/created_at
+    - >-
+      #/goals_path/post/responses/201/content/application~1json/example/goal/created_by_user/updated_at
+api/paths/goals/get.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/goal_by_id_path/get/responses/200/content/application~1json/example/goal/assigned_to_user/created_at
+    - >-
+      #/goal_by_id_path/get/responses/200/content/application~1json/example/goal/assigned_to_user/updated_at
+    - >-
+      #/goal_by_id_path/get/responses/200/content/application~1json/example/goal/created_by_user/created_at
+    - >-
+      #/goal_by_id_path/get/responses/200/content/application~1json/example/goal/created_by_user/updated_at
+    - '#/goal_by_id_path/put/requestBody/content/application~1json/example/goal'
+api/paths/goals/progress.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/goal_progress_path/put/requestBody/content/application~1json/example/goal
+    - >-
+      #/goal_progress_path/put/responses/200/content/application~1json/example/goal/assigned_to_user/created_at
+    - >-
+      #/goal_progress_path/put/responses/200/content/application~1json/example/goal/assigned_to_user/updated_at
+    - >-
+      #/goal_progress_path/put/responses/200/content/application~1json/example/goal/created_by_user/created_at
+    - >-
+      #/goal_progress_path/put/responses/200/content/application~1json/example/goal/created_by_user/updated_at
+api/paths/strategic_models/list.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/strategic_models_path/get/responses/200/content/application~1json/example/strategic_models/0/created_by_user/created_at
+    - >-
+      #/strategic_models_path/get/responses/200/content/application~1json/example/strategic_models/0/created_by_user/updated_at
+    - '#/strategic_models_path/post/requestBody/content/application~1json/example'
+    - >-
+      #/strategic_models_path/post/requestBody/content/application~1json/example/strategic_model
+    - >-
+      #/strategic_models_path/post/responses/201/content/application~1json/example/strategic_model/created_by_user/created_at
+    - >-
+      #/strategic_models_path/post/responses/201/content/application~1json/example/strategic_model/created_by_user/updated_at
+api/paths/strategic_models/get.yaml:
+  no-invalid-media-type-examples:
+    - >-
+      #/strategic_model_by_id_path/get/responses/200/content/application~1json/example/strategic_model/created_by_user/created_at
+    - >-
+      #/strategic_model_by_id_path/get/responses/200/content/application~1json/example/strategic_model/created_by_user/updated_at
+    - >-
+      #/strategic_model_by_id_path/put/requestBody/content/application~1json/example/strategic_model

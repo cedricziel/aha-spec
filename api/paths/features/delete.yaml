@@ -1,5 +1,4 @@
-delete_feature:
-  delete:
+delete:
     operationId: features_delete
     summary: Delete a feature
     description: Deletes the specified feature.

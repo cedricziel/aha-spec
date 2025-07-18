@@ -7,6 +7,6 @@ release_features_path:
         type: string
       description: Numeric ID or key of the release
   get:
-    $ref: './release_features_get.yaml#/release_features_get'
+    $ref: './release_features_get.yaml#/get'
   post:
-    $ref: './create.yaml#/release_features'
+    $ref: './create.yaml#/post'

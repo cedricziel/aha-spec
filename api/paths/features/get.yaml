@@ -1,5 +1,4 @@
-get_feature:
-  get:
+get:
     operationId: features_get
     summary: Get a specific feature
     description: Retrieves the details of a specific feature.

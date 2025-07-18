@@ -1,6 +1,5 @@
 product_ideas_path:
   post:
-    operationId: ideas_list_product
     operationId: ideas_create
     summary: Create an idea
     description: |
@@ -36,6 +35,7 @@ product_ideas_path:
             schema:
               $ref: '../../schemas/ideas/idea.yaml#/IdeaResponse'
   get:
+    operationId: ideas_list_product
     summary: List ideas for a product
     description: Retrieves a list of ideas for the specified product.
     tags:
