@@ -1,0 +1,100 @@
+FeatureUpdateRequest:
+  type: object
+  properties:
+    feature:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the feature
+        workflow_kind:
+          type: string
+          description: Type of feature
+        workflow_status:
+          type: object
+          description: Status of the feature — must be a valid status for the selected product
+          properties:
+            name:
+              type: string
+        release:
+          type: string
+          description: Numeric ID or key of the release the feature should be created in
+        description:
+          type: string
+          description: Description of the feature — may include HTML formatting
+        created_by:
+          type: string
+          description: Email address of the user who created the feature
+        assigned_to_user:
+          type: string
+          description: Email address of user that is assigned the feature
+        tags:
+          type: string
+          description: Tags to add to the feature. Multiple tags must be separated by commas
+        initial_estimate_text:
+          type: string
+          description: >-
+            The initial estimated effort in time or story points for this feature, depending on the capacity units configured.
+            For time: use min, h, d, w, m. Example: "2d 1h".
+            1d = 8h, 1w = 5d, 1m = 22d.
+            For story points: Use p to represent points. Example: "4p".
+        detailed_estimate_text:
+          type: string
+          description: >-
+            The detailed estimated effort in time or story points for this feature, depending on the capacity units configured.
+            For time: use min, h, d, w, m. Example: "2d 1h".
+            1d = 8h, 1w = 5d, 1m = 22d.
+            For story points: Use p to represent points. Example: "4p".
+        remaining_estimate_text:
+          type: string
+          description: >-
+            The remaining estimated effort in time or story points for this feature, depending on the capacity units configured.
+            For time: use min, h, d, w, m. Example: "2d 1h".
+            1d = 8h, 1w = 5d, 1m = 22d.
+            For story points: Use p to represent points. Example: "4p".
+        initial_estimate:
+          type: integer
+          description: Set the initial estimated effort in minutes or story points, depending on the capacity units configured
+        detailed_estimate:
+          type: integer
+          description: Set the detailed estimated effort in minutes or story points, depending on the capacity units configured
+        remaining_estimate:
+          type: integer
+          description: Set the remaining estimated effort in minutes or story points, depending on the capacity units configured
+        start_date:
+          type: string
+          format: date
+          description: Date that work will start on the feature in format YYYY-MM-DD
+        due_date:
+          type: string
+          format: date
+          description: Date that work is due to be completed on the feature in format YYYY-MM-DD
+        release_phase:
+          type: string
+          description: Name or id of release phase which the feature belongs to
+        initiative:
+          type: string
+          description: Name or id of initiative which the feature belongs to
+        epic:
+          type: string
+          description: Name or id of epic which the feature belongs to
+        progress_source:
+          type: string
+          description: >-
+            Source for calculating progress on the feature. Options are: progress_manual,
+            progress_from_requirements, progress_from_remaining_estimate, progress_from_todos
+        progress:
+          type: integer
+          description: Progress completed on the feature. May only be set when the progress_source is manual
+        team:
+          type: string
+          description: Numeric ID or key of the Develop team to assign the feature to
+        team_workflow_status:
+          type: string
+          description: Team status of the feature — must be a valid status for the selected team
+        iteration:
+          type: string
+          description: ID of sprint to assign the feature to, must belong to the selected team
+        program_increment:
+          type: string
+          description: Numeric ID or key of the PI to assign the feature to, must belong to the selected team

@@ -184,6 +184,12 @@ components:
     # Feature related schemas
     FeatureCreateRequest:
       $ref: './schemas/features/create_request.yaml#/FeatureCreateRequest'
+    FeatureUpdateRequest:
+      $ref: './schemas/features/update_request.yaml#/FeatureUpdateRequest'
+    FeatureCreateResponse:
+      $ref: './schemas/features/create_response.yaml#/FeatureCreateResponse'
+    FeatureUpdateResponse:
+      $ref: './schemas/features/update_response.yaml#/FeatureUpdateResponse'
     Feature:
       $ref: './schemas/features/feature.yaml#/Feature'
     FeaturesListResponse:

@@ -1,0 +1,7 @@
+FeatureUpdateResponse:
+  type: object
+  properties:
+    feature:
+      $ref: './feature.yaml#/Feature'
+  required:
+    - feature

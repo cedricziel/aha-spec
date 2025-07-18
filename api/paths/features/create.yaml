@@ -103,12 +103,12 @@ post:
                     name: "Designed"
                   watchers: "689956296,16338845"
     responses:
-      '200':
-        description: Feature created
+      '201':
+        description: Feature created successfully
         content:
           application/json:
             schema:
-              $ref: '../../schemas/features/feature.yaml#/Feature'
+              $ref: '../../schemas/features/create_response.yaml#/FeatureCreateResponse'
             examples:
               success:
                 summary: Standard successful response
@@ -686,12 +686,12 @@ post:
                         value: 10
                         name: "Benefit"
       '400':
-        description: Bad request
+        description: Bad request - Invalid request format or parameters
       '401':
-        description: Unauthorized
+        description: Unauthorized - Invalid or missing authentication
       '403':
-        description: Forbidden
+        description: Forbidden - Insufficient permissions
       '404':
         description: Release not found
       '422':
-        description: Unprocessable entity
+        description: Unprocessable entity - Validation errors
