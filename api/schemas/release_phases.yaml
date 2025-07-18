@@ -1,0 +1,277 @@
+ReleasePhase:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the release phase
+    name:
+      type: string
+      description: Name of the release phase
+    start_on:
+      type: string
+      format: date
+      description: Start date of the release phase
+    end_on:
+      type: string
+      format: date
+      description: End date of the release phase
+    type:
+      type: string
+      enum: [phase, milestone]
+      description: Type of the release phase
+    release_id:
+      type: integer
+      description: ID of the release this phase belongs to
+    created_at:
+      type: string
+      format: date-time
+      description: When the release phase was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the release phase was last updated
+    progress:
+      type: integer
+      description: Progress percentage of the release phase
+    progress_source:
+      type: string
+      enum: [progress_manual, progress_from_features, progress_from_todos, progress_from_features_completed]
+      description: Source for calculating progress
+    duration_source:
+      type: string
+      enum: [duration_manual, duration_from_features]
+      description: Source for calculating duration
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the description
+        body:
+          type: string
+          description: HTML content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: When the description was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the description was last updated
+        attachments:
+          type: array
+          items:
+            $ref: '../schemas/attachments.yaml#/Attachment'
+          description: Attachments in the description
+      description: Description of the release phase
+    release:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the release
+        name:
+          type: string
+          description: Name of the release
+        reference_num:
+          type: string
+          description: Reference number of the release
+        url:
+          type: string
+          format: uri
+          description: URL to view the release in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the release
+        product_id:
+          type: string
+          description: ID of the product
+      description: The release this phase belongs to
+    url:
+      type: string
+      format: uri
+      description: URL to view the release phase in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this release phase
+    comments_count:
+      type: integer
+      description: Number of comments on this release phase
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this release phase
+  required:
+    - id
+    - name
+    - start_on
+    - end_on
+    - type
+    - release_id
+    - created_at
+    - updated_at
+    - progress
+    - progress_source
+    - duration_source
+
+ReleasePhaseCreateRequest:
+  type: object
+  properties:
+    release_phase:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the release phase
+        release_id:
+          type: integer
+          description: ID of the release to which the new release phase belongs
+        phase_type:
+          type: string
+          enum: [phase, milestone]
+          description: Type of phase
+        start_on:
+          type: string
+          format: date
+          description: Start date of the release phase
+        end_on:
+          type: string
+          format: date
+          description: End date of the release phase
+        description:
+          type: string
+          description: HTML description of the release phase
+        progress_source:
+          type: string
+          enum: [progress_manual, progress_from_features, progress_from_todos, progress_from_features_completed]
+          description: Source for calculating progress
+        progress:
+          type: integer
+          description: Progress percentage (only when progress_source is manual)
+        duration_source:
+          type: string
+          enum: [duration_manual, duration_from_features]
+          description: Source for calculating duration
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+        - release_id
+        - phase_type
+  required:
+    - release_phase
+
+ReleasePhaseUpdateRequest:
+  type: object
+  properties:
+    release_phase:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the release phase
+        start_on:
+          type: string
+          format: date
+          description: Start date of the release phase
+        end_on:
+          type: string
+          format: date
+          description: End date of the release phase
+        description:
+          type: string
+          description: HTML description of the release phase
+        progress_source:
+          type: string
+          enum: [progress_manual, progress_from_features, progress_from_todos, progress_from_features_completed]
+          description: Source for calculating progress
+        progress:
+          type: integer
+          description: Progress percentage (only when progress_source is manual)
+        duration_source:
+          type: string
+          enum: [duration_manual, duration_from_features]
+          description: Source for calculating duration
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - release_phase
+
+ReleasePhaseProgressUpdateRequest:
+  type: object
+  properties:
+    release_phase:
+      type: object
+      properties:
+        progress:
+          type: integer
+          description: Progress percentage of the release phase
+        progress_source:
+          type: string
+          enum: [progress_manual, progress_from_features, progress_from_todos, progress_from_features_completed]
+          description: Source for calculating progress
+      required:
+        - progress
+  required:
+    - release_phase
+
+ReleasePhaseProgressSourceUpdateRequest:
+  type: object
+  properties:
+    release_phase:
+      type: object
+      properties:
+        progress_source:
+          type: string
+          enum: [progress_manual, progress_from_features, progress_from_todos, progress_from_features_completed]
+          description: Source for calculating progress
+      required:
+        - progress_source
+  required:
+    - release_phase
+
+ReleaseMilestoneCreateRequest:
+  type: object
+  properties:
+    release_phase:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the release milestone
+        release_id:
+          type: integer
+          description: ID of the release to which the new milestone belongs
+        phase_type:
+          type: string
+          enum: [milestone]
+          description: Must be 'milestone'
+        start_on:
+          type: string
+          format: date
+          description: Date of the milestone
+        end_on:
+          type: string
+          format: date
+          description: Date of the milestone (usually same as start_on)
+        description:
+          type: string
+          description: HTML description of the milestone
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+        - release_id
+        - phase_type
+        - start_on
+  required:
+    - release_phase

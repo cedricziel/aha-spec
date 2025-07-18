@@ -1,0 +1,247 @@
+RollUpRelease:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the roll up release
+    reference_num:
+      type: string
+      description: Reference number of the roll up release
+    name:
+      type: string
+      description: Name of the roll up release
+    start_date:
+      type: string
+      format: date
+      description: Start date of the roll up release
+    release_date:
+      type: string
+      format: date
+      description: Release date of the roll up release
+    created_at:
+      type: string
+      format: date-time
+      description: When the roll up release was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the roll up release was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the roll up release in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this roll up release
+    product_id:
+      type: string
+      description: ID of the product this roll up release belongs to
+    theme:
+      type: string
+      description: Theme or description of the roll up release
+    color:
+      type: string
+      description: Color associated with the roll up release
+    progress:
+      type: integer
+      description: Progress percentage of the roll up release
+    child_releases:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the child release
+          name:
+            type: string
+            description: Name of the child release
+          reference_num:
+            type: string
+            description: Reference number of the child release
+          start_date:
+            type: string
+            format: date
+            description: Start date of the child release
+          release_date:
+            type: string
+            format: date
+            description: Release date of the child release
+          product_id:
+            type: string
+            description: ID of the product the child release belongs to
+          url:
+            type: string
+            format: uri
+            description: URL to view the child release
+          resource:
+            type: string
+            format: uri
+            description: API URL for the child release
+      description: Child releases included in this roll up release
+    projects:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the project
+          name:
+            type: string
+            description: Name of the project
+          reference_num:
+            type: string
+            description: Reference number of the project
+          url:
+            type: string
+            format: uri
+            description: URL to view the project
+          resource:
+            type: string
+            format: uri
+            description: API URL for the project
+      description: Projects associated with this roll up release
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this roll up release
+    comments_count:
+      type: integer
+      description: Number of comments on this roll up release
+  required:
+    - id
+    - reference_num
+    - name
+    - start_date
+    - release_date
+    - created_at
+    - url
+    - resource
+
+RollUpReleaseCreateRequest:
+  type: object
+  properties:
+    roll_up_release:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the roll up release
+        theme:
+          type: string
+          description: Theme or description of the roll up release
+        release_date:
+          type: string
+          format: date
+          description: Release date of the roll up release
+        start_date:
+          type: string
+          format: date
+          description: Start date of the roll up release
+        color:
+          type: string
+          description: Color associated with the roll up release
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+        - release_date
+  required:
+    - roll_up_release
+
+RollUpReleaseUpdateRequest:
+  type: object
+  properties:
+    roll_up_release:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the roll up release
+        theme:
+          type: string
+          description: Theme or description of the roll up release
+        release_date:
+          type: string
+          format: date
+          description: Release date of the roll up release
+        start_date:
+          type: string
+          format: date
+          description: Start date of the roll up release
+        color:
+          type: string
+          description: Color associated with the roll up release
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - roll_up_release
+
+RollUpReleaseProjectRequest:
+  type: object
+  properties:
+    project:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the project to add to the roll up release
+      required:
+        - id
+  required:
+    - project
+
+RollUpReleaseWithProjectCreateRequest:
+  type: object
+  properties:
+    roll_up_release:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the roll up release
+        theme:
+          type: string
+          description: Theme or description of the roll up release
+        release_date:
+          type: string
+          format: date
+          description: Release date of the roll up release
+        start_date:
+          type: string
+          format: date
+          description: Start date of the roll up release
+        color:
+          type: string
+          description: Color associated with the roll up release
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+        - release_date
+    project:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the project to create
+        prefix:
+          type: string
+          description: Prefix for the project reference numbers
+        description:
+          type: string
+          description: Description of the project
+      required:
+        - name
+  required:
+    - roll_up_release
+    - project

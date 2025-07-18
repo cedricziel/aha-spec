@@ -1,0 +1,254 @@
+product_roll_up_releases:
+  get:
+    operationId: roll_up_releases_list_product
+    summary: List roll up releases in a product
+    description: Retrieves a list of roll up releases for the specified product.
+    tags:
+      - Roll-up Releases
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    responses:
+      '200':
+        description: A list of roll up releases
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_releases:
+                  type: array
+                  items:
+                    $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+  post:
+    operationId: roll_up_releases_create_product
+    summary: Create a roll up release for a product
+    description: Creates a new roll up release for the specified product.
+    tags:
+      - Roll-up Releases
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/roll_up_releases.yaml#/RollUpReleaseCreateRequest'
+    responses:
+      '201':
+        description: Roll up release created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_release:
+                  $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity
+
+roll_up_release_by_id:
+  get:
+    operationId: roll_up_releases_get
+    summary: Get a specific roll up release
+    description: Retrieves details of a specific roll up release.
+    tags:
+      - Roll-up Releases
+    parameters:
+      - name: roll_up_release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the roll up release
+    responses:
+      '200':
+        description: Roll up release details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_release:
+                  $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Roll up release not found
+  put:
+    operationId: roll_up_releases_update
+    summary: Update a roll up release
+    description: Updates the specified roll up release.
+    tags:
+      - Roll-up Releases
+    parameters:
+      - name: roll_up_release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the roll up release
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/roll_up_releases.yaml#/RollUpReleaseUpdateRequest'
+    responses:
+      '200':
+        description: Roll up release updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_release:
+                  $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Roll up release not found
+      '422':
+        description: Unprocessable entity
+
+roll_up_release_projects:
+  post:
+    operationId: roll_up_releases_add_project
+    summary: Add a project to a roll up release
+    description: Adds a project to the specified roll up release.
+    tags:
+      - Roll-up Releases
+      - Projects
+    parameters:
+      - name: roll_up_release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the roll up release
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/roll_up_releases.yaml#/RollUpReleaseProjectRequest'
+    responses:
+      '200':
+        description: Project added to roll up release successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_release:
+                  $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Roll up release not found
+      '422':
+        description: Unprocessable entity
+
+roll_up_release_with_project:
+  post:
+    operationId: roll_up_releases_create_with_project
+    summary: Create a project with a roll up release
+    description: Creates a new project with a roll up release.
+    tags:
+      - Roll-up Releases
+      - Projects
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/roll_up_releases.yaml#/RollUpReleaseWithProjectCreateRequest'
+    responses:
+      '201':
+        description: Project with roll up release created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roll_up_release:
+                  $ref: '../schemas/roll_up_releases.yaml#/RollUpRelease'
+                project:
+                  $ref: '../schemas/products.yaml#/Product'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity
+
+roll_up_release_children:
+  get:
+    operationId: roll_up_releases_list_children
+    summary: List releases under a roll-up release
+    description: Retrieves a list of releases under the specified roll-up release.
+    tags:
+      - Roll-up Releases
+      - Releases
+    parameters:
+      - name: roll_up_release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the roll up release
+    responses:
+      '200':
+        description: A list of child releases
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                releases:
+                  type: array
+                  items:
+                    $ref: '../schemas/releases.yaml#/Release'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Roll up release not found
