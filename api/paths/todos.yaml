@@ -1,0 +1,442 @@
+tasks:
+  get:
+    operationId: todos_list
+    summary: List to-dos
+    description: Retrieves a list of all to-dos.
+    tags:
+      - To-Dos
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+  post:
+    operationId: todos_create
+    summary: Create a to-do
+    description: Creates a new to-do.
+    tags:
+      - To-Dos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/todos.yaml#/TodoCreateRequest'
+    responses:
+      '201':
+        description: To-do created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  $ref: '../schemas/todos.yaml#/Todo'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity
+
+feature_todos:
+  get:
+    operationId: todos_list_feature
+    summary: List to-dos associated with a feature
+    description: Retrieves a list of to-dos associated with the specified feature.
+    tags:
+      - To-Dos
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+
+epic_todos:
+  get:
+    operationId: todos_list_epic
+    summary: List to-dos associated with an epic
+    description: Retrieves a list of to-dos associated with the specified epic.
+    tags:
+      - To-Dos
+      - Epics
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the epic
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Epic not found
+
+initiative_todos:
+  get:
+    operationId: todos_list_initiative
+    summary: List to-dos associated with an initiative
+    description: Retrieves a list of to-dos associated with the specified initiative.
+    tags:
+      - To-Dos
+      - Initiatives
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the initiative
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Initiative not found
+
+product_todos:
+  get:
+    operationId: todos_list_product
+    summary: List to-dos associated with a product
+    description: Retrieves a list of to-dos associated with the specified product.
+    tags:
+      - To-Dos
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+
+release_todos:
+  get:
+    operationId: todos_list_release
+    summary: List to-dos associated with a release
+    description: Retrieves a list of to-dos associated with the specified release.
+    tags:
+      - To-Dos
+      - Releases
+    parameters:
+      - name: release_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the release
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Release not found
+
+requirement_todos:
+  get:
+    operationId: todos_list_requirement
+    summary: List to-dos associated with a requirement
+    description: Retrieves a list of to-dos associated with the specified requirement.
+    tags:
+      - To-Dos
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+
+idea_todos:
+  get:
+    operationId: todos_list_idea
+    summary: List to-dos associated with an idea
+    description: Retrieves a list of to-dos associated with the specified idea.
+    tags:
+      - To-Dos
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the idea
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea not found
+
+user_todos:
+  get:
+    operationId: todos_list_user
+    summary: List to-dos assigned to a user
+    description: Retrieves a list of to-dos assigned to the specified user.
+    tags:
+      - To-Dos
+      - Users
+    parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or email of the user
+    responses:
+      '200':
+        description: A list of to-dos
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: User not found
+
+todo_by_id:
+  get:
+    operationId: todos_get
+    summary: Get a specific to-do
+    description: Retrieves details of a specific to-do.
+    tags:
+      - To-Dos
+    parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the to-do
+    responses:
+      '200':
+        description: To-do details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: To-do not found
+  put:
+    operationId: todos_update
+    summary: Update a to-do
+    description: Updates the specified to-do.
+    tags:
+      - To-Dos
+    parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the to-do
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/todos.yaml#/TodoUpdateRequest'
+    responses:
+      '200':
+        description: To-do updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  $ref: '../schemas/todos.yaml#/Todo'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: To-do not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: todos_delete
+    summary: Delete a to-do
+    description: Deletes the specified to-do.
+    tags:
+      - To-Dos
+    parameters:
+      - name: todo_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the to-do
+    responses:
+      '204':
+        description: To-do deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: To-do not found
+
+approvals:
+  get:
+    operationId: approvals_list
+    summary: List approvals
+    description: Retrieves a list of all approvals.
+    tags:
+      - To-Dos
+      - Approvals
+    responses:
+      '200':
+        description: A list of approvals
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tasks:
+                  type: array
+                  items:
+                    $ref: '../schemas/todos.yaml#/Todo'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden

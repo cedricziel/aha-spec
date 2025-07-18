@@ -1,0 +1,59 @@
+Attachment:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the attachment
+    download_url:
+      type: string
+      format: uri
+      description: URL to download the attachment
+    created_at:
+      type: string
+      format: date-time
+      description: When the attachment was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the attachment was last updated
+    original_file_size:
+      type: integer
+      description: Size of the original file in bytes
+    content_type:
+      type: string
+      description: MIME type of the file
+    file_name:
+      type: string
+      description: Name of the file
+    file_size:
+      type: integer
+      description: Size of the file in bytes
+  required:
+    - id
+    - download_url
+    - created_at
+    - updated_at
+    - content_type
+    - file_name
+    - file_size
+
+AttachmentCreateRequest:
+  type: object
+  properties:
+    attachment:
+      type: object
+      properties:
+        data:
+          type: string
+          format: binary
+          description: The file to upload
+        file_name:
+          type: string
+          description: Name of the file
+        description:
+          type: string
+          description: Description of the attachment
+      required:
+        - data
+  required:
+    - attachment

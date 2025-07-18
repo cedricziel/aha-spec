@@ -1,0 +1,261 @@
+CapacityInvestment:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the capacity investment
+    capacity_scenario_id:
+      type: string
+      description: ID of the capacity scenario
+    total:
+      type: number
+      nullable: true
+      description: Total estimated capacity
+    estimate_source:
+      type: string
+      enum: [manual_estimate, features, epics]
+      description: Source of the estimate
+    date_source:
+      type: string
+      enum: [manual_dates, capacity_plannable]
+      description: Source of the dates
+    start_date:
+      type: string
+      format: date
+      description: Start date of the capacity investment
+    end_date:
+      type: string
+      format: date
+      description: End date of the capacity investment
+    feature:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the feature
+        reference_num:
+          type: string
+          description: Reference number of the feature
+        name:
+          type: string
+          description: Name of the feature
+        created_at:
+          type: string
+          format: date-time
+          description: When the feature was created
+        url:
+          type: string
+          format: uri
+          description: URL to view the feature in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the feature
+        product_id:
+          type: string
+          description: ID of the product
+      description: The feature this capacity investment belongs to
+    epic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the epic
+        reference_num:
+          type: string
+          description: Reference number of the epic
+        name:
+          type: string
+          description: Name of the epic
+        created_at:
+          type: string
+          format: date-time
+          description: When the epic was created
+        url:
+          type: string
+          format: uri
+          description: URL to view the epic in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the epic
+        product_id:
+          type: string
+          description: ID of the product
+      description: The epic this capacity investment belongs to
+    initiative:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the initiative
+        reference_num:
+          type: string
+          description: Reference number of the initiative
+        name:
+          type: string
+          description: Name of the initiative
+        created_at:
+          type: string
+          format: date-time
+          description: When the initiative was created
+        url:
+          type: string
+          format: uri
+          description: URL to view the initiative in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the initiative
+        product_id:
+          type: string
+          description: ID of the product
+      description: The initiative this capacity investment belongs to
+    estimate_values:
+      type: array
+      items:
+        $ref: '#/EstimateValue'
+      description: Estimate values for different teams and periods
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this capacity investment
+  required:
+    - id
+    - capacity_scenario_id
+    - estimate_source
+    - date_source
+    - start_date
+    - end_date
+
+EstimateValue:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the estimate value
+    team_id:
+      type: string
+      description: ID of the team
+    period_start:
+      type: string
+      format: date
+      description: Start date of the period
+    total:
+      type: number
+      description: Total estimated capacity for this team and period
+  required:
+    - id
+    - team_id
+    - period_start
+    - total
+
+CapacityInvestmentCreateRequest:
+  type: object
+  properties:
+    capacity_investment:
+      type: object
+      properties:
+        start_date:
+          type: string
+          format: date
+          description: Start date of the capacity investment
+        end_date:
+          type: string
+          format: date
+          description: End date of the capacity investment
+        date_source:
+          type: string
+          enum: [manual_dates, capacity_plannable]
+          description: Source of the dates
+        estimate_source:
+          type: string
+          enum: [manual_estimate, features, epics]
+          description: Source of the estimate
+        capacity_scenario_id:
+          type: string
+          description: ID of the capacity scenario
+        estimate_values:
+          type: array
+          items:
+            type: object
+            properties:
+              team_id:
+                type: string
+                description: ID of the team
+              period_start:
+                type: string
+                format: date
+                description: Start date of the period
+              total:
+                type: number
+                description: Total estimated capacity
+            required:
+              - team_id
+              - period_start
+              - total
+          description: Estimate values for different teams and periods
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - start_date
+        - end_date
+        - date_source
+        - estimate_source
+  required:
+    - capacity_investment
+
+CapacityInvestmentUpdateRequest:
+  type: object
+  properties:
+    capacity_investment:
+      type: object
+      properties:
+        start_date:
+          type: string
+          format: date
+          description: Start date of the capacity investment
+        end_date:
+          type: string
+          format: date
+          description: End date of the capacity investment
+        date_source:
+          type: string
+          enum: [manual_dates, capacity_plannable]
+          description: Source of the dates
+        estimate_source:
+          type: string
+          enum: [manual_estimate, features, epics]
+          description: Source of the estimate
+        capacity_scenario_id:
+          type: string
+          description: ID of the capacity scenario
+        estimate_values:
+          type: array
+          items:
+            type: object
+            properties:
+              team_id:
+                type: string
+                description: ID of the team
+              period_start:
+                type: string
+                format: date
+                description: Start date of the period
+              total:
+                type: number
+                description: Total estimated capacity
+            required:
+              - team_id
+              - period_start
+              - total
+          description: Estimate values for different teams and periods
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - capacity_investment

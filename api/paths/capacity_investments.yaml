@@ -1,0 +1,325 @@
+feature_capacity_investments:
+  get:
+    operationId: capacity_investments_list_feature
+    summary: List capacity investments for a feature
+    description: Retrieves a list of capacity investments for the specified feature.
+    tags:
+      - Capacity Investments
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    responses:
+      '200':
+        description: A list of capacity investments
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investments:
+                  type: array
+                  items:
+                    $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+  post:
+    operationId: capacity_investments_create_feature
+    summary: Create a capacity investment on a feature
+    description: Creates a new capacity investment for the specified feature.
+    tags:
+      - Capacity Investments
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/capacity_investments.yaml#/CapacityInvestmentCreateRequest'
+    responses:
+      '201':
+        description: Capacity investment created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investment:
+                  $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+      '422':
+        description: Unprocessable entity
+
+epic_capacity_investments:
+  get:
+    operationId: capacity_investments_list_epic
+    summary: List capacity investments for an epic
+    description: Retrieves a list of capacity investments for the specified epic.
+    tags:
+      - Capacity Investments
+      - Epics
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the epic
+    responses:
+      '200':
+        description: A list of capacity investments
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investments:
+                  type: array
+                  items:
+                    $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Epic not found
+  post:
+    operationId: capacity_investments_create_epic
+    summary: Create a capacity investment on an epic
+    description: Creates a new capacity investment for the specified epic.
+    tags:
+      - Capacity Investments
+      - Epics
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the epic
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/capacity_investments.yaml#/CapacityInvestmentCreateRequest'
+    responses:
+      '201':
+        description: Capacity investment created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investment:
+                  $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Epic not found
+      '422':
+        description: Unprocessable entity
+
+initiative_capacity_investments:
+  get:
+    operationId: capacity_investments_list_initiative
+    summary: List capacity investments for an initiative
+    description: Retrieves a list of capacity investments for the specified initiative.
+    tags:
+      - Capacity Investments
+      - Initiatives
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the initiative
+    responses:
+      '200':
+        description: A list of capacity investments
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investments:
+                  type: array
+                  items:
+                    $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Initiative not found
+  post:
+    operationId: capacity_investments_create_initiative
+    summary: Create a capacity investment on an initiative
+    description: Creates a new capacity investment for the specified initiative.
+    tags:
+      - Capacity Investments
+      - Initiatives
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the initiative
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/capacity_investments.yaml#/CapacityInvestmentCreateRequest'
+    responses:
+      '201':
+        description: Capacity investment created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investment:
+                  $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Initiative not found
+      '422':
+        description: Unprocessable entity
+
+product_capacity_investments:
+  get:
+    operationId: capacity_investments_list_product
+    summary: List capacity investments for a product
+    description: Retrieves a list of capacity investments for the specified product.
+    tags:
+      - Capacity Investments
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    responses:
+      '200':
+        description: A list of capacity investments
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investments:
+                  type: array
+                  items:
+                    $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+
+capacity_investment_by_id:
+  get:
+    operationId: capacity_investments_get
+    summary: Get a capacity investment
+    description: Retrieves details of a specific capacity investment.
+    tags:
+      - Capacity Investments
+    parameters:
+      - name: capacity_investment_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the capacity investment
+    responses:
+      '200':
+        description: Capacity investment details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investment:
+                  $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Capacity investment not found
+  put:
+    operationId: capacity_investments_update
+    summary: Update a capacity investment
+    description: Updates the specified capacity investment.
+    tags:
+      - Capacity Investments
+    parameters:
+      - name: capacity_investment_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the capacity investment
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/capacity_investments.yaml#/CapacityInvestmentUpdateRequest'
+    responses:
+      '200':
+        description: Capacity investment updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                capacity_investment:
+                  $ref: '../schemas/capacity_investments.yaml#/CapacityInvestment'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Capacity investment not found
+      '422':
+        description: Unprocessable entity

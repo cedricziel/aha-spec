@@ -5,6 +5,7 @@ idea_endorsements_path:
     description: Creates an endorsement (proxy vote) on an idea on behalf of another user.
     tags:
       - Ideas
+      - IdeaVotes
     parameters:
       - name: id
         in: path
@@ -113,6 +114,7 @@ idea_endorsements_path:
     description: Retrieves all endorsements for a specific idea.
     tags:
       - Ideas
+      - IdeaVotes
     parameters:
       - name: id
         in: path
@@ -120,6 +122,12 @@ idea_endorsements_path:
         schema:
           type: string
         description: Numeric ID or key of the idea
+      - name: proxy
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: If set to true, only returns proxy votes (votes with an associated organization)
       - name: page
         in: query
         required: false

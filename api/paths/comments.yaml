@@ -56,6 +56,36 @@ epic_comments:
         description: Invalid input
       '404':
         description: Epic not found
+  post:
+    operationId: comments_create_epic
+    summary: Create a comment on an epic
+    description: Adds a new comment to the specified epic.
+    tags:
+      - Comments
+      - Epics
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/comments.yaml#/CommentCreateRequest'
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/comments.yaml#/Comment'
+      '400':
+        description: Invalid input
+      '404':
+        description: Epic not found
 
 requirement_comments:
   get:
@@ -87,6 +117,36 @@ requirement_comments:
         description: Invalid input
       '404':
         description: Requirement not found
+  post:
+    operationId: comments_create_requirement
+    summary: Create a comment on a requirement
+    description: Adds a new comment to the specified requirement.
+    tags:
+      - Comments
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/comments.yaml#/CommentCreateRequest'
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/comments.yaml#/Comment'
+      '400':
+        description: Invalid input
+      '404':
+        description: Requirement not found
 
 idea_comments:
   get:
@@ -114,6 +174,36 @@ idea_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+  post:
+    operationId: comments_create_idea
+    summary: Create a comment on an idea
+    description: Adds a new comment to the specified idea.
+    tags:
+      - Comments
+      - Ideas
+    parameters:
+      - name: idea_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/comments.yaml#/CommentCreateRequest'
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/comments.yaml#/Comment'
+      '400':
+        description: Invalid input
+      '404':
+        description: Idea not found
 
 initiative_comments:
   get:
@@ -141,6 +231,36 @@ initiative_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+  post:
+    operationId: comments_create_initiative
+    summary: Create a comment on an initiative
+    description: Adds a new comment to the specified initiative.
+    tags:
+      - Comments
+      - Initiatives
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/comments.yaml#/CommentCreateRequest'
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/comments.yaml#/Comment'
+      '400':
+        description: Invalid input
+      '404':
+        description: Initiative not found
 
 goal_comments:
   get:
@@ -276,3 +396,60 @@ product_comments:
                   type: array
                   items:
                     $ref: '../schemas/comments.yaml#/Comment'
+
+note_comments:
+  get:
+    operationId: comments_get_note
+    summary: List comments on a note
+    description: Retrieves a list of comments associated with the specified note.
+    tags:
+      - Comments
+      - Notes
+    parameters:
+      - name: note_id
+        in: path
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: A list of comments
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                comments:
+                  type: array
+                  items:
+                    $ref: '../schemas/comments.yaml#/Comment'
+  post:
+    operationId: comments_create_note
+    summary: Create a comment on a note
+    description: Adds a new comment to the specified note.
+    tags:
+      - Comments
+      - Notes
+    parameters:
+      - name: note_id
+        in: path
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/comments.yaml#/CommentCreateRequest'
+    responses:
+      '201':
+        description: Comment created
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/comments.yaml#/Comment'
+      '400':
+        description: Invalid input
+      '404':
+        description: Note not found

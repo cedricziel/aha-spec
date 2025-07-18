@@ -1,0 +1,116 @@
+RecordLink:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the record link
+    created_at:
+      type: string
+      format: date-time
+      description: When the record link was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the record link was last updated
+    parent_record:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the parent record
+        type:
+          type: string
+          description: Type of the parent record
+        reference_num:
+          type: string
+          description: Reference number of the parent record
+        name:
+          type: string
+          description: Name of the parent record
+        url:
+          type: string
+          format: uri
+          description: URL to view the parent record in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the parent record
+        product_id:
+          type: string
+          description: ID of the product the parent record belongs to
+      description: The parent record in the link relationship
+    child_record:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the child record
+        type:
+          type: string
+          description: Type of the child record
+        reference_num:
+          type: string
+          description: Reference number of the child record
+        name:
+          type: string
+          description: Name of the child record
+        url:
+          type: string
+          format: uri
+          description: URL to view the child record in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the child record
+        product_id:
+          type: string
+          description: ID of the product the child record belongs to
+      description: The child record in the link relationship
+    link_type:
+      type: string
+      enum: [relates_to, blocks, depends_on, duplicates, implements]
+      description: Type of the relationship between the records
+    description:
+      type: string
+      description: Description of the record link
+    url:
+      type: string
+      format: uri
+      description: URL to view the record link in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for the record link
+  required:
+    - id
+    - created_at
+    - updated_at
+    - parent_record
+    - child_record
+    - link_type
+
+RecordLinkCreateRequest:
+  type: object
+  properties:
+    record_link:
+      type: object
+      properties:
+        child_record_id:
+          type: string
+          description: ID of the child record to link to
+        child_record_type:
+          type: string
+          description: Type of the child record
+        link_type:
+          type: string
+          enum: [relates_to, blocks, depends_on, duplicates, implements]
+          description: Type of the relationship between the records
+        description:
+          type: string
+          description: Description of the record link
+      required:
+        - child_record_id
+        - child_record_type
+        - link_type
+  required:
+    - record_link

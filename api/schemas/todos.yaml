@@ -1,0 +1,180 @@
+Todo:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the to-do
+    name:
+      type: string
+      description: Name of the to-do
+    body:
+      type: string
+      description: Description of the to-do
+    due_date:
+      type: string
+      format: date
+      nullable: true
+      description: Due date of the to-do
+    status:
+      type: string
+      enum: [pending, in_progress, completed]
+      description: Status of the to-do
+    position:
+      type: integer
+      description: Position of the to-do in the list
+    created_at:
+      type: string
+      format: date-time
+      description: When the to-do was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the to-do was last updated
+    product_id:
+      type: string
+      description: ID of the product this to-do belongs to
+    assigned_to_users:
+      type: array
+      items:
+        $ref: '../schemas/users.yaml#/User'
+      description: Users assigned to this to-do
+    created_by_user:
+      $ref: '../schemas/users.yaml#/User'
+      description: User who created this to-do
+    attachments:
+      type: array
+      items:
+        $ref: '../schemas/attachments.yaml#/Attachment'
+      description: Attachments associated with this to-do
+    url:
+      type: string
+      format: uri
+      description: URL to view the to-do in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this to-do
+    comments_count:
+      type: integer
+      description: Number of comments on this to-do
+    taskable:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the record this to-do belongs to
+        id:
+          type: string
+          description: ID of the record this to-do belongs to
+        reference_num:
+          type: string
+          description: Reference number of the record
+        name:
+          type: string
+          description: Name of the record
+        url:
+          type: string
+          format: uri
+          description: URL to view the record in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the record
+      description: The record this to-do is associated with
+  required:
+    - id
+    - name
+    - body
+    - status
+    - created_at
+    - updated_at
+    - product_id
+
+TodoCreateRequest:
+  type: object
+  properties:
+    task:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the to-do
+        body:
+          type: string
+          description: Description of the to-do
+        taskable_type:
+          type: string
+          enum: [
+            BusinessModel,
+            Competitor,
+            CreativeBrief,
+            Epic,
+            Feature,
+            Ideas::FeedbackCampaign,
+            Ideas::Idea,
+            Ideas::IdeaSession,
+            Initiative,
+            Iteration,
+            MasterRelease,
+            Page,
+            ProjectStrategyComponent,
+            Persona,
+            Project,
+            ProjectStrategy,
+            Publish::Notebook,
+            Release,
+            ReleasePhase,
+            Requirement,
+            StrategicImperative,
+            StrategicImperativeBackground
+          ]
+          description: Type of the record this to-do belongs to
+        taskable_id:
+          type: string
+          description: ID of the record this to-do belongs to
+        type:
+          type: string
+          enum: [Task, Approval, WorkRequest]
+          description: Type of the to-do
+        assigned_to_users:
+          type: array
+          items:
+            type: string
+          description: Email addresses of assigned users
+        due_date:
+          type: string
+          format: date
+          description: Due date of the to-do
+      required:
+        - name
+        - body
+  required:
+    - task
+
+TodoUpdateRequest:
+  type: object
+  properties:
+    task:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the to-do
+        body:
+          type: string
+          description: Description of the to-do
+        status:
+          type: string
+          enum: [pending, in_progress, completed]
+          description: Status of the to-do
+        assigned_to_users:
+          type: array
+          items:
+            type: string
+          description: Email addresses of assigned users
+        due_date:
+          type: string
+          format: date
+          description: Due date of the to-do
+  required:
+    - task
