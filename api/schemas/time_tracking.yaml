@@ -1,0 +1,141 @@
+TimeTrackingEvent:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the time tracking event
+    user:
+      $ref: '../schemas/users.yaml#/User'
+      description: User who logged the time
+    occurred_on:
+      type: string
+      format: date
+      description: Date when the work occurred
+    work_done:
+      type: integer
+      description: Amount of work done (in minutes)
+    work_units:
+      type: integer
+      description: Work units (typically story points)
+    remaining_estimate:
+      type: integer
+      description: Remaining estimate (in minutes)
+    remaining_estimate_text:
+      type: string
+      description: Text representation of remaining estimate
+    work_done_text:
+      type: string
+      description: Text representation of work done
+    remaining_automatic:
+      type: boolean
+      description: Whether remaining estimate is automatically calculated
+    created_at:
+      type: string
+      format: date-time
+      description: When the time tracking event was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the time tracking event was last updated
+    trackable:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the trackable record
+        type:
+          type: string
+          description: Type of the trackable record
+        name:
+          type: string
+          description: Name of the trackable record
+        reference_num:
+          type: string
+          description: Reference number of the trackable record
+        url:
+          type: string
+          format: uri
+          description: URL to view the trackable record
+        resource:
+          type: string
+          format: uri
+          description: API URL for the trackable record
+      description: The record this time tracking event is associated with
+    url:
+      type: string
+      format: uri
+      description: URL to view the time tracking event in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this time tracking event
+  required:
+    - id
+    - user
+    - occurred_on
+    - work_done
+    - work_units
+
+TimeTrackingEventCreateRequest:
+  type: object
+  properties:
+    time_tracking_event:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: ID of the user logging the time
+        occurred_on:
+          type: string
+          format: date
+          description: Date when the work occurred
+        work_done_text:
+          type: string
+          description: Text representation of work done (e.g. 1d 2h)
+        remaining_estimate_text:
+          type: string
+          description: Text representation of remaining estimate (e.g. 3d 1h)
+        remaining_automatic:
+          type: boolean
+          description: Whether to automatically calculate remaining estimate
+        work_done:
+          type: integer
+          description: Amount of work done (in minutes)
+        remaining_estimate:
+          type: integer
+          description: Remaining estimate (in minutes)
+        description:
+          type: string
+          description: Description of the work done
+  required:
+    - time_tracking_event
+
+StoryPointsTrackingEventCreateRequest:
+  type: object
+  properties:
+    time_tracking_event:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: ID of the user logging the story points
+        occurred_on:
+          type: string
+          format: date
+          description: Date when the work occurred
+        work_units:
+          type: integer
+          description: Number of story points completed
+        remaining_units:
+          type: integer
+          description: Remaining story points
+        remaining_automatic:
+          type: boolean
+          description: Whether to automatically calculate remaining units
+        description:
+          type: string
+          description: Description of the work done
+      required:
+        - work_units
+  required:
+    - time_tracking_event

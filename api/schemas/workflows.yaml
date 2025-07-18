@@ -1,0 +1,101 @@
+Workflow:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Unique identifier for the workflow
+    name:
+      type: string
+      description: Name of the workflow
+    statusable_type:
+      type: string
+      description: Type of record this workflow applies to
+    transitions_only:
+      type: boolean
+      description: Whether this workflow only supports transitions
+    workflow_statuses:
+      type: array
+      items:
+        $ref: '#/WorkflowStatus'
+      description: Statuses available in this workflow
+    workflow_kinds:
+      type: array
+      items:
+        $ref: '#/WorkflowKind'
+      description: Kinds available in this workflow
+    created_at:
+      type: string
+      format: date-time
+      description: When the workflow was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the workflow was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the workflow in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this workflow
+  required:
+    - id
+    - name
+    - statusable_type
+    - transitions_only
+    - workflow_statuses
+    - workflow_kinds
+
+WorkflowStatus:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the workflow status
+    name:
+      type: string
+      description: Name of the workflow status
+    position:
+      type: integer
+      description: Position of the status in the workflow
+    complete:
+      type: boolean
+      description: Whether this status indicates completion
+    color:
+      type: string
+      description: Color associated with this status
+    description:
+      type: string
+      description: Description of the workflow status
+    is_default:
+      type: boolean
+      description: Whether this is the default status
+  required:
+    - id
+    - name
+    - position
+    - complete
+    - color
+
+WorkflowKind:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the workflow kind
+    name:
+      type: string
+      description: Name of the workflow kind
+    description:
+      type: string
+      description: Description of the workflow kind
+    color:
+      type: string
+      description: Color associated with this kind
+    is_default:
+      type: boolean
+      description: Whether this is the default kind
+  required:
+    - id
+    - name

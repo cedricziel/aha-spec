@@ -1,0 +1,192 @@
+feature_time_tracking_events:
+  post:
+    operationId: time_tracking_create_feature
+    summary: Create a time tracking event for a feature
+    description: Creates a new time tracking event for the specified feature.
+    tags:
+      - Time Tracking
+      - Features
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/time_tracking.yaml#/TimeTrackingEventCreateRequest'
+    responses:
+      '201':
+        description: Time tracking event created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time_tracking_event:
+                  $ref: '../schemas/time_tracking.yaml#/TimeTrackingEvent'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+      '422':
+        description: Unprocessable entity
+
+requirement_time_tracking_events:
+  post:
+    operationId: time_tracking_create_requirement
+    summary: Create a time tracking event for a requirement
+    description: Creates a new time tracking event for the specified requirement.
+    tags:
+      - Time Tracking
+      - Requirements
+    parameters:
+      - name: requirement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the requirement
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/time_tracking.yaml#/TimeTrackingEventCreateRequest'
+    responses:
+      '201':
+        description: Time tracking event created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time_tracking_event:
+                  $ref: '../schemas/time_tracking.yaml#/TimeTrackingEvent'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Requirement not found
+      '422':
+        description: Unprocessable entity
+
+initiative_time_tracking_events:
+  post:
+    operationId: time_tracking_create_initiative
+    summary: Create a time tracking event for an initiative
+    description: Creates a new time tracking event for the specified initiative.
+    tags:
+      - Time Tracking
+      - Initiatives
+    parameters:
+      - name: initiative_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the initiative
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/time_tracking.yaml#/TimeTrackingEventCreateRequest'
+    responses:
+      '201':
+        description: Time tracking event created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time_tracking_event:
+                  $ref: '../schemas/time_tracking.yaml#/TimeTrackingEvent'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Initiative not found
+      '422':
+        description: Unprocessable entity
+
+feature_time_tracking_story_points:
+  post:
+    operationId: time_tracking_log_story_points
+    summary: Log work done for a feature that uses story points
+    description: Logs work done for a feature that uses story points instead of time-based tracking.
+    tags:
+      - Time Tracking
+      - Features
+      - Story Points
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/time_tracking.yaml#/StoryPointsTrackingEventCreateRequest'
+    responses:
+      '201':
+        description: Story points tracking event created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                time_tracking_event:
+                  $ref: '../schemas/time_tracking.yaml#/TimeTrackingEvent'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature not found
+      '422':
+        description: Unprocessable entity
+
+time_tracking_event_by_id:
+  delete:
+    operationId: time_tracking_delete
+    summary: Delete a time tracking event
+    description: Deletes the specified time tracking event.
+    tags:
+      - Time Tracking
+    parameters:
+      - name: time_tracking_event_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the time tracking event
+    responses:
+      '204':
+        description: Time tracking event deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Time tracking event not found

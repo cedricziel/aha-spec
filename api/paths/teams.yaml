@@ -1,0 +1,452 @@
+teams:
+  get:
+    operationId: teams_list
+    summary: List teams
+    description: Retrieves a list of all teams.
+    tags:
+      - Teams
+    responses:
+      '200':
+        description: A list of teams
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teams:
+                  type: array
+                  items:
+                    $ref: '../schemas/teams.yaml#/Team'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+  post:
+    operationId: teams_create
+    summary: Create a team
+    description: Creates a new team.
+    tags:
+      - Teams
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamCreateRequest'
+    responses:
+      '201':
+        description: Team created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '422':
+        description: Unprocessable entity
+
+product_teams:
+  get:
+    operationId: teams_list_product
+    summary: List teams in a product
+    description: Retrieves a list of teams for the specified product.
+    tags:
+      - Teams
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    responses:
+      '200':
+        description: A list of teams
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                teams:
+                  type: array
+                  items:
+                    $ref: '../schemas/teams.yaml#/Team'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+  post:
+    operationId: teams_create_product
+    summary: Create a team associated with a product
+    description: Creates a new team associated with the specified product.
+    tags:
+      - Teams
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamCreateRequest'
+    responses:
+      '201':
+        description: Team created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
+      '422':
+        description: Unprocessable entity
+
+team_by_id:
+  get:
+    operationId: teams_get
+    summary: Get a specific team
+    description: Retrieves details of a specific team.
+    tags:
+      - Teams
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    responses:
+      '200':
+        description: Team details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+  put:
+    operationId: teams_update
+    summary: Update a team
+    description: Updates the specified team.
+    tags:
+      - Teams
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamUpdateRequest'
+    responses:
+      '200':
+        description: Team updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: teams_delete
+    summary: Delete a team
+    description: Deletes the specified team.
+    tags:
+      - Teams
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    responses:
+      '204':
+        description: Team deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+
+team_product:
+  put:
+    operationId: teams_update_product
+    summary: Update a team's product
+    description: Updates the product association for the specified team.
+    tags:
+      - Teams
+      - Products
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamProductUpdateRequest'
+    responses:
+      '200':
+        description: Team product updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+      '422':
+        description: Unprocessable entity
+
+team_member_count:
+  put:
+    operationId: teams_update_member_count
+    summary: Manually update a team's member count
+    description: Manually updates the member count for the specified team.
+    tags:
+      - Teams
+      - Team Members
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamMemberCountUpdateRequest'
+    responses:
+      '200':
+        description: Team member count updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+      '422':
+        description: Unprocessable entity
+
+team_member_count_auto:
+  put:
+    operationId: teams_auto_calculate_member_count
+    summary: Automatically calculate team's member count
+    description: Enables automatic calculation of member count based on existing team members.
+    tags:
+      - Teams
+      - Team Members
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamAutoCalculateRequest'
+    responses:
+      '200':
+        description: Team member count calculation updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team:
+                  $ref: '../schemas/teams.yaml#/Team'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+      '422':
+        description: Unprocessable entity
+
+team_memberships:
+  get:
+    operationId: team_memberships_list
+    summary: List team memberships for a team
+    description: Retrieves a list of team memberships for the specified team.
+    tags:
+      - Team Memberships
+      - Teams
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    responses:
+      '200':
+        description: A list of team memberships
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_memberships:
+                  type: array
+                  items:
+                    $ref: '../schemas/teams.yaml#/TeamMembership'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+  post:
+    operationId: team_memberships_add_user
+    summary: Add user to a team
+    description: Adds a user to the specified team.
+    tags:
+      - Team Memberships
+      - Teams
+      - Users
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/teams.yaml#/TeamMembershipCreateRequest'
+    responses:
+      '201':
+        description: User added to team successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_membership:
+                  $ref: '../schemas/teams.yaml#/TeamMembership'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team not found
+      '422':
+        description: Unprocessable entity
+
+team_membership_by_id:
+  delete:
+    operationId: team_memberships_remove_user
+    summary: Remove a user from a team
+    description: Removes a user from the specified team.
+    tags:
+      - Team Memberships
+      - Teams
+      - Users
+    parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the team
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the user
+    responses:
+      '204':
+        description: User removed from team successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Team or user not found
