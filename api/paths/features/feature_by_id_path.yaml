@@ -7,8 +7,65 @@ feature_by_id_path:
         type: string
       description: Numeric ID or key of the feature
   get:
-    $ref: './get.yaml#/get'
+    operationId: features_get
+    summary: Get a specific feature
+    description: Retrieves the details of a specific feature.
+    tags:
+      - Features
+    responses:
+      '200':
+        description: Feature details
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/features/get_response.yaml#/FeatureGetResponse'
+      '401':
+        description: Unauthorized - Invalid or missing authentication
+      '403':
+        description: Forbidden - Insufficient permissions
+      '404':
+        description: Feature not found
   put:
-    $ref: './update.yaml#/put'
+    operationId: features_update
+    summary: Update a feature
+    description: Updates an existing feature with the provided attributes.
+    tags:
+      - Features
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/features/update_request.yaml#/FeatureUpdateRequest'
+    responses:
+      '200':
+        description: Feature updated
+        content:
+          application/json:
+            schema:
+              $ref: '../../schemas/features/update_response.yaml#/FeatureUpdateResponse'
+      '400':
+        description: Bad request - Invalid request format or parameters
+      '401':
+        description: Unauthorized - Invalid or missing authentication
+      '403':
+        description: Forbidden - Insufficient permissions
+      '404':
+        description: Feature not found
+      '422':
+        description: Unprocessable entity - Validation errors
   delete:
-    $ref: './delete.yaml#/delete'
+    operationId: features_delete
+    summary: Delete a feature
+    description: Deletes the specified feature.
+    tags:
+      - Features
+    responses:
+      '204':
+        description: Feature deleted successfully
+      '401':
+        description: Unauthorized - Invalid or missing authentication
+      '403':
+        description: Forbidden - Insufficient permissions
+      '404':
+        description: Feature not found
