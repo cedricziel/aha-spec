@@ -1,0 +1,706 @@
+# Integration Fields - Feature Integration Fields
+feature_integration_fields_by_id:
+  post:
+    operationId: integration_fields_create_feature_by_id
+    summary: Create integration field for a feature (by integration ID)
+    description: Creates a new integration field for the specified feature using integration ID.
+    tags:
+      - Integration Fields
+      - Features
+      - Integrations
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+      - name: integration_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldCreateRequest'
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldsCreateRequest'
+    responses:
+      '201':
+        description: Integration field created successfully
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    integration_field:
+                      $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+                - type: object
+                  properties:
+                    integration_fields:
+                      type: array
+                      items:
+                        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature or integration not found
+      '422':
+        description: Unprocessable entity
+
+feature_integration_fields_by_service:
+  post:
+    operationId: integration_fields_create_feature_by_service
+    summary: Create integration field for a feature (by service name)
+    description: Creates a new integration field for the specified feature using service name.
+    tags:
+      - Integration Fields
+      - Features
+      - Integrations
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Service name of the integration (e.g., jira, github)
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldCreateRequest'
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldsCreateRequest'
+    responses:
+      '201':
+        description: Integration field created successfully
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    integration_field:
+                      $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+                - type: object
+                  properties:
+                    integration_fields:
+                      type: array
+                      items:
+                        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature or integration not found
+      '422':
+        description: Unprocessable entity
+
+feature_integration_field_by_name:
+  get:
+    operationId: integration_fields_get_feature_field
+    summary: Get integration field for a feature
+    description: Retrieves a specific integration field for the specified feature.
+    tags:
+      - Integration Fields
+      - Features
+      - Integrations
+    parameters:
+      - name: feature_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the feature
+      - name: integration_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+    responses:
+      '200':
+        description: Integration field details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                integration_field:
+                  $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Feature, integration, or field not found
+
+# Integration Fields - Epic Integration Fields
+epic_integration_fields_by_id:
+  post:
+    operationId: integration_fields_create_epic_by_id
+    summary: Create integration field for an epic (by integration ID)
+    description: Creates a new integration field for the specified epic using integration ID.
+    tags:
+      - Integration Fields
+      - Epics
+      - Integrations
+    parameters:
+      - name: epic_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the epic
+      - name: integration_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldCreateRequest'
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldsCreateRequest'
+    responses:
+      '201':
+        description: Integration field created successfully
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    integration_field:
+                      $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+                - type: object
+                  properties:
+                    integration_fields:
+                      type: array
+                      items:
+                        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Epic or integration not found
+      '422':
+        description: Unprocessable entity
+
+# Integration Fields - Idea Endorsement Integration Fields
+idea_endorsement_integration_fields_by_id:
+  post:
+    operationId: integration_fields_create_idea_endorsement_by_id
+    summary: Create integration field for an idea endorsement (by integration ID)
+    description: Creates a new integration field for the specified idea endorsement using integration ID.
+    tags:
+      - Integration Fields
+      - Ideas
+      - Integrations
+    parameters:
+      - name: idea_endorsement_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the idea endorsement
+      - name: integration_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldCreateRequest'
+              - $ref: '../schemas/integration_fields.yaml#/IntegrationFieldsCreateRequest'
+    responses:
+      '201':
+        description: Integration field created successfully
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - type: object
+                  properties:
+                    integration_field:
+                      $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+                - type: object
+                  properties:
+                    integration_fields:
+                      type: array
+                      items:
+                        $ref: '../schemas/integration_fields.yaml#/IntegrationField'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Idea endorsement or integration not found
+      '422':
+        description: Unprocessable entity
+
+# Integration Fields - Cross-Resource Search Endpoints
+features_by_integration_field:
+  get:
+    operationId: integration_fields_find_features_by_field
+    summary: Find features by integration field value
+    description: Retrieves features that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Features
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of features with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/features.yaml#/Feature'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+epics_by_integration_field:
+  get:
+    operationId: integration_fields_find_epics_by_field
+    summary: Find epics by integration field value
+    description: Retrieves epics that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Epics
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of epics with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/epics.yaml#/Epic'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+initiatives_by_integration_field:
+  get:
+    operationId: integration_fields_find_initiatives_by_field
+    summary: Find initiatives by integration field value
+    description: Retrieves initiatives that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Initiatives
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of initiatives with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/initiatives.yaml#/Initiative'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+releases_by_integration_field:
+  get:
+    operationId: integration_fields_find_releases_by_field
+    summary: Find releases by integration field value
+    description: Retrieves releases that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Releases
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of releases with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/releases.yaml#/Release'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+requirements_by_integration_field:
+  get:
+    operationId: integration_fields_find_requirements_by_field
+    summary: Find requirements by integration field value
+    description: Retrieves requirements that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Requirements
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of requirements with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/requirements.yaml#/Requirement'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+idea_endorsements_by_integration_field:
+  get:
+    operationId: integration_fields_find_idea_endorsements_by_field
+    summary: Find idea endorsements by integration field value
+    description: Retrieves idea endorsements that have the specified integration field value.
+    tags:
+      - Integration Fields
+      - Ideas
+      - Search
+    parameters:
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of idea endorsements with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    $ref: '../schemas/ideas.yaml#/IdeaEndorsement'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+integration_records_by_field:
+  get:
+    operationId: integration_fields_find_integration_records_by_field
+    summary: Find integration records by field value
+    description: Retrieves records associated with an integration that have the specified field value.
+    tags:
+      - Integration Fields
+      - Integrations
+      - Search
+    parameters:
+      - name: integration_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration
+      - name: field_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the integration field
+      - name: field_value
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Value of the integration field
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: List of records with the specified field value
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                records:
+                  type: array
+                  items:
+                    type: object
+                    description: Mixed record types with integration field values
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Integration not found
+
+# Integration Fields - Delete
+integration_field_by_id:
+  delete:
+    operationId: integration_fields_delete
+    summary: Delete an integration field
+    description: Deletes the specified integration field.
+    tags:
+      - Integration Fields
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the integration field
+    responses:
+      '204':
+        description: Integration field deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Integration field not found

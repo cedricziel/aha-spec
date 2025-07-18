@@ -1,0 +1,161 @@
+Integration:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the integration
+    service_name:
+      type: string
+      description: Service name in snake_case format
+    template_id:
+      type: string
+      nullable: true
+      description: Template ID if integration was created from a template
+    name:
+      type: string
+      description: Display name of the integration
+    enabled:
+      type: boolean
+      description: Whether the integration is enabled
+    callback_token:
+      type: string
+      description: Callback token for the integration
+    created_at:
+      type: string
+      format: date-time
+      description: When the integration was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the integration was last updated
+    last_error_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: When the last error occurred
+    last_webhook_request_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: When the last webhook request was received
+    url:
+      type: string
+      format: uri
+      description: URL to view the integration in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this integration
+    owner:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the owner (e.g., Project, Product)
+        id:
+          type: string
+          description: ID of the owner
+        url:
+          type: string
+          format: uri
+          description: URL to view the owner in the web interface
+        resource:
+          type: string
+          format: uri
+          description: API URL for the owner
+      description: The owner of this integration
+  required:
+    - id
+    - service_name
+    - name
+    - enabled
+
+IntegrationCreateRequest:
+  type: object
+  properties:
+    integration:
+      type: object
+      properties:
+        service_name:
+          type: string
+          description: Service name in snake_case format
+        enabled:
+          type: boolean
+          description: Whether the integration should be enabled
+          default: true
+        integration_version:
+          type: integer
+          description: Integration version (1 or 2)
+          default: 1
+          enum: [1, 2]
+      required:
+        - service_name
+  required:
+    - integration
+
+IntegrationTemplateCreateRequest:
+  type: object
+  properties:
+    integration:
+      type: object
+      properties:
+        template_id:
+          type: string
+          description: ID of the template to use
+        enabled:
+          type: boolean
+          description: Whether the integration should be enabled
+          default: true
+        configuration:
+          type: object
+          description: Configuration parameters for the template
+          additionalProperties: true
+      required:
+        - template_id
+  required:
+    - integration
+
+IntegrationEnableRequest:
+  type: object
+  properties:
+    integration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether to enable or disable the integration
+        configuration:
+          type: object
+          description: Configuration parameters for the integration
+          additionalProperties: true
+      required:
+        - enabled
+  required:
+    - integration
+
+IntegrationSendRecordRequest:
+  type: object
+  properties:
+    record:
+      type: object
+      properties:
+        record_type:
+          type: string
+          description: Type of record to send (e.g., feature, requirement, initiative)
+        record_id:
+          type: string
+          description: ID of the record to send
+        action:
+          type: string
+          description: Action to perform (e.g., create, update, delete)
+          enum: [create, update, delete]
+        data:
+          type: object
+          description: Additional data for the record
+          additionalProperties: true
+      required:
+        - record_type
+        - record_id
+        - action
+  required:
+    - record
