@@ -322,18 +322,34 @@ security:
 
 tags:
   - name: Competitors
+    description: Competitive analysis and competitor tracking
   - name: Users
+    description: User management and authentication
   - name: Features
+    description: Product features and functionality management
   - name: Releases
+    description: Release planning and management
   - name: Comments
+    description: Comments and discussions on various resources
   - name: Epics
+    description: Epic management and feature grouping
   - name: Requirements
+    description: Requirements and specification management
   - name: Ideas
+    description: Idea management and innovation tracking
   - name: Initiatives
+    description: Strategic initiatives and high-level planning
   - name: Goals
+    description: Goal setting and OKR management
   - name: Strategic Models
+    description: Strategic planning and modeling
   - name: Release Phases
+    description: Release phase and milestone management
   - name: Todos
+    description: Task and todo management
   - name: Products
+    description: Product catalog and configuration
   - name: Me
+    description: Current user profile and settings
   - name: Idea Organizations
+    description: Idea organization and categorization

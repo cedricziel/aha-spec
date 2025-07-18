@@ -1,4 +1,11 @@
 product_ideas_path:
+  parameters:
+    - name: product_id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Numeric ID or key of the product
   post:
     operationId: ideas_create
     summary: Create an idea
@@ -14,13 +21,6 @@ product_ideas_path:
       skip this by setting skip_portal: true in the request body.
     tags:
       - Ideas
-    parameters:
-      - name: product_id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the product
     requestBody:
       required: true
       content:
@@ -51,12 +51,6 @@ product_ideas_path:
     tags:
       - Ideas
     parameters:
-      - name: product_id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Numeric ID or key of the product
       - name: q
         in: query
         required: false

@@ -3,25 +3,6 @@
 api/openapi.yaml:
   info-license:
     - '#/info'
-  tag-description:
-    - '#/tags/0/description'
-    - '#/tags/1/description'
-    - '#/tags/2/description'
-    - '#/tags/3/description'
-    - '#/tags/4/description'
-    - '#/tags/5/description'
-    - '#/tags/6/description'
-    - '#/tags/7/description'
-    - '#/tags/8/description'
-    - '#/tags/9/description'
-    - '#/tags/10/description'
-    - '#/tags/11/description'
-    - '#/tags/12/description'
-    - '#/tags/13/description'
-    - '#/tags/14/description'
-    - '#/tags/15/description'
-  no-unresolved-refs:
-    - '#/paths/~1products~1{product_id}~1ideas'
 api/paths/features/create.yaml:
   no-invalid-media-type-examples:
     - >-
