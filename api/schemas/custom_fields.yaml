@@ -1,0 +1,330 @@
+CustomFieldDefinition:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom field definition
+    name:
+      type: string
+      description: Name of the custom field
+    key:
+      type: string
+      description: API key for the custom field
+    type:
+      type: string
+      description: Type of the custom field (e.g., CustomFieldDefinitions::SelectConstant)
+    custom_fieldable_type:
+      type: string
+      description: Type of record this custom field can be applied to
+    internal_name:
+      type: string
+      nullable: true
+      description: Internal name for the custom field
+  required:
+    - id
+    - name
+    - key
+    - type
+    - custom_fieldable_type
+
+CustomField:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom field value
+    key:
+      type: string
+      description: API key for the custom field
+    name:
+      type: string
+      description: Name of the custom field
+    value:
+      oneOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: array
+          items:
+            type: string
+        - type: object
+      description: Value of the custom field
+    type:
+      type: string
+      description: Type of the custom field value
+    updated_at:
+      type: string
+      format: date-time
+      description: When the custom field value was last updated
+  required:
+    - id
+    - key
+    - name
+    - type
+
+CustomFieldOption:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom field option
+    name:
+      type: string
+      description: Name of the option
+    value:
+      type: string
+      description: Value of the option
+    position:
+      type: integer
+      description: Position of the option in the list
+    color:
+      type: string
+      description: Color associated with the option
+    enabled:
+      type: boolean
+      description: Whether the option is enabled
+  required:
+    - id
+    - name
+    - value
+
+CustomFieldOptionCreateRequest:
+  type: object
+  properties:
+    custom_field_option:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the option
+        value:
+          type: string
+          description: Value of the option
+        color:
+          type: string
+          description: Color associated with the option
+        enabled:
+          type: boolean
+          description: Whether the option is enabled
+      required:
+        - name
+        - value
+  required:
+    - custom_field_option
+
+CustomFieldOptionUpdateRequest:
+  type: object
+  properties:
+    custom_field_option:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the option
+        value:
+          type: string
+          description: Value of the option
+        color:
+          type: string
+          description: Color associated with the option
+        enabled:
+          type: boolean
+          description: Whether the option is enabled
+  required:
+    - custom_field_option
+
+CustomTableRecord:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom table record
+    product_id:
+      type: string
+      description: ID of the product this record belongs to
+    key:
+      type: string
+      description: API key of the custom table
+    created_at:
+      type: string
+      format: date-time
+      description: When the record was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the record was last updated
+    custom_fields:
+      type: array
+      items:
+        $ref: '#/CustomField'
+      description: Custom field values for this record
+    custom_object_links:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the link
+          linked_record_id:
+            type: string
+            description: ID of the linked record
+          linked_record_type:
+            type: string
+            description: Type of the linked record
+      description: Links to other custom objects
+    linked_records:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the linked record
+          type:
+            type: string
+            description: Type of the linked record
+          name:
+            type: string
+            description: Name of the linked record
+      description: Records linked to this custom table record
+    created_by_user:
+      $ref: '../schemas/users.yaml#/User'
+      description: User who created this record
+  required:
+    - id
+    - product_id
+    - key
+    - created_at
+    - updated_at
+    - created_by_user
+
+CustomTableRecordCreateRequest:
+  type: object
+  properties:
+    custom_object_record:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values for the record
+      required:
+        - custom_fields
+  required:
+    - custom_object_record
+
+CustomTableRecordUpdateRequest:
+  type: object
+  properties:
+    custom_object_record:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values to update
+  required:
+    - custom_object_record
+
+CustomLayout:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom layout
+    name:
+      type: string
+      description: Name of the custom layout
+    description:
+      type: string
+      description: Description of the custom layout
+    layout_type:
+      type: string
+      description: Type of the layout
+    created_at:
+      type: string
+      format: date-time
+      description: When the layout was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the layout was last updated
+    fields:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the field
+          name:
+            type: string
+            description: Name of the field
+          type:
+            type: string
+            description: Type of the field
+          required:
+            type: boolean
+            description: Whether the field is required
+          position:
+            type: integer
+            description: Position of the field in the layout
+      description: Fields included in the layout
+  required:
+    - id
+    - name
+    - layout_type
+    - created_at
+    - updated_at
+
+CustomPivot:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the custom pivot
+    name:
+      type: string
+      description: Name of the saved report
+    description:
+      type: string
+      description: Description of the saved report
+    created_at:
+      type: string
+      format: date-time
+      description: When the report was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the report was last updated
+    data:
+      type: object
+      additionalProperties: true
+      description: Report data and configuration
+    columns:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the column
+          type:
+            type: string
+            description: Type of the column
+          width:
+            type: integer
+            description: Width of the column
+      description: Columns in the report
+    rows:
+      type: array
+      items:
+        type: object
+        additionalProperties: true
+      description: Rows of data in the report
+  required:
+    - id
+    - name
+    - created_at
+    - updated_at

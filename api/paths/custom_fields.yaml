@@ -1,0 +1,467 @@
+custom_field_definitions:
+  get:
+    operationId: custom_fields_list_all
+    summary: List all custom fields
+    description: Retrieves a list of all custom field definitions.
+    tags:
+      - Custom Fields
+    responses:
+      '200':
+        description: A list of custom field definitions
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field_definitions:
+                  type: array
+                  items:
+                    $ref: '../schemas/custom_fields.yaml#/CustomFieldDefinition'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+custom_field_options:
+  get:
+    operationId: custom_fields_list_options
+    summary: List options for a custom field
+    description: Retrieves a list of options for a specific custom field.
+    tags:
+      - Custom Fields
+    parameters:
+      - name: custom_field_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field
+    responses:
+      '200':
+        description: A list of custom field options
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field_options:
+                  type: array
+                  items:
+                    $ref: '../schemas/custom_fields.yaml#/CustomFieldOption'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom field not found
+  post:
+    operationId: custom_fields_create_option
+    summary: Create a custom field option
+    description: Creates a new option for a custom field.
+    tags:
+      - Custom Fields
+    parameters:
+      - name: custom_field_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/custom_fields.yaml#/CustomFieldOptionCreateRequest'
+    responses:
+      '201':
+        description: Custom field option created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field_option:
+                  $ref: '../schemas/custom_fields.yaml#/CustomFieldOption'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom field not found
+      '422':
+        description: Unprocessable entity
+
+custom_field_option_by_id:
+  put:
+    operationId: custom_fields_update_option
+    summary: Update a custom field option
+    description: Updates a specific custom field option.
+    tags:
+      - Custom Fields
+    parameters:
+      - name: custom_field_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field
+      - name: option_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field option
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/custom_fields.yaml#/CustomFieldOptionUpdateRequest'
+    responses:
+      '200':
+        description: Custom field option updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field_option:
+                  $ref: '../schemas/custom_fields.yaml#/CustomFieldOption'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom field or option not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: custom_fields_delete_option
+    summary: Delete a custom field option
+    description: Deletes a specific custom field option.
+    tags:
+      - Custom Fields
+    parameters:
+      - name: custom_field_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field
+      - name: option_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the custom field option
+    responses:
+      '204':
+        description: Custom field option deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom field or option not found
+
+product_custom_table_records:
+  get:
+    operationId: custom_tables_list_records
+    summary: List records in a custom table for a product
+    description: Retrieves a list of records from a custom table for the specified product.
+    tags:
+      - Custom Tables
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+      - name: table_key
+        in: path
+        required: true
+        schema:
+          type: string
+        description: API key of the custom table
+    responses:
+      '200':
+        description: A list of custom table records
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_object_records:
+                  type: array
+                  items:
+                    $ref: '../schemas/custom_fields.yaml#/CustomTableRecord'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product or table not found
+  post:
+    operationId: custom_tables_create_record
+    summary: Create a custom table record
+    description: Creates a new record in a custom table for the specified product.
+    tags:
+      - Custom Tables
+      - Products
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+      - name: table_key
+        in: path
+        required: true
+        schema:
+          type: string
+        description: API key of the custom table
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/custom_fields.yaml#/CustomTableRecordCreateRequest'
+    responses:
+      '201':
+        description: Custom table record created successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_object_record:
+                  $ref: '../schemas/custom_fields.yaml#/CustomTableRecord'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product or table not found
+      '422':
+        description: Unprocessable entity
+
+custom_table_record_by_id:
+  get:
+    operationId: custom_tables_get_record
+    summary: Get a specific custom table record
+    description: Retrieves details of a specific custom table record.
+    tags:
+      - Custom Tables
+    parameters:
+      - name: record_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the custom table record
+    responses:
+      '200':
+        description: Custom table record details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_object_record:
+                  $ref: '../schemas/custom_fields.yaml#/CustomTableRecord'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom table record not found
+  put:
+    operationId: custom_tables_update_record
+    summary: Update a custom table record
+    description: Updates a specific custom table record.
+    tags:
+      - Custom Tables
+    parameters:
+      - name: record_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the custom table record
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/custom_fields.yaml#/CustomTableRecordUpdateRequest'
+    responses:
+      '200':
+        description: Custom table record updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_object_record:
+                  $ref: '../schemas/custom_fields.yaml#/CustomTableRecord'
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom table record not found
+      '422':
+        description: Unprocessable entity
+  delete:
+    operationId: custom_tables_delete_record
+    summary: Delete a custom table record
+    description: Deletes a specific custom table record.
+    tags:
+      - Custom Tables
+    parameters:
+      - name: record_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the custom table record
+    responses:
+      '204':
+        description: Custom table record deleted successfully
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom table record not found
+
+custom_layouts:
+  get:
+    operationId: custom_layouts_list
+    summary: List all custom layouts
+    description: Retrieves a list of all custom layouts.
+    tags:
+      - Custom Layouts
+    responses:
+      '200':
+        description: A list of custom layouts
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_layouts:
+                  type: array
+                  items:
+                    $ref: '../schemas/custom_fields.yaml#/CustomLayout'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+
+custom_layout_by_id:
+  get:
+    operationId: custom_layouts_get
+    summary: Get a custom layout by ID
+    description: Retrieves details of a specific custom layout.
+    tags:
+      - Custom Layouts
+    parameters:
+      - name: layout_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID of the custom layout
+    responses:
+      '200':
+        description: Custom layout details
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_layout:
+                  $ref: '../schemas/custom_fields.yaml#/CustomLayout'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Custom layout not found
+
+custom_pivots_list:
+  get:
+    operationId: custom_pivots_get_list_view
+    summary: Get the list view of a saved report
+    description: Retrieves the list view of a saved report.
+    tags:
+      - Custom Pivots
+      - Reports
+    parameters:
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the saved report
+    responses:
+      '200':
+        description: List view of the saved report
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_pivot:
+                  $ref: '../schemas/custom_fields.yaml#/CustomPivot'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Report not found
+
+custom_pivots_pivot:
+  get:
+    operationId: custom_pivots_get_pivot_view
+    summary: Get the pivot view of a saved report
+    description: Retrieves the pivot view of a saved report.
+    tags:
+      - Custom Pivots
+      - Reports
+    parameters:
+      - name: report_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the saved report
+    responses:
+      '200':
+        description: Pivot view of the saved report
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_pivot:
+                  $ref: '../schemas/custom_fields.yaml#/CustomPivot'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Report not found

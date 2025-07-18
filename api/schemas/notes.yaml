@@ -1,0 +1,353 @@
+Note:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the note
+    name:
+      type: string
+      description: Name of the note
+    title:
+      type: string
+      description: Full title of the note including reference number
+    document_title:
+      type: string
+      description: Document title used in browser
+    updated_at:
+      type: string
+      format: date-time
+      description: When the note was last updated
+    reference_num:
+      type: string
+      description: Reference number of the note
+    emoji_value:
+      type: string
+      nullable: true
+      description: Emoji associated with the note
+    document_type:
+      type: integer
+      description: Numeric type of the document
+    document_type_name:
+      type: string
+      enum: [note, whiteboard, folder, internal_link, external_link]
+      description: Type of document
+    editor_width:
+      type: string
+      enum: [NARROW, FULL]
+      description: Width of the editor when viewing the note
+    type_name:
+      type: string
+      description: Name of the type
+    position:
+      type: integer
+      nullable: true
+      description: Position in the hierarchy
+    created_at:
+      type: string
+      format: date-time
+      description: When the note was created
+    location:
+      type: string
+      nullable: true
+      description: Location information
+    edit_locked:
+      type: boolean
+      description: Whether the note is locked for editing
+    url:
+      type: string
+      format: uri
+      description: URL to view the note in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this note
+    product_id:
+      type: string
+      description: ID of the product this note belongs to
+    description:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the description
+        body:
+          type: string
+          description: HTML content of the description
+        created_at:
+          type: string
+          format: date-time
+          description: When the description was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the description was last updated
+        attachments:
+          type: array
+          items:
+            $ref: '../schemas/attachments.yaml#/Attachment'
+          description: Attachments in the description
+      description: Description content of the note
+    parent_id:
+      type: string
+      nullable: true
+      description: ID of the parent note or folder
+    tags:
+      type: array
+      items:
+        type: string
+      description: Tags associated with this note
+    full_tags:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: ID of the tag
+          name:
+            type: string
+            description: Name of the tag
+      description: Full tag objects with IDs and names
+    comments_count:
+      type: integer
+      description: Number of comments on this note
+    custom_fields:
+      type: array
+      items:
+        $ref: '../schemas/custom_fields.yaml#/CustomField'
+      description: Custom fields associated with this note
+    link_url:
+      type: string
+      format: uri
+      description: URL for link-type notes
+    linked_record:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the linked record
+        type:
+          type: string
+          description: Type of the linked record
+        name:
+          type: string
+          description: Name of the linked record
+        url:
+          type: string
+          format: uri
+          description: URL of the linked record
+      description: Record linked to this note (for internal links)
+  required:
+    - id
+    - name
+    - title
+    - document_title
+    - updated_at
+    - reference_num
+    - document_type
+    - document_type_name
+    - created_at
+    - url
+    - resource
+    - product_id
+
+NoteCreateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the note
+        document_type:
+          type: string
+          enum: [note, whiteboard, folder, internal_link, external_link]
+          description: Type of document to create
+        description_attributes:
+          type: object
+          properties:
+            body:
+              type: string
+              description: HTML content of the note
+          description: Description content
+        parent_id:
+          type: string
+          description: ID of a parent page or folder
+        tags:
+          type: string
+          description: Tags to add (comma-separated)
+        editor_width:
+          type: string
+          enum: [NARROW, FULL]
+          description: Width of the editor
+        link_url:
+          type: string
+          format: uri
+          description: URL for external links
+        linked_record_id:
+          type: string
+          description: ID of record to link to (for internal links)
+        linked_record_type:
+          type: string
+          description: Type of record to link to (for internal links)
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+      required:
+        - name
+  required:
+    - page
+
+NoteUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the note
+        description_attributes:
+          type: object
+          properties:
+            body:
+              type: string
+              description: HTML content of the note
+          description: Description content
+        parent_id:
+          type: string
+          description: ID of a parent page or folder
+        tags:
+          type: string
+          description: Tags to add (comma-separated)
+        editor_width:
+          type: string
+          enum: [NARROW, FULL]
+          description: Width of the editor
+        link_url:
+          type: string
+          format: uri
+          description: URL for external links
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values
+  required:
+    - page
+
+NoteCustomFieldsUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        custom_fields:
+          type: object
+          additionalProperties: true
+          description: Custom field values to update
+      required:
+        - custom_fields
+  required:
+    - page
+
+NoteTagsUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags to associate with the note
+      required:
+        - tags
+  required:
+    - page
+
+NoteTagsCommaSeparatedUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        tags:
+          type: string
+          description: Tags to associate with the note (comma-separated)
+      required:
+        - tags
+  required:
+    - page
+
+NoteWidthUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        editor_width:
+          type: string
+          enum: [NARROW, FULL]
+          description: Width of the editor
+      required:
+        - editor_width
+  required:
+    - page
+
+InternalLinkCreateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the internal link
+        document_type:
+          type: string
+          enum: [internal_link]
+          description: Must be 'internal_link'
+        linked_record_id:
+          type: string
+          description: ID of record to link to
+        linked_record_type:
+          type: string
+          description: Type of record to link to
+        parent_id:
+          type: string
+          description: ID of a parent page or folder
+        tags:
+          type: string
+          description: Tags to add (comma-separated)
+      required:
+        - name
+        - document_type
+        - linked_record_id
+        - linked_record_type
+  required:
+    - page
+
+ExternalLinkUpdateRequest:
+  type: object
+  properties:
+    page:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the external link
+        link_url:
+          type: string
+          format: uri
+          description: URL for the external link
+        parent_id:
+          type: string
+          description: ID of a parent page or folder
+        tags:
+          type: string
+          description: Tags to add (comma-separated)
+  required:
+    - page
