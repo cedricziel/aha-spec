@@ -2,7 +2,7 @@
 
 API for interacting with Aha! product management platform.
 
-**Version:** 1.0.2
+**Version:** 1.0.3
 
 ## Overview
 
@@ -25,14 +25,14 @@ The API supports the following authentication methods:
 
 | Feature | Count |
 |---------|-------|
-| References | 50 |
+| References | 66 |
 | External Documents | 0 |
-| Schemas | 50 |
+| Schemas | 66 |
 | Parameters | 41 |
 | Links | 0 |
-| Path Items | 66 |
+| Path Items | 72 |
 | Webhooks | 0 |
-| Operations | 99 |
+| Operations | 113 |
 | Tags | 18 |
 
 ## API Tags
