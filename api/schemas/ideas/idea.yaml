@@ -139,8 +139,30 @@ IdeaResponse:
           type: integer
         score_facts:
           type: array
+          description: Score facts for the idea
           items:
             type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the score fact
+              name:
+                type: string
+                description: Name of the score fact (e.g., Benefit, Effort)
+              value:
+                type: integer
+                description: Numeric value of the score fact
+            required:
+              - id
+              - name
+              - value
+          example:
+            - id: "6776881149493035943"
+              name: "Effort"
+              value: 3
+            - id: "6776881149498224807"
+              name: "Benefit"
+              value: 10
         tags:
           type: array
           items:

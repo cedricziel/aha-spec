@@ -1,0 +1,76 @@
+IdeaCategory:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the idea category
+    name:
+      type: string
+      description: Name of the idea category
+    parent_id:
+      type: string
+      nullable: true
+      description: ID of the parent category (for hierarchical categories)
+    project_id:
+      type: integer
+      description: ID of the associated product/project
+    created_at:
+      type: string
+      format: date-time
+      description: When the idea category was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the idea category was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the idea category in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this idea category
+    parent:
+      type: object
+      nullable: true
+      properties:
+        id:
+          type: string
+          description: Parent category ID
+        name:
+          type: string
+          description: Parent category name
+        url:
+          type: string
+          format: uri
+          description: URL to view the parent category
+        resource:
+          type: string
+          format: uri
+          description: API URL for the parent category
+      description: Parent category details (if applicable)
+    children:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Child category ID
+          name:
+            type: string
+            description: Child category name
+          url:
+            type: string
+            format: uri
+            description: URL to view the child category
+          resource:
+            type: string
+            format: uri
+            description: API URL for the child category
+      description: Array of child categories (if applicable)
+  required:
+    - id
+    - name
+    - project_id
+    - created_at

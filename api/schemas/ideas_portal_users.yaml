@@ -1,0 +1,224 @@
+PortalUser:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the portal user
+    email:
+      type: string
+      format: email
+      description: Email address of the portal user
+    first_name:
+      type: string
+      description: First name of the portal user
+    last_name:
+      type: string
+      description: Last name of the portal user
+    enabled:
+      type: boolean
+      description: Whether the portal user is active
+    verified:
+      type: boolean
+      description: Whether the portal user has been verified
+    employee:
+      type: boolean
+      description: Whether the portal user is an employee/partner
+    max_endorsements_override:
+      type: integer
+      nullable: true
+      description: The vote allocation for this specific user
+    idea_user_id:
+      type: string
+      description: Associated idea user ID
+    created_at:
+      type: string
+      format: date-time
+      description: When the portal user was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the portal user was last updated
+    unsubscribed:
+      type: boolean
+      description: Whether the portal user has been unsubscribed from all communications from this portal
+    unsubscribed_from_weekly_emails:
+      type: boolean
+      description: Whether the portal user has been unsubscribed from weekly portal summary email
+    url:
+      type: string
+      format: uri
+      description: URL to view the portal user in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this portal user
+  required:
+    - id
+    - email
+    - first_name
+    - last_name
+    - enabled
+    - verified
+    - employee
+    - created_at
+    - unsubscribed
+    - unsubscribed_from_weekly_emails
+
+PortalUserCreateRequest:
+  type: object
+  properties:
+    portal_user:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the portal user. The email address does not need to be of a user of Aha!
+        first_name:
+          type: string
+          description: First name of the portal user
+        last_name:
+          type: string
+          description: Last name of the portal user
+        permission:
+          type: boolean
+          description: Whether the portal user is an employee/partner
+        enabled:
+          type: boolean
+          description: Whether the portal user is active
+          default: true
+        max_endorsement_override:
+          type: integer
+          description: The vote allocation for this specific user
+        unsubscribed:
+          type: boolean
+          description: Whether the portal user has been unsubscribed from all communications from this portal
+          default: false
+        unsubscribed_from_weekly_emails:
+          type: boolean
+          description: Whether the portal user has been unsubscribed from weekly portal summary email
+          default: false
+      required:
+        - email
+        - first_name
+        - last_name
+  required:
+    - portal_user
+
+PortalUserUpdateRequest:
+  type: object
+  properties:
+    portal_user:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the portal user. The email address does not need to be of a user of Aha!
+        first_name:
+          type: string
+          description: First name of the portal user
+        last_name:
+          type: string
+          description: Last name of the portal user
+        permission:
+          type: boolean
+          description: Whether the portal user is an employee/partner
+        enabled:
+          type: boolean
+          description: Whether the portal user is active
+        max_endorsement_override:
+          type: integer
+          description: The vote allocation for this specific user
+        unsubscribed:
+          type: boolean
+          description: Whether the portal user has been unsubscribed from all communications from this portal
+        unsubscribed_from_weekly_emails:
+          type: boolean
+          description: Whether the portal user has been unsubscribed from weekly portal summary email
+  required:
+    - portal_user
+
+PortalUserSubscription:
+  type: object
+  properties:
+    id:
+      type: string
+      description: Unique identifier for the subscription
+    portal_user_id:
+      type: string
+      description: ID of the portal user
+    subscribed_to_all_categories:
+      type: boolean
+      description: Whether the user is subscribed to all categories
+    subscribed_to_all_projects:
+      type: boolean
+      description: Whether the user is subscribed to all projects
+    created_at:
+      type: string
+      format: date-time
+      description: When the subscription was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the subscription was last updated
+    categories:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Category ID
+          name:
+            type: string
+            description: Category name
+        required:
+          - id
+          - name
+      description: Specific categories the user is subscribed to
+    projects:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Project ID
+          name:
+            type: string
+            description: Project name
+        required:
+          - id
+          - name
+      description: Specific projects the user is subscribed to
+  required:
+    - id
+    - portal_user_id
+    - subscribed_to_all_categories
+    - subscribed_to_all_projects
+
+PortalUserSubscriptionCreateRequest:
+  type: object
+  properties:
+    portal_user_subscription:
+      type: object
+      properties:
+        subscribed_to_all_categories:
+          type: boolean
+          description: Whether to subscribe the user to all categories
+        subscribed_to_all_projects:
+          type: boolean
+          description: Whether to subscribe the user to all projects
+        category_ids:
+          type: array
+          items:
+            type: string
+          description: Specific category IDs to subscribe to
+        project_ids:
+          type: array
+          items:
+            type: string
+          description: Specific project IDs to subscribe to
+  required:
+    - portal_user_subscription

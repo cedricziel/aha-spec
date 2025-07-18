@@ -1,0 +1,110 @@
+ScreenDefinition:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Unique identifier for the screen definition
+    screenable_type:
+      type: string
+      nullable: true
+      description: Type of record this screen definition applies to
+      enum: [Feature, Page, Project, StrategicImperative, Ideas::Idea, Ideas::IdeaPortal, Release, Requirement, Competitor, Initiative, Epic, KeyResult, ReleasePhase, null]
+    name:
+      type: string
+      description: Name of the screen definition
+    custom_field_definitions:
+      type: array
+      items:
+        $ref: '#/CustomFieldDefinition'
+      description: Array of custom field definitions in this screen definition
+    created_at:
+      type: string
+      format: date-time
+      description: When the screen definition was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the screen definition was last updated
+    url:
+      type: string
+      format: uri
+      description: URL to view the screen definition in the web interface
+    resource:
+      type: string
+      format: uri
+      description: API URL for this screen definition
+  required:
+    - id
+    - name
+    - custom_field_definitions
+
+CustomFieldDefinition:
+  type: object
+  properties:
+    id:
+      type: integer
+      description: Unique identifier for the custom field definition
+    key:
+      type: string
+      description: Key identifier for the custom field
+    position:
+      type: integer
+      description: Position of the field in the screen definition
+    name:
+      type: string
+      description: Display name of the custom field
+    type:
+      type: string
+      description: Internal type of the custom field
+      enum: 
+        - CustomFieldDefinitions::ScorecardField
+        - CustomFieldDefinitions::LinkMasterDetail
+        - CustomFieldDefinitions::SelectEditable
+        - CustomFieldDefinitions::LinkMany
+        - CustomFieldDefinitions::Records::UsersField
+        - CustomFieldDefinitions::DateField
+        - CustomFieldDefinitions::TextField
+        - CustomFieldDefinitions::UrlField
+        - CustomFieldDefinitions::SelectConstant
+    api_type:
+      type: string
+      description: API type for the custom field
+      enum: [scorecard, array, string, date, url]
+    required:
+      type: boolean
+      description: Whether the custom field is required
+    configuration_display:
+      type: string
+      nullable: true
+      description: Configuration display settings for the field
+    options:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: Option ID
+          label:
+            type: string
+            description: Option label
+        required:
+          - id
+          - label
+      description: Available options for select fields
+    created_at:
+      type: string
+      format: date-time
+      description: When the custom field definition was created
+    updated_at:
+      type: string
+      format: date-time
+      description: When the custom field definition was last updated
+  required:
+    - id
+    - key
+    - position
+    - name
+    - type
+    - api_type
+    - required

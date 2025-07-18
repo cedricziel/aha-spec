@@ -1,0 +1,51 @@
+product_idea_categories:
+  get:
+    operationId: idea_categories_list_product
+    summary: List idea categories in a product
+    description: Retrieves a list of idea categories for the specified product.
+    tags:
+      - Idea Categories
+      - Products
+      - Ideas
+    parameters:
+      - name: product_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Numeric ID or key of the product
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+        description: Page number for pagination
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+          default: 20
+        description: Number of results per page
+    responses:
+      '200':
+        description: A list of idea categories
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idea_categories:
+                  type: array
+                  items:
+                    $ref: '../schemas/idea_categories.yaml#/IdeaCategory'
+                pagination:
+                  $ref: '../schemas/shared.yaml#/Pagination'
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Product not found
