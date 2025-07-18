@@ -5,12 +5,5 @@ FeaturesListResponse:
       type: array
       items:
         $ref: './feature.yaml#/Feature'
-    pagination:
-      type: object
-      properties:
-        total_records:
-          type: integer
-        total_pages:
-          type: integer
-        current_page:
-          type: integer
+    meta:
+      $ref: '../../openapi.yaml#/components/schemas/PaginationMeta'

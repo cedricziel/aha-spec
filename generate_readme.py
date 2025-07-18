@@ -116,10 +116,16 @@ This OpenAPI specification defines the REST API for the Aha! product management 
 
 ## Authentication
 
-The API supports the following authentication methods:
+The API supports two authentication methods:
 
-- **OAuth2**: oauth2 authentication (OAuth 2.0)
-- **BearerAuth**: http authentication (bearer scheme)
+- **OAuth 2.0**: For web applications and integrations requiring user consent
+- **Bearer Token (API Key)**: For server-to-server integrations and personal access
+
+### Rate Limiting
+- **300 requests per minute** per account
+- **20 requests per second** per account
+
+When rate limits are exceeded, the API returns a `429 Too Many Requests` response.
 
 ## API Statistics
 

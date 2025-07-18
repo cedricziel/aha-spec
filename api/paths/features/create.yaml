@@ -11,6 +11,7 @@ post:
         schema:
           type: string
         description: Numeric ID or key of the release
+      - $ref: '../../openapi.yaml#/components/parameters/DisableMailersParameter'
     requestBody:
       required: true
       content:
@@ -695,3 +696,7 @@ post:
         description: Release not found
       '422':
         description: Unprocessable entity - Validation errors
+      '429':
+        $ref: '../../openapi.yaml#/components/responses/RateLimitResponse'
+      '504':
+        $ref: '../../openapi.yaml#/components/responses/GatewayTimeoutResponse'

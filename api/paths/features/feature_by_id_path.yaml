@@ -25,6 +25,10 @@ feature_by_id_path:
         description: Forbidden - Insufficient permissions
       '404':
         description: Feature not found
+      '429':
+        $ref: '../../openapi.yaml#/components/responses/RateLimitResponse'
+      '504':
+        $ref: '../../openapi.yaml#/components/responses/GatewayTimeoutResponse'
   put:
     operationId: features_update
     summary: Update a feature
@@ -54,6 +58,10 @@ feature_by_id_path:
         description: Feature not found
       '422':
         description: Unprocessable entity - Validation errors
+      '429':
+        $ref: '../../openapi.yaml#/components/responses/RateLimitResponse'
+      '504':
+        $ref: '../../openapi.yaml#/components/responses/GatewayTimeoutResponse'
   delete:
     operationId: features_delete
     summary: Delete a feature
@@ -69,3 +77,7 @@ feature_by_id_path:
         description: Forbidden - Insufficient permissions
       '404':
         description: Feature not found
+      '429':
+        $ref: '../../openapi.yaml#/components/responses/RateLimitResponse'
+      '504':
+        $ref: '../../openapi.yaml#/components/responses/GatewayTimeoutResponse'
