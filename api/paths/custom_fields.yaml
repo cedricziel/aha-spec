@@ -17,6 +17,17 @@ custom_field_definitions:
                   type: array
                   items:
                     $ref: '../schemas/custom_fields.yaml#/CustomFieldDefinition'
+            examples:
+              success:
+                summary: Successful response with custom field definitions
+                value:
+                  custom_field_definitions:
+                    - name: "Priority"
+                      id: "581360680"
+                      key: "priority"
+                      type: "CustomFieldDefinitions::SelectConstant"
+                      custom_fieldable_type: "Feature"
+                      internal_name: null
       '401':
         description: Unauthorized
       '403':
