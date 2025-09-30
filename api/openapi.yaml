@@ -28,7 +28,7 @@ info:
 
     ## Error Handling
     The API uses standard HTTP status codes and includes detailed error messages in the response body for debugging.
-  version: 1.0.5
+  version: 1.0.6
 
 servers:
   - url: https://{subdomain}.aha.io/api/v1
