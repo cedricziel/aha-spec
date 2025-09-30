@@ -216,6 +216,12 @@ paths:
   /release_phases/{id}:
     $ref: './paths/release_phases.yaml#/release_phase_by_id'
 
+  # Custom Fields
+  /custom_field_definitions:
+    $ref: './paths/custom_fields.yaml#/custom_field_definitions'
+  /custom_field_definitions/{custom_field_definition_id}/options:
+    $ref: './paths/custom_fields.yaml#/custom_field_options'
+
 # Components are referenced from separate files
 components:
   schemas:
@@ -354,6 +360,10 @@ components:
       $ref: './schemas/idea_organizations/get_response.yaml#/IdeaOrganizationGetResponse'
     IdeaOrganizationsListResponse:
       $ref: './schemas/idea_organizations/list_response.yaml#/IdeaOrganizationsListResponse'
+
+    # Custom Fields related schemas
+    CustomFieldDefinition:
+      $ref: './schemas/custom_fields.yaml#/CustomFieldDefinition'
 
     # Common pagination schema
     PaginationMeta:
@@ -514,3 +524,5 @@ tags:
     description: Current user profile and settings
   - name: Idea Organizations
     description: Idea organization and categorization
+  - name: Custom Fields
+    description: Custom field definitions and configuration
