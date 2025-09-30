@@ -31,15 +31,15 @@ When rate limits are exceeded, the API returns a `429 Too Many Requests` respons
 
 | Feature | Count |
 |---------|-------|
-| References | 73 |
+| References | 74 |
 | External Documents | 0 |
-| Schemas | 67 |
+| Schemas | 68 |
 | Parameters | 43 |
 | Links | 0 |
-| Path Items | 72 |
+| Path Items | 73 |
 | Webhooks | 0 |
-| Operations | 113 |
-| Tags | 18 |
+| Operations | 114 |
+| Tags | 19 |
 
 ## API Tags
 
@@ -107,6 +107,10 @@ Current user profile and settings
 
 Idea organization and categorization
 
+### Custom Fields
+
+Custom field definitions and configuration
+
 ## Resource Overview
 
 The API is organized around the following main resources:
@@ -127,6 +131,7 @@ The API is organized around the following main resources:
 - **Products**: Product catalog and configuration
 - **Me**: Current user profile and settings
 - **Idea Organizations**: Idea organization and categorization
+- **Custom Fields**: Custom field definitions and configuration
 
 
 ## Development
