@@ -31,14 +31,14 @@ When rate limits are exceeded, the API returns a `429 Too Many Requests` respons
 
 | Feature | Count |
 |---------|-------|
-| References | 74 |
+| References | 76 |
 | External Documents | 0 |
-| Schemas | 68 |
-| Parameters | 43 |
+| Schemas | 70 |
+| Parameters | 44 |
 | Links | 0 |
-| Path Items | 73 |
+| Path Items | 74 |
 | Webhooks | 0 |
-| Operations | 114 |
+| Operations | 116 |
 | Tags | 19 |
 
 ## API Tags
